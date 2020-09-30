@@ -25,7 +25,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { HeaderComponent } from './header/header.component';
 import { SearchMarketplaceComponent } from './search-marketplace/search-marketplace.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
-import { ScullyLibModule } from '@scullyio/ng-lib'
+
 
 import { UrlDataService } from './url-data.service'
 registerLocaleData(en);
@@ -53,7 +53,6 @@ registerLocaleData(en);
 		NzButtonModule,
 		NzDropDownModule,
 		NzTableModule,
-		ScullyLibModule,
   ],
   providers: [
 		{ provide: NZ_I18N, useValue: en_GB }, 
