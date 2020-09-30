@@ -136,11 +136,13 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 ng serve --port 0 --open
 
 
+---
+ng add @scullyio/init
 
 ng build --prod
 
 npm run scully
-
+---
 
 
 in netlify do:

@@ -27,7 +27,8 @@ import { SearchMarketplaceComponent } from './search-marketplace/search-marketpl
 import { SearchResultsComponent } from './search-results/search-results.component';
 
 
-import { UrlDataService } from './url-data.service'
+import { UrlDataService } from './url-data.service';
+import { ScullyLibModule } from '@scullyio/ng-lib'
 registerLocaleData(en);
 
 @NgModule({
@@ -53,6 +54,7 @@ registerLocaleData(en);
 		NzButtonModule,
 		NzDropDownModule,
 		NzTableModule,
+		ScullyLibModule,
   ],
   providers: [
 		{ provide: NZ_I18N, useValue: en_GB }, 

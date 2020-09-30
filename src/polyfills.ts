@@ -32,6 +32,12 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 	};
 }
 
+// this is a polyfil for the build and scully static site generation.
+// It is only needed if you want to generate a static site from the prod build
+// https://github.com/scullyio/scully/issues/458
+import 'new-event-polyfill';
+
+
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 import 'classlist.js';  // Run `npm install --save classlist.js`.
 
@@ -76,3 +82,9 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  * APPLICATION IMPORTS
  */
 
+
+/***************************************************************************************************
+* SCULLY IMPORTS
+*/
+// tslint:disable-next-line: align
+import 'zone.js/dist/task-tracking';
