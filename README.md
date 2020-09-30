@@ -65,19 +65,17 @@ Install the Transform Angular Components [tf-ng-core](https://www.npmjs.com/pack
 
 ## POLYFILLS 
 
-in polyfill.ts
+To get the application working in IE 11, we need to follow the angular standar procedure and alter the shipped/default polyfill.ts.
 
-Uncommented...
-import 'classlist.js'; 
-import 'web-animations-js';
-import 'zone.js/dist/zone';
+`src/polyfill.ts`
 
-... save
+1. Uncomment `import 'classlist.js';` (roughly line:22)
+2. Run `npm install --save classlist.js`
+3. Uncomment `import 'web-animations-js';` (roughly line:29)
+4. Run `npm install --save web-animations-js`
+5. Ensure `import 'zone.js/dist/zone';` is uncommented (roughly line:58)
 
-Install below npm
-
-npm install --save classlist.js
-npm install --save web-animations-js
+Test a production build, `ng build --prod`
 
 
 

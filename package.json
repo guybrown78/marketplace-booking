@@ -24,10 +24,12 @@
     "@scullyio/init": "^1.0.1",
     "@scullyio/ng-lib": "^1.0.0",
     "@scullyio/scully": "^1.0.0",
+    "classlist.js": "^1.1.20150312",
     "ng-zorro-antd": "^10.0.0",
     "rxjs": "~6.6.0",
     "tf-ng-core": "0.0.19",
     "tslib": "^2.0.0",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
