@@ -62,6 +62,11 @@ Install the Transform Angular Components [tf-ng-core](https://www.npmjs.com/pack
 
 `npm i tf-ng-core`
 
+add to the app.module.ts imports;
+
+`import { TfNgCoreModule } from 'tf-ng-core';`
+
+and then finally ads `TfNgCoreModule` to the NgModule imports list
 
 ## POLYFILLS 
 
@@ -77,10 +82,56 @@ To get the application working in IE 11, we need to follow the angular standar p
 
 Test a production build, `ng build --prod`
 
+Once built and tested in IE11, there maybe a few additional tweaks needed to get it going, depending on your angular versions and build scripts etc...
 
+One of this is installing [core-js](https://github.com/zloirock/core-js) 
 
+`npm i core-js`
 
+and then adding it entirely to the polyfil.ts or adding just the parts you require;
 
+all:
+
+```javascript
+import 'core-js';
+```
+
+or seperate polyfils, eg:
+
+```javascript
+import 'core-js/es6/symbol';
+import 'core-js/es6/object';
+import 'core-js/es6/function';
+import 'core-js/es6/parse-int';
+import 'core-js/es6/parse-float';
+import 'core-js/es6/number';
+import 'core-js/es6/math';
+import 'core-js/es6/string';
+import 'core-js/es6/date';
+import 'core-js/es6/regexp';
+import 'core-js/es6/map';
+import 'core-js/es6/weak-map';
+import 'core-js/es6/set';
+import 'core-js/es6/array';
+```
+
+Note
+> In the past, i have also had to experiment with core-js version and also the dev dependancy angular-devkit/build-angular version in package.json. This doesnt seem necessary anymore but it you do run into trouble it is always worth searching for the errors that are printed out and matching them up to package versions
+
+Finally, with angular 10 I found that an additional nodeList polyfil is required after new errors were printed out in the console after updating. These errors were to do with a [forEach](https://gist.github.com/bob-lee/e7520bfcdac266e5490f40c2759cc955) which basically is slotted in the browser polyfils...
+
+```javascript
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+	console.info('polyfill for IE11');
+	NodeList.prototype.forEach = function (callback, thisArg) {
+		 thisArg = thisArg || window;
+		 for (var i = 0; i < this.length; i++) {
+				callback.call(thisArg, this[i], i, this);
+		 }
+	};
+}
+```
+-----------
 
 ng serve --port 0 --open
 
