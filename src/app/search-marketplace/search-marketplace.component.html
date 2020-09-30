@@ -1,0 +1,83 @@
+<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+	<span nz-typography>Welcome to the 3T Marketplace</span>
+</tf-ng-page-title-breadcrumbs>
+
+
+<tf-ng-card>
+	<h2 nz-typography>Standard Buttons</h2>
+	<tf-ng-card-content>
+		
+		<div class="button-container">
+
+			<button nz-button nzSize="small" nzType="primary" [routerLink]="['/results']">Small Button</button>
+
+			<button nz-button nzType="default" [routerLink]="['/results']">Default</button>
+
+			<button nz-button nzType="primary" [routerLink]="['/results']">Primary</button>
+			
+			<button nz-button nzSize="large" class="navy" [routerLink]="['/results']">Large Button</button>
+
+			<button nz-button class="grey" [routerLink]="['/results']">Subtle Grey</button>
+		</div>
+
+	</tf-ng-card-content>
+</tf-ng-card>
+
+
+<tf-ng-card colour="white">
+
+		<form nz-form>
+	
+			<h3 nz-typography class="navy">Input Form Elements</h3>
+			<nz-divider></nz-divider>
+			
+			<nz-input-group [nzSuffix]="suffixIconSearch">
+				<input type="text" nz-input placeholder="input search text" />
+			</nz-input-group>
+			<ng-template #suffixIconSearch>
+				<i nz-icon nzType="search"></i>
+			</ng-template>
+			<br />
+			
+		</form>
+
+</tf-ng-card> 
+
+
+<tf-ng-card>
+	<h2 nz-typography>Dropdown examples</h2>
+
+	<tf-ng-card-content>
+		<div nz-row>
+			<div nz-col nzSpan="4">
+				
+				<button 
+					nz-button 
+					nz-dropdown 
+					[nzDropdownMenu]="menu"
+					nzTrigger="click"
+					nzPlacement="left"
+				>Actions<i nz-icon nzType="down"></i></button>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>1st menu item length</li>
+            <li nz-menu-item>2nd menu item length</li>
+            <li nz-menu-item>3rd menu item length</li>
+          </ul>
+        </nz-dropdown-menu>
+			</div>
+			
+		</div>
+	</tf-ng-card-content>
+
+</tf-ng-card>
+
+
+<tf-ng-card colour="white">
+	<h2 nz-typography>Entry Data</h2>
+	<tf-ng-card-content>
+		<code>
+			<pre>{{urlService.entryData | json}}</pre>
+		</code>
+	</tf-ng-card-content>
+</tf-ng-card>
