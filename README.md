@@ -87,4 +87,13 @@ ng serve --port 0 --open
 
 
 ng build --prod
+
 npm run scully
+
+
+
+in netlify do:
+ng build --prod && npm run scully
+
+then directory is:
+dist/static
