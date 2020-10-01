@@ -24,10 +24,9 @@ Once the zorro coponents are installed, you can then start the server
 
 `ng serve --port 0 --open`
 
-## ADD NG-ZORRO / Transform theme
+## ADD Zorro styles / Transform theme
 
-
-...todo - instructions
+First, we create some global styles for our theme and add the  transform font 'Roboto Condensed'
 
 Add the Roboto condensed font to index.html
 
@@ -54,9 +53,18 @@ body {
 }
 ```
 
+When we were adding the zorro components (`ng add ng-zorro-antd`) it asked us if we wanted to add a theme. Answering yes exposed `src/theme.less`. 
+
+Even if we initially created our angular project with basic css, Zorro will still display a `less` file as it is built upon less. In `src/theme.less` we need to add the variables and the overriding styles that make the zorro components look and feel like they belong to Transform.
+
+replace all that is in the `src/theme.less` with this....
+
+...to do, get a link for the styles
 
 
 ## ADD TF-NG-CORE
+
+To help out the zorro components and achieve the Transform UI, we need to add a library of prebuilt Angular components. 
 
 Install the Transform Angular Components [tf-ng-core](https://www.npmjs.com/package/tf-ng-core)  from npm
 
@@ -116,7 +124,7 @@ import 'core-js/es6/array';
 ```
 
 Note
-> In the past, i have also had to experiment with core-js version and also the dev dependancy angular-devkit/build-angular version in package.json. This doesnt seem necessary anymore but it you do run into trouble it is always worth searching for the errors that are printed out and matching them up to package versions
+> In the past, i have also had to experiment with core-js version and also the dev dependancy angular-devkit/build-angular version in package.json. This doesn't seem necessary anymore but it is worth noting that if you do run into trouble it is always worth searching for the errors that are printed out and matching them up to package versions
 
 Finally, with angular 10 I found that an additional nodeList polyfil is required after new errors were printed out in the console after updating. These errors were to do with a [forEach](https://gist.github.com/bob-lee/e7520bfcdac266e5490f40c2759cc955) which basically is slotted in the browser polyfils...
 
@@ -131,7 +139,7 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 	};
 }
 ```
------------
+---
 
 ng serve --port 0 --open
 
@@ -142,11 +150,14 @@ ng add @scullyio/init
 ng build --prod
 
 npm run scully
+
 ---
 
 
 in netlify do:
+
 ng build --prod && npm run scully
 
 then directory is:
+
 dist/static
