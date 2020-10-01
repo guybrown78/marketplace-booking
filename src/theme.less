@@ -1167,9 +1167,11 @@ span.italic{
 	border-color: @blue-600;
 	padding-left: 36px!important;
 }
-.ant-input::-webkit-input-placeholder {
-	color: #D0DFE3;
+.ant-input::-webkit-input-placeholder,
+.ant-picker-input > input::placeholder {
+	color: @grey-600;
 }
+
 .has-error .ant-input::-webkit-input-placeholder
 {
 	color: #b92950;
@@ -1248,6 +1250,10 @@ span.italic{
 }
 .ant-select-selection--multiple .ant-select-selection__choice__remove:hover {
 	color: #FFFFFF;
+}
+.force-select-prefix.ant-select-single:not(.ant-select-customize-input) .ant-select-selector, 
+.force-select-prefix .ant-select-selector {
+	padding-left: 31px;
 }
 .ant-divider-horizontal {
 	margin: 1rem 0;

@@ -18,6 +18,9 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -28,7 +31,8 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 
 
 import { UrlDataService } from './url-data.service';
-import { ScullyLibModule } from '@scullyio/ng-lib'
+import { ScullyLibModule } from '@scullyio/ng-lib';
+import { SearchFiltersComponent } from './search-filters/search-filters.component'
 registerLocaleData(en);
 
 @NgModule({
@@ -36,7 +40,8 @@ registerLocaleData(en);
     AppComponent,
     HeaderComponent,
     SearchMarketplaceComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    SearchFiltersComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,9 @@ registerLocaleData(en);
 		NzIconModule,
 		NzFormModule,
 		NzInputModule,
+		NzAutocompleteModule,
+		NzDatePickerModule,
+		NzSelectModule,
 		NzButtonModule,
 		NzDropDownModule,
 		NzTableModule,

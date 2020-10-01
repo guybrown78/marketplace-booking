@@ -1,0 +1,33 @@
+.search-filters{
+	min-width: 300px;
+	min-height: 350px;
+	background-color: #ECF2F3;
+	padding: 2rem 1rem 1rem;
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+}
+
+.fake-input-group{
+	display: flex;
+	position: relative;
+}
+.fake-input-group-prefix-icon{
+	position: absolute;
+	left:11px;
+	top: 8px;
+	z-index: 5;
+}
+.date-picker{
+	width: 100%;
+ 	padding-left: 31px;
+	/*padding-right: 0;
+	border: none; */
+}
+
+/* .date-picker:hover,
+.date-picker:focus{
+	border: none!important;
+	outline: none;
+	box-shadow: none;
+} */

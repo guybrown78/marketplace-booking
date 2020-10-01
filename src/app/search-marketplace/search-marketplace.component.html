@@ -1,21 +1,60 @@
-<tf-ng-page-title-breadcrumbs [show-back-button]="false">
-	<span nz-typography>Welcome to the 3T Marketplace</span>
-</tf-ng-page-title-breadcrumbs>
 
+<section class="mp-page-card">
+	<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+		<span nz-typography>Welcome to the 3T Marketplace</span>
+	</tf-ng-page-title-breadcrumbs>
 
+	<div class="mp-page-card-bottom">
+		<div class="mp-search-wrapper">
+
+			<div class="filters-column">
+				<search-filters></search-filters>
+			</div>
+			<div class="results-column">
+				<!-- <ul>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+				</ul> -->
+			</div>
+
+		</div>
+	</div>
+	
+</section>
+
+<!-- 
 <tf-ng-card>
 	<h2 nz-typography>Standard Buttons</h2>
 	<tf-ng-card-content>
 		
 		<div class="button-container">
-
-			<button nz-button nzSize="small" nzType="primary" [routerLink]="['/results']">Small Button</button>
-
-			<button nz-button nzType="default" [routerLink]="['/results']">Default</button>
-
-			<button nz-button nzType="primary" [routerLink]="['/results']">Primary</button>
-			
-			<button nz-button nzSize="large" class="navy" [routerLink]="['/results']">Large Button</button>
 
 			<button nz-button class="grey" [routerLink]="['/results']">Subtle Grey</button>
 		</div>
@@ -80,4 +119,4 @@
 			<pre>{{urlService.entryData | json}}</pre>
 		</code>
 	</tf-ng-card-content>
-</tf-ng-card>
+</tf-ng-card> -->

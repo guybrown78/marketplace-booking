@@ -1,0 +1,151 @@
+<div class="search-filters form-hero-card">
+	<form 
+		nz-form 
+		[formGroup]="searchFiltersForm" 
+		(ngSubmit)="submitForm()" 
+		nzLayout="vertical">
+
+		<nz-form-item>
+			<nz-form-label nzFor="delegate">Delegate</nz-form-label>
+			<nz-form-control nzErrorTip="The input is not valid E-mail!">
+				<nz-input-group [nzPrefix]="prefixUser">
+					<input 
+						placeholder="Start typing delegates name" 
+						nz-input 
+						formControlName="delegate" 
+						id="delegate" 
+						(input)="onDelegateInput($event)" 
+						[nzAutocomplete]="autoDelegate" 
+					/>
+					<nz-autocomplete 
+						[nzDataSource]="delegateOptions" 
+						nzBackfill 
+						#autoDelegate
+					></nz-autocomplete>
+			
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+
+		<nz-form-item>
+			<nz-form-label nzFor="course">Course</nz-form-label>
+			<nz-form-control nzErrorTip="You need to input a course">
+				<nz-input-group [nzPrefix]="prefixSearch">
+					<input 
+						placeholder="Start typing course name" 
+						nz-input 
+						formControlName="course" 
+						id="course" 
+						(input)="onCourseInput($event)" 
+						[nzAutocomplete]="autoCourse" 
+					/>
+					<nz-autocomplete 
+						[nzDataSource]="courseOptions" 
+						nzBackfill 
+						#autoCourse
+					></nz-autocomplete>
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+
+		<nz-form-item>
+			<nz-form-label nzFor="type">Type</nz-form-label>
+			
+			<nz-form-control>
+				
+				<div class="fake-input-group">
+					<i nz-icon nzType="menu" nzTheme="outline" class="fake-input-group-prefix-icon"></i>
+					<nz-select 
+						placeholder="Select course type" 
+						formControlName="type" 
+						id="type"
+						class="force-select-prefix"
+					>
+						<nz-option 
+							nzValue="all"
+							nzLabel="All"
+						></nz-option>
+						<nz-option 
+							nzValue="eLearn"
+							nzLabel="E-Learn"
+						></nz-option>
+						<nz-option 
+							nzValue="vLearn"
+							nzLabel="V-Learn"
+						></nz-option>
+					</nz-select>
+				</div>
+
+				<!-- <nz-input-group [nzPrefix]="prefixType"> -->
+					
+					<!-- <input nz-input formControlName="type" id="type" />
+					<nz-autocomplete 
+						[nzDataSource]="typeOptions" 
+						#autoType
+					></nz-autocomplete> 
+				 </nz-input-group> -->
+			</nz-form-control> 
+
+		</nz-form-item>
+
+		<nz-form-item>
+			<nz-form-label nzFor="location">Location</nz-form-label>
+			<nz-form-control>
+				<nz-input-group [nzPrefix]="prefixLocation">
+					<input nz-input formControlName="location" id="location" />
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+
+		<nz-form-item>
+			<nz-form-label nzFor="startDate">Start Date</nz-form-label>
+			<nz-form-control>
+				<div class="fake-input-group">
+					<i nz-icon nzType="calendar" nzTheme="outline" class="fake-input-group-prefix-icon"></i>
+					<nz-date-picker 
+						class="date-picker"
+						[nzFormat]="dateFormat"
+						formControlName="startDate" 
+						id="startDate"
+						[nzSuffixIcon]="suffixDate"
+					></nz-date-picker>
+				</div>
+				<!-- <nz-input-group [nzPrefix]="prefixDate"> -->
+					<!-- <input nz-input formControlName="startDate" id="startDate" /> -->
+					<!-- <nz-date-picker 
+						class="date-picker"
+						formControlName="startDate" 
+						id="startDate"
+						[nzSuffixIcon]="suffixDate"
+					></nz-date-picker> -->
+				<!-- </nz-input-group> -->
+			</nz-form-control>
+		</nz-form-item>
+
+		<nz-form-item class="submit-area">
+			<nz-form-control>
+				<button nz-button nzType="primary">Search</button>
+			</nz-form-control>
+		</nz-form-item>
+
+
+	</form>
+</div>
+
+
+<ng-template #prefixUser>
+	<i nz-icon nzType="user"></i>
+</ng-template>
+<ng-template #prefixSearch>
+	<i nz-icon nzType="search"></i>
+</ng-template>
+<ng-template #prefixType>
+	<i nz-icon nzType="menu"></i>
+</ng-template>
+<ng-template #prefixLocation>
+	<i nz-icon nzType="environment" nzTheme="outline"></i>
+</ng-template>
+<ng-template #prefixDate>
+	<i nz-icon nzType="calendar" nzTheme="outline"></i>
+</ng-template>
+<ng-template #suffixDate></ng-template>
