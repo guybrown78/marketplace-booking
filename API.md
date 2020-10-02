@@ -71,7 +71,7 @@ tenant.ontransform.com/api/delegates?id=id1,id2,id3,id4,id5
 The delegates entry point should also be searchable on name values. When adding the name param as a search query for delegates, it will search for matches in all the models 'name' params, ie 'firstName' and 'lastName'
 
 ```
-tenant.ontransform.com/api/delegates?search-param=name&search-value=bl
+tenant.ontransform.com/api/bookingform/delegates?search-param=name&search-value=bl
 ```
 The response **results** are as above however the search object/parameters from the request is reiterated in the response. this is for clarity when doing multiple searches
 
@@ -108,7 +108,7 @@ The courses here are prefuxed after mp 'marketplace' as courses maybe a popular 
 
 
 ```
-tenant.ontransform.com/api/mp/courses/names
+tenant.ontransform.com/api/bookingform/mp/courses/names
 ```
 
 ```json 
@@ -178,7 +178,7 @@ response
     },
     "startDate":"10/12/2020",
     "prices":{
-			"current":"GBP",
+			"currency":"GBP",
 			"total":"490",
 			"incVat":false,
     },
