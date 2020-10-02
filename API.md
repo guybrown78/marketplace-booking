@@ -3,18 +3,18 @@ All the calls in these examples are tennanted. It will be worth having a quick t
 The API url examples are assumed as;
 
 ```
-tenant.ontransform.com/api...
+tenant.ontransform.com/api/bookingform/...
 ```
 # Tenant
 
 **GET** call to get the information about the tennant. This is called once and stored in the client. It will allow the client to construct delegates job roles sentances such as "Rigger at Wood"
 
-all Coure MP ID's type = guid
 
-pass tennant guid into app
+The entry URL will contain the tennant id, this is needed to make the initial tennant call
+
 
 ```
-tenant.ontransform.com/api/tenant/:id
+tenant.ontransform.com/api/bookingform/tenant/:id
 ```
 
 **RESPONSE**
@@ -38,16 +38,18 @@ tenant.ontransform.com/api/tenant/:id
 }
 ```
 
+>Liam to firm up what the ID' will be for tennant and delegates, wether if comes from Coure MP (type will be GUID) or mutitenant (int?)
+
 # Delegate
 
 **GET** calls to recieve delegate models. Variations in these entry points means you can get all delegates from a tennant, a single delegate in a tennant from an id and a selected list of delegates from multiple ids
 
 ```
-tenant.ontransform.com/api/delegates
+tenant.ontransform.com/api/bookingform/delegates
 
-tenant.ontransform.com/api/delegates/id 
+tenant.ontransform.com/api/bookingform/delegates/id 
 
-tenant.ontransform.com/api/delegates?id=id1,id2,id3,id4,id5
+tenant.ontransform.com/api/bookingform/delegates?id=id1,id2,id3,id4,id5
 
 ```
 **RESPONSE** The return data will be a list of the neccessary delegate models;
@@ -57,7 +59,7 @@ tenant.ontransform.com/api/delegates?id=id1,id2,id3,id4,id5
 {
   "results":[
     {
-			"id":"001", // confirm id dataTupe, wether multiTennant or courseMP 
+      "id":"001",
       "firstName":"Joe",
       "lastName":"Bloggs",
       "jobRole":"Rigger"
@@ -66,16 +68,20 @@ tenant.ontransform.com/api/delegates?id=id1,id2,id3,id4,id5
 }
 
 ```
+>Liam to confirm delegate id type
+
 ### Search
 
 The delegates entry point should also be searchable on name values. When adding the name param as a search query for delegates, it will search for matches in all the models 'name' params, ie 'firstName' and 'lastName'
 
+
 ```
-tenant.ontransform.com/api/bookingform/delegates?search-param=name&search-value=bl
+tenant.ontransform.com/api/bookingform/delegates?search=name|bl
 ```
+
 The response **results** are as above however the search object/parameters from the request is reiterated in the response. this is for clarity when doing multiple searches
 
-*** What if several search params are at once?
+
 
 ```JSON
 {
@@ -94,6 +100,36 @@ The response **results** are as above however the search object/parameters from 
   ]
 }
 ```
+
+You can have multiple search params by adding additional search quiries. 
+```
+tenant.ontransform.com/api/bookingform/delegates?search=name|bl,robRole|Rig,location:N
+```
+
+Each search query is split with a `|` and that determins the name value pair.
+
+For example, the query;
+```
+?search=name|bl,robRole|Rig,location:N
+```
+translates to
+```
+[
+	{
+    "param":"name",
+    "value":"bl"
+  },
+	{
+    "param":"jobRole",
+    "value":"Rig"
+  },
+	{
+    "param":"location",
+    "value":"N"
+  }
+]
+```
+
 >if this is going to be too slow, then the client can get all delegates in a tennant in simple format, ie (name and id). Then search on that. However, when we go un-tennanted is this going to be huge? Other options are to type 3 chars in the client and thenmake the initial call. as the user types more chars adding to that initial 3, the client sorts
 
 
@@ -127,7 +163,7 @@ tenant.ontransform.com/api/bookingform/mp/courses/names
 Similar to the delegates, the UI should autocomplete suggestions for the course name. If we are doing this with API then
 
 ```
-tenant.ontransform.com/api/mp/courses/names?search-param=name&search-value=bl
+tenant.ontransform.com/api/bookingform/mp/courses/names?search=name|h2s
 ```
 **response** 
 
@@ -155,14 +191,19 @@ This provides the initial search and then allows all the filter parameters to cr
 
 
 ```
-tenant.ontransform.com/api/mp/courses/available/:standardId
+tenant.ontransform.com/api/bookingform/mp/courses/available/:standardId
 ```
 response
+
+`standardId = GUID Course MP standard qual - this is the id we searched for`
+
+`scheduledCourseId = id for scheduled course`
+
 ```json
 [
   {
-    "standardId":"001", // GUID Course MP standard qual -  this is the id we searched for
-    "scheduledCourseId":"001", // id for scheduled course
+    "standardId":"001",
+    "scheduledCourseId":"001",
     "name":"OPITO Basic H2S Training",
     "type":{
       "name":"In-Centre",
@@ -178,9 +219,9 @@ response
     },
     "startDate":"10/12/2020",
     "prices":{
-			"currency":"GBP",
-			"total":"490",
-			"incVat":false,
+      "currency":"GBP",
+      "total":"490",
+      "incVat":false
     },
     "availability":{
       "total":"20",
@@ -199,7 +240,7 @@ response
 
 >availability: not sure we need the total but example on how it can expand in future
 
-> !!!!! if the filters are meant to make calls then this is going to need more thought
+> This will give us enougth information to allow the client to organise the data and filter - if the filters are meant to make calls then this is going to need more thought
 
 ----------
 from this data. the UI allows to filter from n courses.
