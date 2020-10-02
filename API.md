@@ -176,9 +176,7 @@ response
       "name":"AIS-Training",
       "id":"001"
     },
-    "startDates":[
-      "10/12/2020" // to confirm what the DB wants
-    ],
+    "startDate":"10/12/2020",
     "prices":{
 			"current":"GBP",
 			"total":"490",
