@@ -9,8 +9,12 @@ tenant.ontransform.com/api...
 
 **GET** call to get the information about the tennant. This is called once and stored in the client. It will allow the client to construct delegates job roles sentances such as "Rigger at Wood"
 
+all Coure MP ID's type = guid
+
+pass tennant guid into app
+
 ```
-tenant.ontransform.com/api/tenant
+tenant.ontransform.com/api/tenant/:id
 ```
 
 **RESPONSE**
@@ -20,7 +24,7 @@ tenant.ontransform.com/api/tenant
 {
   "results":[
     {
-      "id":"001",
+      "id":"guid",
       "name":"Wood",
       "availableCourseTypes":[
         {
@@ -53,10 +57,9 @@ tenant.ontransform.com/api/delegates?id=id1,id2,id3,id4,id5
 {
   "results":[
     {
-      "id":"001",
+			"id":"001", // confirm id dataTupe, wether multiTennant or courseMP 
       "firstName":"Joe",
       "lastName":"Bloggs",
-      "displayName":"Joe Bloggs", // is this possible?
       "jobRole":"Rigger"
     }
   ]
@@ -72,12 +75,14 @@ tenant.ontransform.com/api/delegates?search-param=name&search-value=bl
 ```
 The response **results** are as above however the search object/parameters from the request is reiterated in the response. this is for clarity when doing multiple searches
 
+*** What if several search params are at once?
+
 ```JSON
 {
-  "search":{
+  "search":[{
     "param":"name",
     "value":"bl"
-  },
+  }],
   "results":[
     {
       "id":"001",
@@ -128,13 +133,13 @@ tenant.ontransform.com/api/mp/courses/names?search-param=name&search-value=bl
 
 ```JSON
 {
-  "search":{
+  "search":[{
     "param":"name",
     "value":"h2s"
-  },
+  }],
   "results":[
     {
-      "id":"001",
+      "standardId":"001",
       "name":"OPITO Basic H2S Training",
     }
   ]
@@ -150,14 +155,14 @@ This provides the initial search and then allows all the filter parameters to cr
 
 
 ```
-tenant.ontransform.com/api/mp/courses/available/:id
+tenant.ontransform.com/api/mp/courses/available/:standardId
 ```
 response
 ```json
 [
   {
-    "courseId":"001",
-    "id":"001",
+    "standardId":"001", // GUID Course MP standard qual -  this is the id we searched for
+    "scheduledCourseId":"001", // id for scheduled course
     "name":"OPITO Basic H2S Training",
     "type":{
       "name":"In-Centre",
@@ -165,14 +170,14 @@ response
       "value":"inCentre"
     },
     "location":{
-      "name":"Name"
+      "name":"Newcastle"
     },
     "supplier":{
       "name":"AIS-Training",
       "id":"001"
     },
     "startDates":[
-      "Fri Oct 23 2020 07:39:41 GMT+0100 (British Summer Time)"
+      "10/12/2020" // to confirm what the DB wants
     ],
     "prices":{
 			"current":"GBP",
