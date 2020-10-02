@@ -175,7 +175,9 @@ response
       "Fri Oct 23 2020 07:39:41 GMT+0100 (British Summer Time)"
     ],
     "prices":{
-      "total":"490"
+			"current":"GBP",
+			"total":"490",
+			"incVat":false,
     },
     "availability":{
       "total":"20",
@@ -190,7 +192,7 @@ response
 
 >startDates: what date format are in the DB?
 
->prices: simple total for now but in obj cos of discounts etc,
+>prices: simple total for now but in a object to allow for future functionalit such as discounts, different tax etc,
 
 >availability: not sure we need the total but example on how it can expand in future
 
