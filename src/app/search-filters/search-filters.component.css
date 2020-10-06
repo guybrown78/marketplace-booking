@@ -1,6 +1,7 @@
 .search-filters{
 	min-width: 300px;
 	min-height: 350px;
+	max-width: 100%;
 	background-color: #ECF2F3;
 	padding: 2rem 1rem 1rem;
 	border-bottom-left-radius: 0.5rem;
@@ -31,3 +32,20 @@
 	outline: none;
 	box-shadow: none;
 } */
+
+span.label-prefix{
+	font-size: 0.8rem;
+	margin-left: 0.5rem;
+}
+
+
+
+.ant-select-item-option-disabled.alternative-course-option {
+	font-size: 0.9rem;
+	cursor: default;
+}
+@media (min-width: 640px){
+	.search-filters{
+		max-width: 320px;
+	}
+}

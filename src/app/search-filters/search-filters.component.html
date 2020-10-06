@@ -6,7 +6,15 @@
 		nzLayout="vertical">
 
 		<nz-form-item>
-			<nz-form-label nzFor="delegate">Delegate</nz-form-label>
+			<nz-form-label nzFor="delegate">
+				Delegate 
+				<span 
+					class="label-prefix" 
+					*ngIf="selectedDelegate"
+				>
+					{{ selectedDelegate | getUsersTennantJobRole: tennantService.tennant }}
+				</span> 
+			</nz-form-label>
 			<nz-form-control nzErrorTip="The input is not valid E-mail!">
 				<nz-input-group [nzPrefix]="prefixUser">
 					<input 
@@ -18,11 +26,28 @@
 						[nzAutocomplete]="autoDelegate" 
 					/>
 					<nz-autocomplete 
-						[nzDataSource]="delegateOptions" 
 						nzBackfill 
 						#autoDelegate
-					></nz-autocomplete>
-			
+					>
+						<nz-auto-option 
+							*ngIf="delegatesLoading"
+							nzDisabled 
+							nzCustomContent
+						>
+							<i nz-icon nzType="loading" class="loading-icon"></i> Loading Delegates...
+						</nz-auto-option>
+						
+						<ng-container *ngFor="let option of delegateOptions">
+							<nz-auto-option 
+								*ngIf="!delegatesLoading"
+								[nzValue]="(option | getUsersFullName)"
+								(click)="onDelegateAutoSelected(option)"
+							>{{ option | getUsersFullName }}</nz-auto-option>
+						</ng-container>
+					
+					</nz-autocomplete>
+
+
 				</nz-input-group>
 			</nz-form-control>
 		</nz-form-item>
@@ -40,10 +65,38 @@
 						[nzAutocomplete]="autoCourse" 
 					/>
 					<nz-autocomplete 
-						[nzDataSource]="courseOptions" 
 						nzBackfill 
 						#autoCourse
-					></nz-autocomplete>
+					>
+						<nz-auto-option 
+							*ngIf="coursesLoading"
+							nzDisabled 
+							nzCustomContent
+						>
+							<i nz-icon nzType="loading" class="loading-icon"></i> Loading Courses...
+						</nz-auto-option>
+						
+						<ng-container *ngFor="let option of courseOptions">
+							<nz-auto-option 
+								*ngIf="!coursesLoading"
+								[nzValue]="option.name"
+								(click)="onCoursesAutoSelected(option)"
+							>{{ option.name }}</nz-auto-option>
+						</ng-container>
+
+						<nz-auto-option 
+							*ngIf="!coursesLoading && courseOptions.length"
+							nzDisabled 
+							nzCustomContent
+							class="alternative-course-option"
+						>
+							<span nzTypography class="blue">
+								Can't find your choice? 
+								<a href="#" class="underlined">Use this form</a>
+							</span>
+						</nz-auto-option>
+			
+					</nz-autocomplete>
 				</nz-input-group>
 			</nz-form-control>
 		</nz-form-item>

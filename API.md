@@ -12,9 +12,10 @@ tenant.ontransform.com/api/bookingform/...
 
 The entry URL will contain the tennant id, this is needed to make the initial tennant call
 
+This api will have a slightly different URL as at this stage, we will only have a tennant ID and no tennant apiSuffix to construct the api. This will be a general rule within the application. If no tennant data is saved, the data entry points will start with the default 'transform'. (Could this be used as the entry point for non-tennanted states?).
 
 ```
-tenant.ontransform.com/api/bookingform/tenant/:id
+transform.ontransform.com/api/bookingform/tenant/:id
 ```
 
 **RESPONSE**
@@ -24,8 +25,9 @@ tenant.ontransform.com/api/bookingform/tenant/:id
 {
   "results":[
     {
-      "id":"guid",
-      "name":"Wood",
+			"id":"guid",
+			"name":"Wood",
+			"apiSuffix":"wood",
       "availableCourseTypes":[
         {
           "name":"eLearn",
@@ -37,10 +39,12 @@ tenant.ontransform.com/api/bookingform/tenant/:id
   ]
 }
 ```
+apiSuffix is what the api entry URL will start with, For example {apiSuffix}.ontransform.com/api... will result in wood.ontransform.com/api...
 
 >Liam to firm up what the ID' will be for tennant and delegates, wether if comes from Coure MP (type will be GUID) or mutitenant (int?)
 
 # Delegate
+
 
 **GET** calls to recieve delegate models. Variations in these entry points means you can get all delegates from a tennant, a single delegate in a tennant from an id and a selected list of delegates from multiple ids
 
@@ -133,6 +137,8 @@ translates to
 >if this is going to be too slow, then the client can get all delegates in a tennant in simple format, ie (name and id). Then search on that. However, when we go un-tennanted is this going to be huge? Other options are to type 3 chars in the client and thenmake the initial call. as the user types more chars adding to that initial 3, the client sorts
 
 
+[Example Delegates JSON](https://my-json-server.typicode.com/guybrown78/api-delegates/db)
+
 # COURSE Names
 
 
@@ -152,7 +158,7 @@ tenant.ontransform.com/api/bookingform/mp/courses/names
 {
   "results":[
     {
-      "id":"001",
+      "standardId":"001",
       "name":"OPITO Basic H2S Training",
     }
   ]
@@ -181,6 +187,8 @@ tenant.ontransform.com/api/bookingform/mp/courses/names?search=name|h2s
   ]
 }
 ```
+
+[EXAMPLE Course names JSON](https://my-json-server.typicode.com/guybrown78/api-courses/db)
 
 # COURSE 
 

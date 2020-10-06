@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UrlDataService } from '../url-data.service';
-
+import { UrlDataService } from '../services/url-data.service';
+import { TennantService } from '../services/tennant.service';
+import { TennantModel } from '../common/models/tennant.model'
+import { AppError } from '../common/errors/app.error'
 @Component({
   selector: 'app-search-marketplace',
   templateUrl: './search-marketplace.component.html',
@@ -9,29 +11,31 @@ import { UrlDataService } from '../url-data.service';
 })
 export class SearchMarketplaceComponent implements OnInit {
 
-	isObjectEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+	error:string = null;
+
   constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		public urlService: UrlDataService,
+		private urlService: UrlDataService,
+		private tennantService: TennantService
 	) { }
-	// example query
-	// ?entrydata=%7B"name":"Guy%20Brown","course":"Optito%20Bosiet%20with%20CA-EBS","location":"Teesside"%7D&returndata=%7B"type":"url","url":"https:%2F%2Ftf-ng-zorro.netlify.app%2Flms"%7D
+
   ngOnInit(): void {
 		this.route.queryParams.subscribe(params => {
-			if(!this.isObjectEmpty(params)){
-				if(!this.isObjectEmpty(params.entrydata)){
-					this.urlService.entryData = JSON.parse(params.entrydata)
-				}
-				if(!this.isObjectEmpty(params.returndata)){
-					this.urlService.returnData = JSON.parse(params.returndata)
-				}
-				
-			}
-			
+			this.urlService.setUrlQueryData(params);
 		});
+		//
 		console.log(this.urlService.entryData);
 		console.log(this.urlService.returnData);
+		//
+		if(this.urlService.entryData.tennantId){
+			console.log(this.urlService.entryData.tennantId);
+			this.tennantService.getTennant(this.urlService.entryData.tennantId).subscribe((tennant:TennantModel) => {
+				this.tennantService.tennant = tennant;
+			}, (error: AppError) => {
+				this.error = "Sorry, something went wrong loading the tennant";
+			});
+		}
   }
 
 }

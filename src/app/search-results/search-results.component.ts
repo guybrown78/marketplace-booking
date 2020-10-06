@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UrlDataService } from '../url-data.service';
+import { UrlDataService } from '../services/url-data.service';
 
 @Component({
   selector: 'app-search-results',

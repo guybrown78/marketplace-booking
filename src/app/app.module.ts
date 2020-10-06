@@ -30,9 +30,15 @@ import { SearchMarketplaceComponent } from './search-marketplace/search-marketpl
 import { SearchResultsComponent } from './search-results/search-results.component';
 
 
-import { UrlDataService } from './url-data.service';
+import { UrlDataService } from './services/url-data.service';
+import { TennantService } from './services/tennant.service';
+
 import { ScullyLibModule } from '@scullyio/ng-lib';
-import { SearchFiltersComponent } from './search-filters/search-filters.component'
+import { SearchFiltersComponent } from './search-filters/search-filters.component';
+
+// PIPES
+import { GetUsersFullNamePipe } from './common/pipes/get-users-full-name.pipe';
+import { GetUsersTennantJobRolePipe } from './common/pipes/get-users-tennant-job-role.pipe'
 registerLocaleData(en);
 
 @NgModule({
@@ -41,7 +47,9 @@ registerLocaleData(en);
     HeaderComponent,
     SearchMarketplaceComponent,
     SearchResultsComponent,
-    SearchFiltersComponent
+    SearchFiltersComponent,
+    GetUsersFullNamePipe,
+    GetUsersTennantJobRolePipe
   ],
   imports: [
     BrowserModule,
@@ -66,7 +74,9 @@ registerLocaleData(en);
   ],
   providers: [
 		{ provide: NZ_I18N, useValue: en_GB }, 
-		UrlDataService
+		UrlDataService,
+		TennantService,
+		GetUsersFullNamePipe,
 	],
   bootstrap: [AppComponent]
 })
