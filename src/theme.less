@@ -782,9 +782,9 @@
 @tabs-vertical-padding: @padding-xs @padding-lg;
 @tabs-vertical-margin: 0 0 @margin-md 0;
 @tabs-scrolling-size: 32px;
-@tabs-highlight-color: @primary-color;
-@tabs-hover-color: @primary-5;
-@tabs-active-color: @primary-7;
+@tabs-highlight-color: @grey-300;
+@tabs-hover-color: @grey-400;
+@tabs-active-color: #ffffff;
 @tabs-card-gutter: 2px;
 @tabs-card-tab-active-border-top: 2px solid transparent;
 
@@ -1475,9 +1475,12 @@ span.italic{
 	color: rgba(#FFFFFF, 0.25);
 }
 
+
+
 // NAVY
-.ant-tabs.navy .ant-tabs-bar{
-	border-color: @navy-400;
+.ant-tabs.navy .ant-tabs-bar,
+.ant-tabs.navy .ant-tabs-nav::before{
+	border-color: @navy-400!important;
 }
 .ant-tabs.navy .ant-tabs-ink-bar{
 	background-color: @navy-600;
@@ -1485,6 +1488,11 @@ span.italic{
 .ant-tabs.navy .ant-tabs-nav .ant-tabs-tab{
 	color: @navy-400;
 }
+.ant-tabs.navy .ant-tabs-tab-btn:focus,
+.ant-tabs.navy .ant-tabs-tab-remove:focus,
+.ant-tabs.navy .ant-tabs-tab-btn:active,
+.ant-tabs.navy .ant-tabs-tab-remove:active,
+.ant-tabs.navy .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
 .ant-tabs.navy .ant-tabs-nav .ant-tabs-tab:hover, 
 .ant-tabs.navy .ant-tabs-nav .ant-tabs-tab-active {
 	color: @navy-600;
@@ -1496,8 +1504,9 @@ span.italic{
 
 
 // BLUE
-.ant-tabs.blue .ant-tabs-bar{
-	border-color: @blue-400;
+.ant-tabs.blue .ant-tabs-bar,
+.ant-tabs.blue .ant-tabs-nav::before{
+	border-color: @blue-400!important;
 }
 .ant-tabs.blue .ant-tabs-ink-bar{
 	background-color: @blue-600;
@@ -1505,14 +1514,24 @@ span.italic{
 .ant-tabs.blue .ant-tabs-nav .ant-tabs-tab{
 	color: @blue-400;
 }
+.ant-tabs.blue .ant-tabs-tab-btn:focus,
+.ant-tabs.blue .ant-tabs-tab-remove:focus,
+.ant-tabs.blue .ant-tabs-tab-btn:active,
+.ant-tabs.blue .ant-tabs-tab-remove:active,
+.ant-tabs.blue .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
 .ant-tabs.blue .ant-tabs-nav .ant-tabs-tab:hover, 
 .ant-tabs.blue .ant-tabs-nav .ant-tabs-tab-active {
-	color: @blue-600;
+	color: @blue-600!important;
 }
 .ant-tabs.blue .ant-tabs-nav .ant-tabs-tab-disabled, 
 .ant-tabs.blue .ant-tabs-nav .ant-tabs-tab-disabled:hover {
 	color: rgba(@blue-600, 0.25);
 }
+
+// .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+// 	color: #E7EFF1;
+// 	font-weight: 500;
+// }
 
 .ant-pagination.mini 
 .ant-pagination-prev, 

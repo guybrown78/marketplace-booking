@@ -24,6 +24,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 //
 import { HeaderComponent } from './header/header.component';
 import { SearchMarketplaceComponent } from './search-marketplace/search-marketplace.component';
@@ -79,6 +80,7 @@ registerLocaleData(en);
 		NzButtonModule,
 		NzDropDownModule,
 		NzTableModule,
+		NzTabsModule,
 		ScullyLibModule,
   ],
   providers: [

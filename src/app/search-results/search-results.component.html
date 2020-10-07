@@ -42,11 +42,31 @@
 </div>
 
 
+
 <div *ngIf="!isLoading && hasSearched" class="schedules">
 
-	<ul class="schedule-list">
-		<li *ngFor="let course of scheduledCourses">
-			<schedule-item [course]="course"></schedule-item>
-		</li>
-	</ul>
+
+	<nz-tabset class="blue">
+
+		<nz-tab nzTitle="Show in Date Order">
+			
+			<ul class="schedule-list">
+				<li *ngFor="let course of scheduledCourses">
+					<schedule-item [course]="course"></schedule-item>
+				</li>
+			</ul>
+
+		</nz-tab>
+
+		<nz-tab nzTitle="View by suppliers">
+			
+		</nz-tab>
+
+		<nz-tab nzTitle="View Learning Technology Only">
+			
+		</nz-tab>
+
+	
+	</nz-tabset>
+
 </div>
