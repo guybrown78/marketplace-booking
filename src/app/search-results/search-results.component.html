@@ -1,39 +1,52 @@
-<tf-ng-page-title-breadcrumbs>
-	<nz-breadcrumb nzSeparator=">">
-		<nz-breadcrumb-item>
-			<a [routerLink]="['/search']">Search</a>
-		</nz-breadcrumb-item>
-		<nz-breadcrumb-item>
-			Results
-		</nz-breadcrumb-item>
-	</nz-breadcrumb>
-</tf-ng-page-title-breadcrumbs>
+<div class="search-results">
+
+	<div 
+		class="search-results-status"
+		[ngClass]="[
+			error ? 'error'
+			: !isLoading && !error && hasSearched && !scheduledCourses.length ? 'error'
+			: 'default'
+		]"
+	>
+		<!-- Initial state/instructions -->
+		<span *ngIf="!hasSearched">Use the search tools to start the booking process</span>
+
+		<!-- Loading state -->
+		<span *ngIf="isLoading" class="blue">
+			<i nz-icon nzType="loading" class="loading-icon"></i> Searching for suppliers and dates
+		</span>
+
+		<!-- Load errored -->
+		<div *ngIf="!isLoading && hasSearched && error">
+			<span>{{ error }}</span>
+		</div>
+
+		<!-- Load successful -->
+		<div *ngIf="!isLoading && hasSearched && !error">
+
+			<!-- has no results -->
+			<span *ngIf="!scheduledCourses.length" >
+				Sorry, there are no exact matches for your search. Please search again or <a class="blue underlined" href="#">use this from.</a>
+			</span>
+
+			<!-- has courses -->
+			<span *ngIf="scheduledCourses.length" >
+				We've found <span class="blue">{{ scheduledCourses.length }} dates</span>
+			</span>
+		</div>
+
+		
 
 
-<tf-ng-card>
-	<h2 nz-typography>Search results</h2>
+	</div>
+</div>
 
-	<tf-ng-card-content>
-		<a nz-dropdown [nzDropdownMenu]="menu">
-      Hover me
-      <i nz-icon nzType="down"></i>
-    </a>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu nzSelectable>
-        <li nz-menu-item>1st menu item</li>
-        <li nz-menu-item>2nd menu item</li>
-        <li nz-menu-item>3rd menu item</li>
-      </ul>
-    </nz-dropdown-menu>
-	</tf-ng-card-content>
 
-</tf-ng-card>
+<div *ngIf="!isLoading && hasSearched" class="schedules">
 
-<tf-ng-card colour="white">
-	<h2 nz-typography>Return Data</h2>
-	<tf-ng-card-content>
-		<code>
-			<pre>{{urlService.returnData | json}}</pre>
-		</code>
-	</tf-ng-card-content>
-</tf-ng-card>
+	<ul class="schedule-list">
+		<li *ngFor="let course of scheduledCourses">
+			<schedule-item [course]="course"></schedule-item>
+		</li>
+	</ul>
+</div>

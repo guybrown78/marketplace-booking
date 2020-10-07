@@ -1,0 +1,39 @@
+<tf-ng-page-title-breadcrumbs>
+	<nz-breadcrumb nzSeparator=">">
+		<nz-breadcrumb-item>
+			<a [routerLink]="['/search']">Search</a>
+		</nz-breadcrumb-item>
+		<nz-breadcrumb-item>
+			Results
+		</nz-breadcrumb-item>
+	</nz-breadcrumb>
+</tf-ng-page-title-breadcrumbs>
+
+
+<tf-ng-card>
+	<h2 nz-typography>Search results</h2>
+
+	<tf-ng-card-content>
+		<a nz-dropdown [nzDropdownMenu]="menu">
+      Hover me
+      <i nz-icon nzType="down"></i>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item>1st menu item</li>
+        <li nz-menu-item>2nd menu item</li>
+        <li nz-menu-item>3rd menu item</li>
+      </ul>
+    </nz-dropdown-menu>
+	</tf-ng-card-content>
+
+</tf-ng-card>
+
+<tf-ng-card colour="white">
+	<h2 nz-typography>Return Data</h2>
+	<tf-ng-card-content>
+		<code>
+			<pre>{{urlService.returnData | json}}</pre>
+		</code>
+	</tf-ng-card-content>
+</tf-ng-card>

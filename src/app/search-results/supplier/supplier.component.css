@@ -1,0 +1,37 @@
+.course-supplier{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+.supplier-logo{
+	width: 38px;
+	height: 38px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 0.5rem;
+}
+.supplier-logo-image{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.supplier-logo-image.image-eval{
+	width:auto;
+	height:auto;
+	opacity: 0;
+}
+.supplier-logo-image.image-width-dominant{
+	width:100%;
+	height:auto;
+	opacity: 1;
+}
+.supplier-logo-image.image-height-dominant,
+.supplier-logo-image.image-default{
+	width:auto;
+	height:100%;
+	opacity: 1;
+}

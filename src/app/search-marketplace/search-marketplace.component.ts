@@ -36,6 +36,7 @@ export class SearchMarketplaceComponent implements OnInit {
 				this.error = "Sorry, something went wrong loading the tennant";
 			});
 		}
-  }
+	}
+	
 
 }

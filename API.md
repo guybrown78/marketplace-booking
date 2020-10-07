@@ -190,7 +190,7 @@ tenant.ontransform.com/api/bookingform/mp/courses/names?search=name|h2s
 
 [EXAMPLE Course names JSON](https://my-json-server.typicode.com/guybrown78/api-courses/db)
 
-# COURSE 
+# COURSE / SCHEDULES
 
 
 **GET** call get all the information for a selected course.
@@ -200,6 +200,10 @@ This provides the initial search and then allows all the filter parameters to cr
 
 ```
 tenant.ontransform.com/api/bookingform/mp/courses/available/:standardId
+
+// or
+
+tenant.ontransform.com/api/bookingform/mp/courses/schedules/:standardId
 ```
 response
 
@@ -226,31 +230,53 @@ response
       "id":"001"
     },
     "startDate":"10/12/2020",
+    "duration":{
+      "days":4,
+      "hours":null
+    },
     "prices":{
       "currency":"GBP",
-      "total":"490",
+      "total":490,
       "incVat":false
     },
     "availability":{
-      "total":"20",
-      "available":"8"
+      "total":20,
+      "available":8
     }
   }
 ]
 ```
+
+
 >location: lat/lang? town/city/county
 
 >supplier: supplier logo url?
 
 >startDates: what date format are in the DB?
 
+>duration: Course duration model to allow course duration descriptions to be formed. If Vlearn/Elearn courses can set days/hours to null
+
 >prices: simple total for now but in a object to allow for future functionalit such as discounts, different tax etc,
+
+Course Prices Currency will be an Enum ISO 4217 Currency Codes [CurrencyCodes](https://gist.github.com/Aquazus/1a26a55ba7c38ed0363e0068d389cf30). In the application client, we will include;
+
+```javascript
+export enum CoursePriceCurrency
+{
+	GBP = "GBP",
+	USD = "USD",
+	AUD = "AUD",
+	EUR = "EUR",
+}
+```
 
 >availability: not sure we need the total but example on how it can expand in future
 
 > This will give us enougth information to allow the client to organise the data and filter - if the filters are meant to make calls then this is going to need more thought
 
-----------
+[Example Course/Schedules JSON](https://my-json-server.typicode.com/guybrown78/api-course/db)
+
+--------------------------------------------------
 from this data. the UI allows to filter from n courses.
 
 1. filtering on location, the client can scrape or the locations from the list (doesn't solve spelling/errors etc)

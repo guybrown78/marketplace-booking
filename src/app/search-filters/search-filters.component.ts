@@ -6,7 +6,6 @@ import { DelegateService } from '../services/delegate.service'
 import { CourseService } from '../services/course.service'
 // common
 import { AppError } from '../common/errors/app.error';
-import { TennantModel, TennantsModel } from '../common/models/tennant.model';
 import { DelegateModel } from '../common/models/delegate.model';
 import { DelegatesModel } from '../common/models/delegates.model';
 import { CourseModel, CoursesModel } from '../common/models/courses.model';
@@ -40,18 +39,19 @@ export class SearchFiltersComponent implements OnInit {
 	//
 	courseOptions: CourseModel[] = [];
 	coursesLoading:boolean = false;
-	selectedCourse:CourseModel = null;
+	// selectedCourse:CourseModel = null;
 	//
 	typeOptions: TypeOption[] = [
 		{ label: 'All', value: 'all' },
     { label: 'E-Learn', value: 'eLearn' },
     { label: 'V-Leran', value: 'vLearn' }
-  ];
+	];
+	
   constructor(
 		private fb: FormBuilder,
 		public tennantService: TennantService,
 		private delegateService: DelegateService,
-		private courseService: CourseService,
+		public courseService: CourseService,
 		private getUsersFullName: GetUsersFullNamePipe,
 		private getUsersTennantJobRole: GetUsersTennantJobRolePipe
 	) {}
@@ -78,8 +78,9 @@ export class SearchFiltersComponent implements OnInit {
 	}
 
 	submitForm(): void {
-		console.log("Boooom")
-		console.log(this.searchFiltersForm.value)
+		if(this.courseService.course){
+			this.courseService.announceSearch();
+		}
     // for (const i in this.validateForm.controls) {
     //   this.validateForm.controls[i].markAsDirty();
     //   this.validateForm.controls[i].updateValueAndValidity();
@@ -93,7 +94,6 @@ export class SearchFiltersComponent implements OnInit {
 		this.delegateService.getDelegates()
 			.subscribe((delegates:DelegatesModel) => {
 				if(!this.delegateService.allDelegatesLoaded){
-					console.log("loaded ONCE, don't do it again!")
 					this.delegateService.delegates = delegates.results;
 					this.delegateService.allDelegatesLoaded = true;
 				}
@@ -118,13 +118,12 @@ export class SearchFiltersComponent implements OnInit {
 					this.courseService.allCoursesLoaded = true;
 				}
 				this.courseOptions = this.courseService.getFilteredCourses(value.toLocaleLowerCase());
-				console.log(this.courseOptions)
 				this.coursesLoading = false;
 			}, (error: AppError) => {
 				this.error = "Sorry, something went wrong loading the courses";
 			});
 	}
 	onCoursesAutoSelected(course:CourseModel){
-		this.selectedCourse = course;
+		this.courseService.course = course;
 	}
 }

@@ -1,0 +1,20 @@
+<div class='course-supplier'>
+	<div class="supplier-logo">
+		<img 
+			#imgRef
+			class="supplier-logo-image"
+			[ngClass]="[
+				logoImageClass === 'evaluate' ? 'image-eval'
+				: logoImageClass === 'width-dom' ? 'image-width-dominant'
+				: logoImageClass === 'height-dom' ? 'image-height-dominant'
+				: 'image-default'
+			]"
+			title="courseSupplier.name"
+			src='{{ "assets/images/supplier-logos/" + courseSupplier.id + ".png" }}'
+			(load)="onSupplierLogoLoaded()"
+		/>
+	</div>
+	<span class="navy"><strong>{{ courseSupplier.name }}</strong></span>
+	
+</div>
+	

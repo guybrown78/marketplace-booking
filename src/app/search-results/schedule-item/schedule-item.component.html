@@ -1,0 +1,32 @@
+<div class="course-schedule-wrapper">
+	<supplier class="supplier" [courseSupplier]="course.supplier"></supplier>
+	
+	<column-title
+		class="type"
+		[mainTitle]="course.type.name"
+		[subTitle]="course.duration.days"
+	></column-title>
+
+	<column-title
+		class="location"
+		[mainTitle]="course.location.name"
+		[subTitle]="'-'"
+	></column-title>
+
+	<column-title
+		class="price"
+		[mainTitle]="course.prices.total"
+		[subTitle]="course.prices.total"
+	></column-title>
+
+	<column-title
+		class="date"
+		[mainTitle]="course.startDate"
+		[subTitle]="course.availability.available"
+	></column-title>
+
+	<div class="book-btn">
+		<button nz-button nzSize="large" class="blue">Book</button>
+	</div>
+	
+</div>

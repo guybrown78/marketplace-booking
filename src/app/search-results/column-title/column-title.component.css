@@ -1,0 +1,16 @@
+.column-title{
+	border: solid 1px blue;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	margin-right: 0.25rem;
+}
+.column-title .top{
+	font-size: 1rem;
+	line-height: 1;
+}
+.column-title .bottom{
+	font-size: 0.8rem;
+	line-height: 0.8rem;
+}

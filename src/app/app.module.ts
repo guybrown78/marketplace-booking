@@ -32,13 +32,18 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 
 import { UrlDataService } from './services/url-data.service';
 import { TennantService } from './services/tennant.service';
+import { CourseService } from './services/course.service';
 
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { SearchFiltersComponent } from './search-filters/search-filters.component';
 
 // PIPES
 import { GetUsersFullNamePipe } from './common/pipes/get-users-full-name.pipe';
-import { GetUsersTennantJobRolePipe } from './common/pipes/get-users-tennant-job-role.pipe'
+import { GetUsersTennantJobRolePipe } from './common/pipes/get-users-tennant-job-role.pipe';
+import { BookCourseComponent } from './book-course/book-course.component';
+import { ScheduleItemComponent } from './search-results/schedule-item/schedule-item.component';
+import { SupplierComponent } from './search-results/supplier/supplier.component';
+import { ColumnTitleComponent } from './search-results/column-title/column-title.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -49,7 +54,11 @@ registerLocaleData(en);
     SearchResultsComponent,
     SearchFiltersComponent,
     GetUsersFullNamePipe,
-    GetUsersTennantJobRolePipe
+    GetUsersTennantJobRolePipe,
+    BookCourseComponent,
+    ScheduleItemComponent,
+    SupplierComponent,
+    ColumnTitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +85,7 @@ registerLocaleData(en);
 		{ provide: NZ_I18N, useValue: en_GB }, 
 		UrlDataService,
 		TennantService,
+		CourseService,
 		GetUsersFullNamePipe,
 	],
   bootstrap: [AppComponent]

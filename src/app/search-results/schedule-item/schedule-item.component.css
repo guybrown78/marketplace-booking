@@ -1,0 +1,33 @@
+.course-schedule-wrapper{
+	background-color: #FFFFFF;
+	padding: 0.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	border-radius: 5px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.supplier{
+	border:solid 1px red;
+	width: 35%;
+}
+
+.type{
+	width:10%;
+}
+.location{
+	width:15%;
+}
+.price{
+	width:10%;
+}
+.date{
+	width:15%;
+}
+.book-btn{
+	border:solid 1px yellowgreen;
+	width:15%;
+	display: flex;
+	justify-content: flex-end;
+}
