@@ -25,6 +25,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 //
 import { HeaderComponent } from './header/header.component';
 import { SearchMarketplaceComponent } from './search-marketplace/search-marketplace.component';
@@ -45,6 +46,7 @@ import { BookCourseComponent } from './book-course/book-course.component';
 import { ScheduleItemComponent } from './search-results/schedule-item/schedule-item.component';
 import { SupplierComponent } from './search-results/supplier/supplier.component';
 import { ColumnTitleComponent } from './search-results/column-title/column-title.component';
+import { ScheduleCourseSupplierItemComponent } from './search-results/schedule-course-supplier-item/schedule-course-supplier-item.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -60,6 +62,7 @@ registerLocaleData(en);
     ScheduleItemComponent,
     SupplierComponent,
     ColumnTitleComponent,
+    ScheduleCourseSupplierItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ registerLocaleData(en);
 		NzDropDownModule,
 		NzTableModule,
 		NzTabsModule,
+		NzCollapseModule,
 		ScullyLibModule,
   ],
   providers: [

@@ -59,7 +59,12 @@
 		</nz-tab>
 
 		<nz-tab nzTitle="View by suppliers">
-			
+			<ul class="schedule-list">
+				<li *ngFor="let courseSupplier of scheduledCourseSuppliers">
+					<schedule-course-supplier-item [courseSupplier]="courseSupplier"></schedule-course-supplier-item>
+				</li>
+			</ul>
+
 		</nz-tab>
 
 		<nz-tab nzTitle="View Learning Technology Only">

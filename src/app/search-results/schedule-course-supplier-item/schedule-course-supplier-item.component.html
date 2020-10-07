@@ -1,0 +1,41 @@
+<div class="course-schedule-container">
+
+	<div class="course-schedule-wrapper">
+		<supplier 
+			class="supplier" 
+			[courseSupplier]="courseSupplier.supplier"
+		></supplier>
+
+		<column-title
+			class="dates"
+			[mainTitle]="courseSupplier.courses.length + ' dates'"
+			[subTitle]="'-'"
+		></column-title>
+
+		<div class="book-btn">
+			<button 
+				nz-button 
+				class="grey"
+				(click)="onToggle()"
+			>
+				Show Dates
+				<i nz-icon [nzType]="isOpen ? 'up' : 'down'"></i>
+			</button>
+
+		</div>
+		
+	</div>
+
+
+	<div 
+		class="dates-dd-panel" 
+		[ngClass]="isOpen ? 'show' : 'hide'"
+	>
+		<div class="dd-panel-container dd-panel-grey">
+			<div class="dd-panel-bg">
+
+			</div>	
+		</div>
+	</div>
+
+</div>

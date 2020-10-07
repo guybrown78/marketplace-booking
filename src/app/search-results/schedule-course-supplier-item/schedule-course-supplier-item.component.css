@@ -1,0 +1,72 @@
+.course-schedule-container{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.course-schedule-wrapper{
+	background-color: #FFFFFF;
+	padding: 0.25rem;
+	display: flex;
+	position: relative;
+	z-index: 50;
+	align-items: center;
+	justify-content: flex-start;
+	border-radius: 5px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.supplier{
+	width: 50%;
+}
+.dates{
+	width: 25%;
+}
+.book-btn{
+	width:25%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+.dates-dd-panel{
+	position: relative;
+	width: 100%;
+	
+	border-radius: 5px;
+	/* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
+	z-index: 40;
+
+}
+.dates-dd-panel.show{
+	pointer-events: auto;
+	opacity: 1;
+	height: 120px;
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+	transition-duration: 200ms;
+	margin-top:-5px;
+}
+.dates-dd-panel.hide{
+	pointer-events: none;
+	opacity: 0;
+	height: 0px;
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+	transition-duration: 100ms;
+}
+.dd-panel-container{
+	border-bottom-right-radius: 0.375rem;
+	border-bottom-left-radius: 0.375rem;
+	/* background-color: #D0DFE3; */
+	background-color: #ECF2F3;
+	height: 100%;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+.dd-panel-bg{
+	padding-top: 0.75rem;
+	padding-left: 0.25rem;
+	padding-right: 0.25rem;
+	padding-bottom: 0.25rem;
+}

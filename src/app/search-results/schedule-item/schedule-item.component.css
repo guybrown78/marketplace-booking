@@ -9,7 +9,7 @@
 }
 
 .supplier{
-	border:solid 1px red;
+	/* border:solid 1px red; */
 	width: 35%;
 }
 
@@ -26,7 +26,7 @@
 	width:15%;
 }
 .book-btn{
-	border:solid 1px yellowgreen;
+	/* border:solid 1px yellowgreen; */
 	width:15%;
 	display: flex;
 	justify-content: flex-end;
