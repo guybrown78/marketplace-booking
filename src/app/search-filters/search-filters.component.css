@@ -44,6 +44,11 @@ span.label-prefix{
 	font-size: 0.9rem;
 	cursor: default;
 }
+
+.tooltip-container{
+	display: inline-flex;
+	justify-content: space-between;
+}
 @media (min-width: 640px){
 	.search-filters{
 		max-width: 320px;

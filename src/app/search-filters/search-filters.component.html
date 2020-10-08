@@ -19,11 +19,11 @@
 
 			<nz-form-control 
 				nzErrorTip="The input is not valid E-mail!" 
-				nzTooltipTitle="If you want to add multiple delegates, you can leave this blank" 
+				[nzTooltipTitle]="delegateTooltipTemplate" 
 				nzTooltipPlacement="right" 
 				nz-tooltip
 				[nzTooltipTrigger]="null"
-				[nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched"
+				[nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched && !forceCloseTT"
 			>
 				<nz-input-group [nzPrefix]="prefixUser">
 					<input 
@@ -236,3 +236,13 @@
 	<i nz-icon nzType="calendar" nzTheme="outline"></i>
 </ng-template>
 <ng-template #suffixDate></ng-template>
+
+<ng-template #delegateTooltipTemplate>
+	<div class="tooltip-container">
+		<span>If you want to add multiple delegates, you can leave this&nbsp;blank</span>
+		<button nz-button nzSize="small" nzShape="circle" class="navy" (click)="onForceCloseTT()">
+			<i nz-icon nzType="close"></i>
+		</button>
+	</div>
+	
+</ng-template>

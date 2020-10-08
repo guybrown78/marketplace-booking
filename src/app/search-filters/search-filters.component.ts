@@ -48,7 +48,8 @@ export class SearchFiltersComponent implements OnInit {
 	//
 	typeOptions: CourseTypeModel[] = null;
 	locationOptions:CourseLocationModel[] = null;
-	
+	//
+	forceCloseTT:boolean = false;
   constructor(
 		private fb: FormBuilder,
 		private urlService: UrlDataService,
@@ -87,6 +88,7 @@ export class SearchFiltersComponent implements OnInit {
 			},(error: AppError) => {
 				// if error, make sure you set the delegate input to untouched to show the tooltip
 				this.searchFiltersForm.controls['delegate'].markAsUntouched()
+				
 				this.error = "Sorry, couldn't load the delegate";
 				console.log("error loading the delegate")
 			})
@@ -154,8 +156,13 @@ export class SearchFiltersComponent implements OnInit {
 		this.typeOptions = this.courseService.parsedResults.courseTypes;
 		this.locationOptions = this.courseService.parsedResults.locations;
 	}
+	
 	resetFilters(){
 		this.typeOptions = null;
 		this.locationOptions = null;
+	}
+
+	onForceCloseTT(){
+		this.forceCloseTT = true;
 	}
 }
