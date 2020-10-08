@@ -48,6 +48,7 @@ export class SearchFiltersComponent implements OnInit {
 	//
 	typeOptions: CourseTypeModel[] = null;
 	locationOptions:CourseLocationModel[] = null;
+	disableFilters:boolean = true;
 	//
 	forceCloseTT:boolean = false;
   constructor(
@@ -107,6 +108,7 @@ export class SearchFiltersComponent implements OnInit {
 
 	submitForm(): void {
 		if(this.courseService.course){
+			this.forceCloseTT = true;
 			this.resetFilters();
 			this.courseService.announceSearch();
 		}
@@ -155,11 +157,13 @@ export class SearchFiltersComponent implements OnInit {
 	onCourseSeacrchComplete(){
 		this.typeOptions = this.courseService.parsedResults.courseTypes;
 		this.locationOptions = this.courseService.parsedResults.locations;
+		this.disableFilters = false;
 	}
 	
 	resetFilters(){
 		this.typeOptions = null;
 		this.locationOptions = null;
+		this.disableFilters = true;
 	}
 
 	onForceCloseTT(){
