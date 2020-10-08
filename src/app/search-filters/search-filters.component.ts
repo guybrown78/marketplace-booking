@@ -74,13 +74,19 @@ export class SearchFiltersComponent implements OnInit {
 		});
 		// check entry delegates
 		if(this.urlService.entryData.delegateIds.length){
-			// console.log(this.urlService.entryData.delegateIds);
+
+			// set the input to touched to stop the flicker of the tooltip if takes a while to load the delegate
+			this.searchFiltersForm.controls['delegate'].markAsTouched()
+			// load the delegate
 			this.delegateService.getDelegatesFromId(this.urlService.entryData.delegateIds[0]).subscribe((delegate:DelegateModel) => {
 				this.onDelegateAutoSelected(delegate)
 				// update form value with delegates name
 				this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
+				this.searchFiltersForm.controls['delegate'].markAsTouched()
 
 			},(error: AppError) => {
+				// if error, make sure you set the delegate input to untouched to show the tooltip
+				this.searchFiltersForm.controls['delegate'].markAsUntouched()
 				this.error = "Sorry, couldn't load the delegate";
 				console.log("error loading the delegate")
 			})

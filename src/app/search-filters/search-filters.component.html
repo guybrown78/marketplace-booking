@@ -1,4 +1,5 @@
 <div class="search-filters form-hero-card">
+
 	<form 
 		nz-form 
 		[formGroup]="searchFiltersForm" 
@@ -15,7 +16,15 @@
 					{{ selectedDelegate | getUsersTennantJobRole: tennantService.tennant }}
 				</span> 
 			</nz-form-label>
-			<nz-form-control nzErrorTip="The input is not valid E-mail!">
+
+			<nz-form-control 
+				nzErrorTip="The input is not valid E-mail!" 
+				nzTooltipTitle="If you want to add multiple delegates, you can leave this blank" 
+				nzTooltipPlacement="right" 
+				nz-tooltip
+				[nzTooltipTrigger]="null"
+				[nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched"
+			>
 				<nz-input-group [nzPrefix]="prefixUser">
 					<input 
 						placeholder="Start typing delegates name" 
