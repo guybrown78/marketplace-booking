@@ -114,18 +114,18 @@
 						id="type"
 						class="force-select-prefix"
 					>
-						<nz-option 
-							nzValue="all"
-							nzLabel="All"
+						<nz-option *ngFor="let type of typeOptions" 
+							[nzValue]="type.value"
+							[nzLabel]="type.name"
 						></nz-option>
-						<nz-option 
+						<!-- <nz-option 
 							nzValue="eLearn"
 							nzLabel="E-Learn"
 						></nz-option>
 						<nz-option 
 							nzValue="vLearn"
 							nzLabel="V-Learn"
-						></nz-option>
+						></nz-option> -->
 					</nz-select>
 				</div>
 
@@ -141,13 +141,34 @@
 
 		</nz-form-item>
 
-		<nz-form-item>
+		<!-- <nz-form-item>
 			<nz-form-label nzFor="location">Location</nz-form-label>
 			<nz-form-control>
 				<nz-input-group [nzPrefix]="prefixLocation">
 					<input nz-input formControlName="location" id="location" />
 				</nz-input-group>
 			</nz-form-control>
+		</nz-form-item> -->
+		<nz-form-item>
+			<nz-form-label nzFor="location">Location</nz-form-label>
+			<nz-form-control>
+				
+				<div class="fake-input-group">
+					<i nz-icon nzType="environment" nzTheme="outline" class="fake-input-group-prefix-icon"></i>
+					<nz-select 
+						placeholder="Select a location" 
+						formControlName="location" 
+						id="location"
+						class="force-select-prefix"
+					>
+						<nz-option *ngFor="let location of locationOptions" 
+							[nzValue]="location.name"
+							[nzLabel]="location.name"
+						></nz-option>
+					</nz-select>
+				</div>
+			</nz-form-control> 
+
 		</nz-form-item>
 
 		<nz-form-item>

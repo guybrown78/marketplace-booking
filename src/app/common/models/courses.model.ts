@@ -46,3 +46,8 @@ export class CourseAvailabilityModel {
 	total:number
 	available:number
 }
+
+export class ScheduledCourseSupplierModel {
+	supplier:CourseSupplierModel
+	courses:CourseModel[]
+}

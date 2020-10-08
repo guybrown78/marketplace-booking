@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UrlDataService } from '../services/url-data.service';
 import { CourseService } from '../services/course.service';
-import { CourseModel, CoursesModel } from '../common/models/courses.model';
+import { CourseModel, CoursesModel, ScheduledCourseSupplierModel } from '../common/models/courses.model';
 import { Subscription, Observable } from 'rxjs';
 import { AppError } from '../common/errors/app.error';
 @Component({
@@ -17,7 +17,7 @@ export class SearchResultsComponent implements OnInit {
 	hasSearched:boolean = false;
 	isLoading:boolean = false;
 	scheduledCourses:CourseModel[];
-	scheduledCourseSuppliers:any[];
+	scheduledCourseSuppliers:ScheduledCourseSupplierModel[];
 	// private _selectedCourse:CourseModel;
 	// @Input("selectedCourse") set selectedCourse(course:CourseModel) {
 	// 	this._selectedCourse = course;
@@ -50,26 +50,10 @@ export class SearchResultsComponent implements OnInit {
 		this.error = null;
 		this.courseService.getCourseSchedules(this.courseService.course.standardId)
 			.subscribe((scheduledCourses:CoursesModel) => {
-				this.scheduledCourses = [ ...scheduledCourses.results];
-				//
-				let suppliers = [];
-				scheduledCourses.results.map(c => {
-					// todo, do types here too
-					if (!suppliers.some(s => s.id === c.supplier.id)) {
-						/* doesn't contain the element so add it */
-						suppliers.push(c.supplier)
-					}
-				})
-				console.log(" >>>>> ")
-				console.log(suppliers)
-				this.scheduledCourseSuppliers = suppliers.map(s => {
-					//
-					const courses = scheduledCourses.results.filter(c => c.supplier.id === s.id)
-					return { supplier:s, courses };
-				})
-				console.log(this.scheduledCourseSuppliers);
-				//
+				this.courseService.parseSearchResults(scheduledCourses.results);
+				console.log(this.courseService.parsedResults);
 				this.isLoading = false;
+				this.courseService.confirmSearch();
 			}, (error: AppError) => {
 				this.error = "Sorry, something went wrong trying to search for your course.";
 				this.isLoading = false;

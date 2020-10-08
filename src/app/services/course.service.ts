@@ -3,7 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Subject, of } from 'rxjs';
 import { BaseService } from './base.service';
-import { CoursesModel, CourseModel } from '../common/models/courses.model';
+import { CourseTypeModel } from '../common/models/tennant.model';
+import { CoursesModel, CourseModel, CourseSupplierModel, CourseLocationModel, ScheduledCourseSupplierModel } from '../common/models/courses.model';
+
+interface SearchResultsInterface {
+	hasResults:boolean;
+	suppliers:CourseSupplierModel[];
+	courseTypes:CourseTypeModel[];
+	locations:CourseLocationModel[];
+	scheduledCourses:CourseModel[];
+	scheduledCourseSuppliers:ScheduledCourseSupplierModel[];
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +23,8 @@ export class CourseService extends BaseService {
 	private _course:CourseModel = null;
 	private _courses:CourseModel[]  = [];
 	private _allCoursesLoaded: boolean = false;
+	//
+	private _parsedResults:SearchResultsInterface = null;
 	//
 	// Observable sources
 	private searchAnnouncedSource = new Subject();
@@ -56,19 +68,35 @@ export class CourseService extends BaseService {
 			.pipe(catchError(this.handleError));
 	}
 
-	// public getStaticJSON():any{
-	// 	let id = 0;
-	// 	const newModels = courseData.map((c,i) => {
-	// 		id++
-	// 		const obj = {
-	// 			"id":String(id),
-	// 			"name":String(c.name)
-	// 		}
-	// 		return obj;
-	// 	})
-	// 	return { "results":JSON.stringify(newModels) };
-	// }
-
+	parseSearchResults(results:CourseModel[]){
+		let obj:SearchResultsInterface = {
+			scheduledCourses:[ ...results],
+			hasResults:results.length > 0,
+			suppliers:[],
+			courseTypes:[],
+			locations:[],
+			scheduledCourseSuppliers:[]
+		}
+		//
+		results.map(c => {
+			if (!obj.suppliers.some(s => s.id === c.supplier.id)) {
+				/* doesn't contain the element so add it */
+				obj.suppliers.push(c.supplier);
+			}
+			if (!obj.courseTypes.some(ct => ct.id === c.type.id)) {
+				obj.courseTypes.push(c.type);
+			}
+			if (!obj.locations.some(l => l.name.toLocaleLowerCase() === c.location.name.toLocaleLowerCase())) {
+				obj.locations.push(c.location);
+			}
+		})
+		obj.scheduledCourseSuppliers = obj.suppliers.map(s => {
+			// map the available supliers to filter courses
+			const courses = results.filter(c => c.supplier.id === s.id)
+			return { supplier:s, courses };
+		})
+		this.parsedResults = obj;
+	}
 	// Service message commands
 	announceSearch() {
 		this.searchAnnouncedSource.next();
@@ -99,4 +127,12 @@ export class CourseService extends BaseService {
 	set allCoursesLoaded(value:boolean){
 		this._allCoursesLoaded = value;
 	}
+
+	get parsedResults():SearchResultsInterface{
+		return this._parsedResults;
+	}
+	set parsedResults(results:SearchResultsInterface){
+		this._parsedResults = results;
+	}
+	
 }

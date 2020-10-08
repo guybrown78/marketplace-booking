@@ -65,8 +65,27 @@
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 .dd-panel-bg{
-	padding-top: 0.75rem;
-	padding-left: 0.25rem;
-	padding-right: 0.25rem;
-	padding-bottom: 0.25rem;
+	padding: 0.25rem;
+	display: flex;
+	flex: 1 1 0%;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.date-select{
+	background-color: #FFFFFF;
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 99999px;
+	cursor: pointer;
+}
+.date-select .prefix-icon{
+	margin-right: 1.5rem;
+	font-size: 1.3rem;
+}
+.date-select .suffix-icon{
+	margin-left: 1.5rem;
 }

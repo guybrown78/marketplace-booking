@@ -4,7 +4,7 @@
 		class="search-results-status"
 		[ngClass]="[
 			error ? 'error'
-			: !isLoading && !error && hasSearched && !scheduledCourses.length ? 'error'
+			: !isLoading && !error && hasSearched && !courseService.parsedResults.hasResults ? 'error'
 			: 'default'
 		]"
 	>
@@ -25,13 +25,13 @@
 		<div *ngIf="!isLoading && hasSearched && !error">
 
 			<!-- has no results -->
-			<span *ngIf="!scheduledCourses.length" >
+			<span *ngIf="!courseService.parsedResults.hasResults" >
 				Sorry, there are no exact matches for your search. Please search again or <a class="blue underlined" href="#">use this from.</a>
 			</span>
 
 			<!-- has courses -->
-			<span *ngIf="scheduledCourses.length" >
-				We've found <span class="blue">{{ scheduledCourses.length }} dates</span>
+			<span *ngIf="courseService.parsedResults.hasResults" >
+				We've found <span class="blue"><strong>{{ courseService.parsedResults.scheduledCourseSuppliers.length }} suppliers</strong></span> with <span class="blue"><strong>{{ courseService.parsedResults.scheduledCourses.length }} dates</strong></span>
 			</span>
 		</div>
 
@@ -43,35 +43,31 @@
 
 
 
-<div *ngIf="!isLoading && hasSearched" class="schedules">
+<div *ngIf="!isLoading && hasSearched && !error && courseService.parsedResults.hasResults" class="schedules">
 
 
 	<nz-tabset class="blue">
 
 		<nz-tab nzTitle="Show in Date Order">
-			
 			<ul class="schedule-list">
-				<li *ngFor="let course of scheduledCourses">
+				<li *ngFor="let course of courseService.parsedResults.scheduledCourses">
 					<schedule-item [course]="course"></schedule-item>
 				</li>
 			</ul>
-
 		</nz-tab>
 
 		<nz-tab nzTitle="View by suppliers">
 			<ul class="schedule-list">
-				<li *ngFor="let courseSupplier of scheduledCourseSuppliers">
+				<li *ngFor="let courseSupplier of courseService.parsedResults.scheduledCourseSuppliers">
 					<schedule-course-supplier-item [courseSupplier]="courseSupplier"></schedule-course-supplier-item>
 				</li>
 			</ul>
-
 		</nz-tab>
 
 		<nz-tab nzTitle="View Learning Technology Only">
-			
+			<!-- show stuff -->
 		</nz-tab>
 
-	
 	</nz-tabset>
 
 </div>

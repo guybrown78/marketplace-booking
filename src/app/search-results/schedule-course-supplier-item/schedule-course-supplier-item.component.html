@@ -34,6 +34,22 @@
 		<div class="dd-panel-container dd-panel-grey">
 			<div class="dd-panel-bg">
 
+				<span role="button" aria-pressed="false" class="blue date-select" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+					<i class="prefix-icon" nz-icon nzType="calendar" nzTheme="outline"></i>
+					Select a date to book
+					<i class="suffix-icon" nz-icon nzType="down"></i>
+				</span>
+				<nz-dropdown-menu #menu="nzDropdownMenu">
+					<ul nz-menu nzSelectable>
+						<li *ngFor="let course of courseSupplier.courses" nz-menu-item>
+							<span>
+								<strong>{{ course.startDate }}</strong> 
+								({{ course.availability.available }} spaces)
+							</span>
+						</li>
+					</ul>
+				</nz-dropdown-menu>
+
 			</div>	
 		</div>
 	</div>
