@@ -39,4 +39,5 @@ export class SearchMarketplaceComponent implements OnInit {
 	}
 	
 
+
 }

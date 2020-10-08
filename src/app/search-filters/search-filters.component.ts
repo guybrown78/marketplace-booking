@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 // services
+import { UrlDataService } from '../services/url-data.service'
 import { TennantService } from '../services/tennant.service'
 import { DelegateService } from '../services/delegate.service'
 import { CourseService } from '../services/course.service'
@@ -50,6 +51,7 @@ export class SearchFiltersComponent implements OnInit {
 	
   constructor(
 		private fb: FormBuilder,
+		private urlService: UrlDataService,
 		public tennantService: TennantService,
 		private delegateService: DelegateService,
 		public courseService: CourseService,
@@ -63,15 +65,27 @@ export class SearchFiltersComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-		// this.fetchDelegateData();
-    this.searchFiltersForm = this.fb.group({
+		this.searchFiltersForm = this.fb.group({
       delegate: [null],
       course: [null, [Validators.required]],
       type: [null],
       location: [null],
       startDate: [null],
 		});
-		//
+		// check entry delegates
+		if(this.urlService.entryData.delegateIds.length){
+			// console.log(this.urlService.entryData.delegateIds);
+			this.delegateService.getDelegatesFromId(this.urlService.entryData.delegateIds[0]).subscribe((delegate:DelegateModel) => {
+				this.onDelegateAutoSelected(delegate)
+				// update form value with delegates name
+				this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
+
+			},(error: AppError) => {
+				this.error = "Sorry, couldn't load the delegate";
+				console.log("error loading the delegate")
+			})
+
+		}
 	}
 	
 	fetchDelegateData(){

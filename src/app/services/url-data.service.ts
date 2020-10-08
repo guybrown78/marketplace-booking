@@ -19,12 +19,33 @@ export class UrlDataService {
 
 	constructor() { }
 	
+	// ?entrydata={"tennantId":"679e8ced-6c32-441d-9fdc-d806180e27f7"}
+	// ?entrydata=%7B"tennantId":"679e8ced-6c32-441d-9fdc-d806180e27f7"%7D
+
+	// ?entrydata={"tennantId":"679e8ced-6c32-441d-9fdc-d806180e27f7","delegateIds":["63122"]}
+	// ?entrydata=%7B%22tennantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263122%22%5D%7D
+
+
 	setUrlQueryData(params:any){
+		console.log("params")
+		console.log(params)
 		if(!isObjectEmpty(params)){
-			if(!isObjectEmpty(params.entrydata)){
-				this.entryData = JSON.parse(params.entrydata) as EntryQueryData;
+			console.log("params.entrydata")
+			console.log(params.entrydata)
+			console.log(!isObjectEmpty(params.entrydata));
+			if(params.entrydata && !isObjectEmpty(params.entrydata)){
+				console.log("HEEEEEEEER")
+				const ed = JSON.parse(params.entrydata);
+				console.log("---------")
+				console.log(ed)
+				console.log(ed.delegateIds);
+				console.log("---------")
+				this.entryData = {
+					tennantId:ed.tennantId || "",
+					delegateIds: ed.delegateIds ? ed.delegateIds.map(d => String(d)) : []
+				}
 			}
-			if(!isObjectEmpty(params.returndata)){
+			if(params.returndata && !isObjectEmpty(params.returndata)){
 				this.returnData = JSON.parse(params.returndata)
 			}
 		}

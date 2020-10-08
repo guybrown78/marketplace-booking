@@ -42,7 +42,12 @@ export class DelegateService extends BaseService{
 			.pipe(catchError(this.handleError));
 	}
 	//
-
+	getDelegatesFromId(id:string) {
+		// GET ...api/api-delegates/db
+		return this.http
+			.get(this.getDataURL(`api-delegates/results/${id}`), { ...this.requestOptions() })
+			.pipe(catchError(this.handleError));
+	}
 	// public getStaticJSON():any{
 	// 	let id = 63120;
 	// 	const roles = ["Rigger", "Welding Inspector", "Drilling Supervisor", "Platform Safety Officer", "Scaffolding engineer", "First Aider", "Pipe Specialist", "Engineer","Pipe Fitter"]
