@@ -110,6 +110,8 @@ export class SearchFiltersComponent implements OnInit {
 		if(this.courseService.course){
 			this.forceCloseTT = true;
 			this.resetFilters();
+			console.log(this.searchFiltersForm.value);
+			this.courseService.searchFiltersFormValues = this.searchFiltersForm.value;
 			this.courseService.announceSearch();
 		}
   }
@@ -152,6 +154,9 @@ export class SearchFiltersComponent implements OnInit {
 	}
 	onCoursesAutoSelected(course:CourseModel){
 		this.courseService.course = course;
+		this.searchFiltersForm.controls['type'].setValue(null);
+		this.searchFiltersForm.controls['location'].setValue(null);
+		this.searchFiltersForm.controls['startDate'].setValue(null);
 	}
 
 	onCourseSeacrchComplete(){
@@ -160,6 +165,7 @@ export class SearchFiltersComponent implements OnInit {
 		this.disableFilters = false;
 	}
 	
+
 	resetFilters(){
 		this.typeOptions = null;
 		this.locationOptions = null;

@@ -25,11 +25,10 @@ export class SearchMarketplaceComponent implements OnInit {
 			this.urlService.setUrlQueryData(params);
 		});
 		//
-		console.log(this.urlService.entryData);
-		console.log(this.urlService.returnData);
+		// console.log(this.urlService.entryData);
+		// console.log(this.urlService.returnData);
 		//
 		if(this.urlService.entryData.tennantId){
-			console.log(this.urlService.entryData.tennantId);
 			this.tennantService.getTennant(this.urlService.entryData.tennantId).subscribe((tennant:TennantModel) => {
 				this.tennantService.tennant = tennant;
 			}, (error: AppError) => {

@@ -5,6 +5,8 @@ import { Subject, of } from 'rxjs';
 import { BaseService } from './base.service';
 import { CourseTypeModel } from '../common/models/tennant.model';
 import { CoursesModel, CourseModel, CourseSupplierModel, CourseLocationModel, ScheduledCourseSupplierModel } from '../common/models/courses.model';
+//
+import * as moment from 'moment';
 
 interface SearchResultsInterface {
 	hasResults:boolean;
@@ -25,6 +27,7 @@ export class CourseService extends BaseService {
 	private _allCoursesLoaded: boolean = false;
 	//
 	private _parsedResults:SearchResultsInterface = null;
+	private _searchFiltersFormValues:any = null;
 	//
 	// Observable sources
 	private searchAnnouncedSource = new Subject();
@@ -69,15 +72,36 @@ export class CourseService extends BaseService {
 	}
 
 	parseSearchResults(results:CourseModel[]){
+		let filteredResults:CourseModel[] = [ ...results ];
+		// location
+		if(this.searchFiltersFormValues.location){
+			filteredResults = filteredResults.filter(c => c.location.name.toLocaleLowerCase() === this.searchFiltersFormValues.location.toLocaleLowerCase());
+		}
+		if(this.searchFiltersFormValues.startDate){
+			console.log("DATE")
+			console.log(this.searchFiltersFormValues.startDate);
+			const sd = moment(this.searchFiltersFormValues.startDate)
+			console.log("startDate",sd.format("DD/MM/YYYY"))
+			filteredResults = filteredResults.filter(c => {
+				const cd = moment(c.startDate, 'DD/MM/YYYY')
+				// const after = moment(cd).isAfter(sd, 'day');
+				const sameOrAfter = moment(cd).isSameOrAfter(sd, 'day');
+				console.log(c.startDate, sameOrAfter, cd.format("DD/MM/YYYY"))
+				if(sameOrAfter){
+					return c;
+				}
+			})
+		}
+		//
 		let obj:SearchResultsInterface = {
-			scheduledCourses:[ ...results],
-			hasResults:results.length > 0,
+			scheduledCourses:[ ...filteredResults ],
+			hasResults:filteredResults.length > 0,
 			suppliers:[],
 			courseTypes:[],
 			locations:[],
 			scheduledCourseSuppliers:[]
 		}
-		//
+		// Set the Overall Results filters
 		results.map(c => {
 			if (!obj.suppliers.some(s => s.id === c.supplier.id)) {
 				/* doesn't contain the element so add it */
@@ -90,9 +114,21 @@ export class CourseService extends BaseService {
 				obj.locations.push(c.location);
 			}
 		})
-		obj.scheduledCourseSuppliers = obj.suppliers.map(s => {
+		//
+		let filteredSuppliers:CourseSupplierModel[] = [];
+		// let filteredCourseTypes:CourseTypeModel[];
+		// let filteredLocations:CourseLocationModel[];
+		filteredResults.map(fc => {
+			if (!filteredSuppliers.some(fs => fs.id === fc.supplier.id)) {
+				filteredSuppliers.push(fc.supplier);
+			}
+			// if (!filteredCourseTypes.some(fct => fct.id === fc.type.id)) {
+			// 	filteredCourseTypes.push(fc.type);
+			// }
+		})
+		obj.scheduledCourseSuppliers = filteredSuppliers.map(s => {
 			// map the available supliers to filter courses
-			const courses = results.filter(c => c.supplier.id === s.id)
+			const courses = filteredResults.filter(c => c.supplier.id === s.id)
 			return { supplier:s, courses };
 		})
 		this.parsedResults = obj;
@@ -135,4 +171,11 @@ export class CourseService extends BaseService {
 		this._parsedResults = results;
 	}
 	
+	get searchFiltersFormValues():any{
+		return this._searchFiltersFormValues;
+	}
+	set searchFiltersFormValues(values:any){
+		this._searchFiltersFormValues = values;
+	}
+
 }

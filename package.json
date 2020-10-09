@@ -26,6 +26,7 @@
     "@scullyio/scully": "^1.0.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
+    "moment": "^2.29.1",
     "new-event-polyfill": "^1.0.1",
     "ng-zorro-antd": "^10.0.0",
     "rxjs": "~6.3.3",

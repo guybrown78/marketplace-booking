@@ -15,14 +15,14 @@
 
 	<column-title
 		class="price"
-		[mainTitle]="course.prices.total"
+		[mainTitle]="course.prices | getCoursePrice"
 		[subTitle]="course.prices.total"
 	></column-title>
 
 	<column-title
 		class="date"
-		[mainTitle]="course.startDate"
-		[subTitle]="course.availability.available"
+		[mainTitle]=" course.startDate | getDisplayDate: true "
+		[subTitle]="course.availability.available | getNumberLabel: 'space'"	
 	></column-title>
 
 	<div class="book-btn">

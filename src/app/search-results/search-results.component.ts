@@ -4,10 +4,17 @@ import { CourseService } from '../services/course.service';
 import { CourseModel, CoursesModel, ScheduledCourseSupplierModel } from '../common/models/courses.model';
 import { Subscription, Observable } from 'rxjs';
 import { AppError } from '../common/errors/app.error';
+
+import { GetNumberLabelPipe } from '../common/pipes/get-number-label.pipe';
+import { GetDisplayDatePipe } from '../common/pipes/get-display-date.pipe'
 @Component({
   selector: 'search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+	styleUrls: ['./search-results.component.css'],
+	providers:[
+		GetNumberLabelPipe,
+		GetDisplayDatePipe
+	]
 })
 export class SearchResultsComponent implements OnInit {
 
@@ -32,7 +39,9 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(
 		public urlService: UrlDataService,
-		public courseService: CourseService
+		public courseService: CourseService,
+		private getNumberLabel: GetNumberLabelPipe,
+		private getDisplayDate:GetDisplayDatePipe
 	) {
 		this.searchSubscription = courseService.searchAnnounced$.subscribe(
 			() => {

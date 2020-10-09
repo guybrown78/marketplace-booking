@@ -31,7 +31,23 @@
 
 			<!-- has courses -->
 			<span *ngIf="courseService.parsedResults.hasResults" >
-				We've found <span class="blue"><strong>{{ courseService.parsedResults.scheduledCourseSuppliers.length }} suppliers</strong></span> with <span class="blue"><strong>{{ courseService.parsedResults.scheduledCourses.length }} dates</strong></span>
+				We've found 
+				<span class="blue"><strong>
+					{{ courseService.parsedResults.scheduledCourseSuppliers.length | getNumberLabel: "supplier":"suppliers" }}
+				</strong></span> 
+				<span *ngIf="courseService.searchFiltersFormValues.location">
+					in <span class="blue"><strong>
+						{{ courseService.searchFiltersFormValues.location }}
+					</strong></span>
+				</span>
+				 with <span class="blue"><strong>
+					{{ courseService.parsedResults.scheduledCourses.length | getNumberLabel: "date" }}
+					</strong></span> 
+					<span *ngIf="courseService.searchFiltersFormValues.startDate">
+						 from <span class="blue"><strong>
+							 {{ courseService.searchFiltersFormValues.startDate |getDisplayDate }}
+							</strong></span>
+						</span>
 			</span>
 		</div>
 

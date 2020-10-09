@@ -47,6 +47,11 @@ import { ScheduleItemComponent } from './search-results/schedule-item/schedule-i
 import { SupplierComponent } from './search-results/supplier/supplier.component';
 import { ColumnTitleComponent } from './search-results/column-title/column-title.component';
 import { ScheduleCourseSupplierItemComponent } from './search-results/schedule-course-supplier-item/schedule-course-supplier-item.component';
+import { GetNumberLabelPipe } from './common/pipes/get-number-label.pipe';
+import { GetDisplayDatePipe } from './common/pipes/get-display-date.pipe';
+import { GetCoursePricePipe } from './common/pipes/get-course-price.pipe';
+
+
 registerLocaleData(en);
 
 @NgModule({
@@ -63,6 +68,9 @@ registerLocaleData(en);
     SupplierComponent,
     ColumnTitleComponent,
     ScheduleCourseSupplierItemComponent,
+    GetNumberLabelPipe,
+    GetDisplayDatePipe,
+    GetCoursePricePipe,
   ],
   imports: [
     BrowserModule,
