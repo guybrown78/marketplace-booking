@@ -16,7 +16,7 @@
 	<column-title
 		class="price"
 		[mainTitle]="course.prices | getCoursePrice"
-		[subTitle]="course.prices.total"
+		[subTitle]="course.prices | getCourseTax"
 	></column-title>
 
 	<column-title

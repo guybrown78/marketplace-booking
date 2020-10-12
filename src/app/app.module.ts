@@ -50,6 +50,7 @@ import { ScheduleCourseSupplierItemComponent } from './search-results/schedule-c
 import { GetNumberLabelPipe } from './common/pipes/get-number-label.pipe';
 import { GetDisplayDatePipe } from './common/pipes/get-display-date.pipe';
 import { GetCoursePricePipe } from './common/pipes/get-course-price.pipe';
+import { GetCourseTaxPipe } from './common/pipes/get-course-tax.pipe';
 
 
 registerLocaleData(en);
@@ -71,6 +72,7 @@ registerLocaleData(en);
     GetNumberLabelPipe,
     GetDisplayDatePipe,
     GetCoursePricePipe,
+    GetCourseTaxPipe,
   ],
   imports: [
     BrowserModule,
