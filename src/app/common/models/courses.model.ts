@@ -49,5 +49,6 @@ export class CourseAvailabilityModel {
 
 export class ScheduledCourseSupplierModel {
 	supplier:CourseSupplierModel
+	locations:CourseLocationModel[]
 	courses:CourseModel[]
 }

@@ -7,6 +7,9 @@ import { AppError } from '../common/errors/app.error';
 
 import { GetNumberLabelPipe } from '../common/pipes/get-number-label.pipe';
 import { GetDisplayDatePipe } from '../common/pipes/get-display-date.pipe'
+
+import { _mpConfigAltFormURL } from '../../config'
+
 @Component({
   selector: 'search-results',
   templateUrl: './search-results.component.html',
@@ -25,17 +28,8 @@ export class SearchResultsComponent implements OnInit {
 	isLoading:boolean = false;
 	scheduledCourses:CourseModel[];
 	scheduledCourseSuppliers:ScheduledCourseSupplierModel[];
-	// private _selectedCourse:CourseModel;
-	// @Input("selectedCourse") set selectedCourse(course:CourseModel) {
-	// 	this._selectedCourse = course;
-	// 	// Do Something!
-	// 	console.log("oh, got it :)")
-	// 	console.log(this.selectedCourse);
-	// }
 
-	// get selectedCourse(): CourseModel {
-	// 	return this._selectedCourse;
-	// }
+	altFormUrl:string = _mpConfigAltFormURL;
 
   constructor(
 		public urlService: UrlDataService,

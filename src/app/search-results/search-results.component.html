@@ -26,7 +26,7 @@
 
 			<!-- has no results -->
 			<span *ngIf="!courseService.parsedResults.hasResults" >
-				Sorry, there are no exact matches for your search. Please search again or <a class="blue underlined" href="#">use this from.</a>
+				Sorry, there are no exact matches for your search. Please search again or <strong><a  [href]="altFormUrl" title="Alternative booking form" class="blue underlined">use this from.</a></strong>
 			</span>
 
 			<!-- has courses -->

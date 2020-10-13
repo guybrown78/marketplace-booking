@@ -9,7 +9,7 @@
 		<column-title
 			class="dates"
 			[mainTitle]="courseSupplier.courses.length | getNumberLabel: 'date'"
-			[subTitle]="'-'"
+			[subTitle]="courseSupplier.locations | getLocations"
 		></column-title>
 
 		<div class="book-btn">

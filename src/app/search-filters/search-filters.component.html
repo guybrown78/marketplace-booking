@@ -101,7 +101,7 @@
 						>
 							<span nzTypography class="blue">
 								Can't find your choice? 
-								<a [href]="altFormUrl" title="Alternative booking form" class="underlined">Use this form</a>
+								<strong><a [href]="altFormUrl" title="Alternative booking form" class="underlined">Use this form</a></strong>
 							</span>
 						</nz-auto-option>
 			
@@ -178,11 +178,11 @@
 		<!-- <nz-form-item class="submit-area">
 			<nz-form-control> -->
 				<button 
-					[disabled]="!courseService.course" 
+					[disabled]="!this.searchFiltersForm.dirty ? true : !this.courseService.course ? true : false" 	
 					nz-button 
 					nzType="primary"
 					class="search-btn"
-				>Search</button>
+				>{{ !initialSearchComplete ? "Search" : "Update Results" }}</button>
 			<!-- </nz-form-control>
 		</nz-form-item> -->
 

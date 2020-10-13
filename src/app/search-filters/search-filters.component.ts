@@ -52,6 +52,7 @@ export class SearchFiltersComponent implements OnInit {
 	disableFilters:boolean = true;
 	//
 	forceCloseTT:boolean = false;
+	initialSearchComplete:boolean = false;
 	altFormUrl:string = _mpConfigAltFormURL;
   constructor(
 		private fb: FormBuilder,
@@ -112,7 +113,7 @@ export class SearchFiltersComponent implements OnInit {
 		if(this.courseService.course){
 			this.forceCloseTT = true;
 			this.resetFilters();
-			console.log(this.searchFiltersForm.value);
+			// console.log(this.searchFiltersForm.value);
 			this.courseService.searchFiltersFormValues = this.searchFiltersForm.value;
 			this.courseService.announceSearch();
 		}
@@ -162,9 +163,12 @@ export class SearchFiltersComponent implements OnInit {
 	}
 
 	onCourseSeacrchComplete(){
+		this.initialSearchComplete = true;
 		this.typeOptions = this.courseService.parsedResults.courseTypes;
 		this.locationOptions = this.courseService.parsedResults.locations;
 		this.disableFilters = false;
+		this.searchFiltersForm.markAsPristine()
+		console.log(this.searchFiltersForm)
 	}
 	
 

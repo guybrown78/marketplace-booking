@@ -13,6 +13,7 @@ interface SearchResultsInterface {
 	suppliers:CourseSupplierModel[];
 	courseTypes:CourseTypeModel[];
 	locations:CourseLocationModel[];
+	filteredLocations:CourseLocationModel[];
 	scheduledCourses:CourseModel[];
 	scheduledCourseSuppliers:ScheduledCourseSupplierModel[];
 }
@@ -63,7 +64,6 @@ export class CourseService extends BaseService {
 
 	// Get All Courses
 	getCourseSchedules(standardId:string) {
-		console.log("get course", standardId);
 		const epURL = standardId === "133" ? "api-course/db" : `api-course-${standardId}/db`
 		// GET ...api/api-course/db
 		return this.http
@@ -78,15 +78,11 @@ export class CourseService extends BaseService {
 			filteredResults = filteredResults.filter(c => c.location.name.toLocaleLowerCase() === this.searchFiltersFormValues.location.toLocaleLowerCase());
 		}
 		if(this.searchFiltersFormValues.startDate){
-			console.log("DATE")
-			console.log(this.searchFiltersFormValues.startDate);
 			const sd = moment(this.searchFiltersFormValues.startDate)
-			console.log("startDate",sd.format("DD/MM/YYYY"))
 			filteredResults = filteredResults.filter(c => {
 				const cd = moment(c.startDate, 'DD/MM/YYYY')
 				// const after = moment(cd).isAfter(sd, 'day');
 				const sameOrAfter = moment(cd).isSameOrAfter(sd, 'day');
-				console.log(c.startDate, sameOrAfter, cd.format("DD/MM/YYYY"))
 				if(sameOrAfter){
 					return c;
 				}
@@ -99,6 +95,7 @@ export class CourseService extends BaseService {
 			suppliers:[],
 			courseTypes:[],
 			locations:[],
+			filteredLocations:[],
 			scheduledCourseSuppliers:[]
 		}
 		// Set the Overall Results filters
@@ -131,12 +128,22 @@ export class CourseService extends BaseService {
 			// if (!filteredCourseTypes.some(fct => fct.id === fc.type.id)) {
 			// 	filteredCourseTypes.push(fc.type);
 			// }
+			if (!obj.filteredLocations.some(fl => fl.name.toLocaleLowerCase() === fc.location.name.toLocaleLowerCase())) {
+				obj.filteredLocations.push(fc.location);
+			}
 		})
 		obj.scheduledCourseSuppliers = filteredSuppliers.map(s => {
 			// map the available supliers to filter courses
 			const courses = filteredResults.filter(c => c.supplier.id === s.id)
-			return { supplier:s, courses };
+			const locations = []
+			courses.map(fsc => {
+				if (!locations.some(frl => frl.name.toLocaleLowerCase() === fsc.location.name.toLocaleLowerCase())) {
+					locations.push(fsc.location);
+				}
+			})
+			return { supplier:s, courses, locations };
 		})
+
 		this.parsedResults = obj;
 	}
 	// Service message commands
