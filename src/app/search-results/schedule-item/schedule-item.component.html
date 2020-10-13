@@ -1,16 +1,16 @@
 <div class="course-schedule-wrapper">
 	<supplier class="supplier" [courseSupplier]="course.supplier"></supplier>
 	
-	<column-title
+	<!-- <column-title
 		class="type"
 		[mainTitle]="course.type.name"
-		[subTitle]="course.duration.days"
-	></column-title>
+		[subTitle]="course.duration | getCourseDuration"
+	></column-title> -->
 
 	<column-title
 		class="location"
 		[mainTitle]="course.location.name"
-		[subTitle]="'-'"
+		[subTitle]="course.duration | getCourseDuration"
 	></column-title>
 
 	<column-title

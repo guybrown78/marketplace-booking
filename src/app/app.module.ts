@@ -51,6 +51,7 @@ import { GetNumberLabelPipe } from './common/pipes/get-number-label.pipe';
 import { GetDisplayDatePipe } from './common/pipes/get-display-date.pipe';
 import { GetCoursePricePipe } from './common/pipes/get-course-price.pipe';
 import { GetCourseTaxPipe } from './common/pipes/get-course-tax.pipe';
+import { GetCourseDurationPipe } from './common/pipes/get-course-duration.pipe';
 
 
 registerLocaleData(en);
@@ -73,6 +74,7 @@ registerLocaleData(en);
     GetDisplayDatePipe,
     GetCoursePricePipe,
     GetCourseTaxPipe,
+    GetCourseDurationPipe,
   ],
   imports: [
     BrowserModule,

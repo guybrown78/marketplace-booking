@@ -74,7 +74,7 @@ export class CourseService extends BaseService {
 	parseSearchResults(results:CourseModel[]){
 		let filteredResults:CourseModel[] = [ ...results ];
 		// location
-		if(this.searchFiltersFormValues.location){
+		if(this.searchFiltersFormValues.location && this.searchFiltersFormValues.location !== "All"){
 			filteredResults = filteredResults.filter(c => c.location.name.toLocaleLowerCase() === this.searchFiltersFormValues.location.toLocaleLowerCase());
 		}
 		if(this.searchFiltersFormValues.startDate){
@@ -114,6 +114,12 @@ export class CourseService extends BaseService {
 				obj.locations.push(c.location);
 			}
 		})
+		//
+		if(obj.locations.length){
+			obj.locations.unshift({
+				name:"All"
+			} as CourseLocationModel)
+		}
 		//
 		let filteredSuppliers:CourseSupplierModel[] = [];
 		// let filteredCourseTypes:CourseTypeModel[];

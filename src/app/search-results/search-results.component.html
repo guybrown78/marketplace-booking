@@ -35,7 +35,7 @@
 				<span class="blue"><strong>
 					{{ courseService.parsedResults.scheduledCourseSuppliers.length | getNumberLabel: "supplier":"suppliers" }}
 				</strong></span> 
-				<span *ngIf="courseService.searchFiltersFormValues.location">
+				<span *ngIf="courseService.searchFiltersFormValues.location && courseService.searchFiltersFormValues.location !== 'All' ">
 					in <span class="blue"><strong>
 						{{ courseService.searchFiltersFormValues.location }}
 					</strong></span>
@@ -80,9 +80,9 @@
 			</ul>
 		</nz-tab>
 
-		<nz-tab nzTitle="View Learning Technology Only">
-			<!-- show stuff -->
-		</nz-tab>
+		<!-- <nz-tab nzTitle="View Learning Technology Only">
+			 show stuff
+		</nz-tab> -->
 
 	</nz-tabset>
 

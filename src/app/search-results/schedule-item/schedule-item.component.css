@@ -13,17 +13,17 @@
 	width: 35%;
 }
 
-.type{
+/* .type{
 	width:10%;
-}
+} */
 .location{
-	width:15%;
+	width:18%;
 }
 .price{
-	width:10%;
+	width:14%;
 }
 .date{
-	width:15%;
+	width:18%;
 }
 .book-btn{
 	/* border:solid 1px yellowgreen; */

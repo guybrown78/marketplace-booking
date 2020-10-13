@@ -15,6 +15,7 @@ import { CourseTypeModel } from '../common/models/tennant.model'
 import { GetUsersFullNamePipe } from '../common/pipes/get-users-full-name.pipe';
 import { GetUsersTennantJobRolePipe } from '../common/pipes/get-users-tennant-job-role.pipe';
 
+import { _mpConfigAltFormURL } from '../../config'
 interface TypeOption {
   label: string;
   value: string;
@@ -51,6 +52,7 @@ export class SearchFiltersComponent implements OnInit {
 	disableFilters:boolean = true;
 	//
 	forceCloseTT:boolean = false;
+	altFormUrl:string = _mpConfigAltFormURL;
   constructor(
 		private fb: FormBuilder,
 		private urlService: UrlDataService,

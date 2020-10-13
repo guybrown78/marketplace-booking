@@ -101,7 +101,7 @@
 						>
 							<span nzTypography class="blue">
 								Can't find your choice? 
-								<a href="#" class="underlined">Use this form</a>
+								<a [href]="altFormUrl" title="Alternative booking form" class="underlined">Use this form</a>
 							</span>
 						</nz-auto-option>
 			
@@ -110,7 +110,7 @@
 			</nz-form-control>
 		</nz-form-item>
 
-		<nz-form-item>
+		<!-- <nz-form-item>
 			<nz-form-label nzFor="type">Type</nz-form-label>
 			
 			<nz-form-control>
@@ -133,16 +133,8 @@
 
 			</nz-form-control> 
 
-		</nz-form-item>
-
-		<!-- <nz-form-item>
-			<nz-form-label nzFor="location">Location</nz-form-label>
-			<nz-form-control>
-				<nz-input-group [nzPrefix]="prefixLocation">
-					<input nz-input formControlName="location" id="location" />
-				</nz-input-group>
-			</nz-form-control>
 		</nz-form-item> -->
+
 		<nz-form-item>
 			<nz-form-label nzFor="location">Location</nz-form-label>
 			<nz-form-control>
@@ -180,15 +172,6 @@
 						[nzSuffixIcon]="suffixDate"
 					></nz-date-picker>
 				</div>
-				<!-- <nz-input-group [nzPrefix]="prefixDate"> -->
-					<!-- <input nz-input formControlName="startDate" id="startDate" /> -->
-					<!-- <nz-date-picker 
-						class="date-picker"
-						formControlName="startDate" 
-						id="startDate"
-						[nzSuffixIcon]="suffixDate"
-					></nz-date-picker> -->
-				<!-- </nz-input-group> -->
 			</nz-form-control>
 		</nz-form-item>
 
@@ -198,6 +181,7 @@
 					[disabled]="!courseService.course" 
 					nz-button 
 					nzType="primary"
+					class="search-btn"
 				>Search</button>
 			<!-- </nz-form-control>
 		</nz-form-item> -->
@@ -206,6 +190,11 @@
 	</form>
 </div>
 
+<div class="search-alternative-form">
+ <span class="blue">
+	 If you need to choose a paticular supplier please <strong><a [href]="altFormUrl" title="Alternative booking form" class="underlined">use this form</a></strong>
+ </span>
+</div>
 
 <ng-template #prefixUser>
 	<i nz-icon nzType="user"></i>
@@ -213,15 +202,13 @@
 <ng-template #prefixSearch>
 	<i nz-icon nzType="search"></i>
 </ng-template>
-<ng-template #prefixType>
+<!-- <ng-template #prefixType>
 	<i nz-icon nzType="menu"></i>
-</ng-template>
-<ng-template #prefixLocation>
+</ng-template> -->
+<!-- <ng-template #prefixLocation>
 	<i nz-icon nzType="environment" nzTheme="outline"></i>
-</ng-template>
-<ng-template #prefixDate>
-	<i nz-icon nzType="calendar" nzTheme="outline"></i>
-</ng-template>
+</ng-template> -->
+
 <ng-template #suffixDate></ng-template>
 
 <ng-template #delegateTooltipTemplate>

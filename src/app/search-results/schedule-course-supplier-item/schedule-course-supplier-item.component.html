@@ -8,7 +8,7 @@
 
 		<column-title
 			class="dates"
-			[mainTitle]="courseSupplier.courses.length + ' dates'"
+			[mainTitle]="courseSupplier.courses.length | getNumberLabel: 'date'"
 			[subTitle]="'-'"
 		></column-title>
 

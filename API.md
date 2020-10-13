@@ -284,3 +284,15 @@ from this data. the UI allows to filter from n courses.
 3. start date, the client accepts a single date, then only displays courses that are after that date
 4. supliers, list all courses grouped by their suppliers unique id
 5. type, list all courses grouped by their type unique id
+
+
+
+# FINALISE BOOKING
+
+From selecting a course, the UI moves to the booking page where a single course is selected. From here the user can add Delegates to the course and additional notes. Once happy the user can aslo add additional courses and/or confirm booking.
+
+ 1. Are we saving the course just one, at the very end of the process? or are we saving along the way to 'save' for later?
+ 2. what if, during the saving process another user takes all the spaces? error handling needs to be in place (API standerd?).
+ 3. Are the additional notes per booking? per course (additional courses allowed), per delegate?
+ 4. Additional courses, are they handled seperatly so the save process can be sequential? thus, handling #2 better
+ 5. What happens at confirm booking? Pay, email? return back?
