@@ -50,7 +50,7 @@ From selecting a course, the UI moves to the booking page where a single course 
 
 initial questions and answers...
 
- 1. Are we saving the course just one, at the very end of the process? or are we saving along the way to 'save' for later?
+ 1. Are we saving the course just once, at the very end of the process? or are we saving along the way to 'save' for later?
 
  Saving at the very end. One call, One confirmation
 
@@ -84,7 +84,7 @@ initial questions and answers...
 ## CONFIRM BOOKING
 UI shows each delegate as an item of the scheduledCourseId. Displaying them like a ecommerce basket with the ability to remove them from the booking
 
-A totals node follows all the items. Thios is calculated by the client from the scheduledCourseModels price.
+A totals node follows all the items. This is calculated by the client from the scheduledCourseModels price.
 
 There is an additional notes form on this page too. The additional notes is PER BOOKING as per TMS. It populates the fields:
 
