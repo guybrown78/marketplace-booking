@@ -286,13 +286,109 @@ from this data. the UI allows to filter from n courses.
 5. type, list all courses grouped by their type unique id
 
 
+## BOOKING CONFIRMATION
 
-# FINALISE BOOKING
 
-From selecting a course, the UI moves to the booking page where a single course is selected. From here the user can add Delegates to the course and additional notes. Once happy the user can aslo add additional courses and/or confirm booking.
 
- 1. Are we saving the course just one, at the very end of the process? or are we saving along the way to 'save' for later?
- 2. what if, during the saving process another user takes all the spaces? error handling needs to be in place (API standerd?).
- 3. Are the additional notes per booking? per course (additional courses allowed), per delegate?
- 4. Additional courses, are they handled seperatly so the save process can be sequential? thus, handling #2 better
- 5. What happens at confirm booking? Pay, email? return back?
+**POST** call to create the booking. 
+
+```
+tenant.ontransform.com/api/bookingform/mp/courses/schedules/:standardId/book
+
+```
+
+**PAYLOAD**
+
+```json 
+
+{
+	"scheduledCourseId":"001",
+  "delegates":[
+    {
+      "id":"001",
+		},
+		{
+      "id":"002",
+    }
+	],
+	"prices":{
+		"currency":"GBP",
+		"total":960,
+		"incVat":false
+	},
+	"additionalNotes":{
+		"poNumber":"",
+		"level":"",
+		"tmsCost":"",
+		"trainingReason":""
+	}
+}
+```
+
+**RESPONSE** The return data will be a list of the neccessary delegate models;
+
+if the booking process was a success, then send back the data in results...
+
+```json 
+
+{
+  "results":[
+    {
+      "scheduledCourseId":"001",
+			"delegates":[
+				{
+					"id":"001",
+				},
+				{
+					"id":"002",
+				}
+			],
+			"prices":{
+				"currency":"GBP",
+				"total":960,
+				"incVat":false
+			},
+			"additionalNotes":{
+				"poNumber":"",
+				"level":"",
+				"tmsCost":"",
+				"trainingReason":""
+			}
+    }
+  ]
+}
+```
+
+if the booking process failed, then state the errors...
+
+```json 
+
+{
+  "errors":[
+    {
+			"type":"SPACES_UNAVAILABLE",
+			"message":"",
+		}
+  ]
+}
+```
+
+```json 
+
+{
+  "errors":[
+    {
+			"type":"GENERAL",
+			"message":"Something went wrong with the service",
+		}
+  ]
+}
+```
+
+```javascript
+export enum CourseErrorType
+{
+	SPACES_UNAVAILABLE = "SPACES_UNAVAILABLE",
+	GENERAL = "GENERAL",
+}
+```
