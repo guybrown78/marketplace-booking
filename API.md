@@ -286,42 +286,40 @@ from this data. the UI allows to filter from n courses.
 5. type, list all courses grouped by their type unique id
 
 
-## BOOKING CONFIRMATION
+# BOOKING CONFIRMATION
 
-
+The booking service call is derived from these [notes](./NOTES.md) that have been collected through varous conversations.
 
 **POST** call to create the booking. 
 
 ```
-tenant.ontransform.com/api/bookingform/mp/courses/schedules/:standardId/book
-
+tenant.ontransform.com/api/bookingform/book
 ```
 
 **PAYLOAD**
 
 ```json 
-
 {
-	"scheduledCourseId":"001",
+  "scheduledCourseId":"001",
   "delegates":[
     {
-      "id":"001",
-		},
-		{
-      "id":"002",
+      "id":"001"
+    },
+    {
+      "id":"002"
     }
-	],
-	"prices":{
-		"currency":"GBP",
-		"total":960,
-		"incVat":false
-	},
-	"additionalNotes":{
-		"poNumber":"",
-		"level":"",
-		"tmsCost":"",
-		"trainingReason":""
-	}
+  ],
+  "prices":{
+    "currency":"GBP",
+    "total":960,
+    "incVat":false
+  },
+  "additionalNotes":{
+    "poNumber":"",
+    "level":"",
+    "tmsCost":"",
+    "trainingReason":""
+  }
 }
 ```
 
@@ -330,60 +328,74 @@ tenant.ontransform.com/api/bookingform/mp/courses/schedules/:standardId/book
 if the booking process was a success, then send back the data in results...
 
 ```json 
-
 {
   "results":[
     {
       "scheduledCourseId":"001",
-			"delegates":[
-				{
-					"id":"001",
-				},
-				{
-					"id":"002",
-				}
-			],
-			"prices":{
-				"currency":"GBP",
-				"total":960,
-				"incVat":false
-			},
-			"additionalNotes":{
-				"poNumber":"",
-				"level":"",
-				"tmsCost":"",
-				"trainingReason":""
-			}
+      "delegates":[
+        {
+          "id":"001"
+        },
+        {
+          "id":"002"
+        }
+      ],
+      "prices":{
+        "currency":"GBP",
+        "total":960,
+        "incVat":false
+      },
+      "additionalNotes":{
+        "poNumber":"",
+        "level":"",
+        "tmsCost":"",
+        "trainingReason":""
+      }
     }
   ]
 }
 ```
 
-if the booking process failed, then state the errors...
+If the booking process failed, then error is passed back into the response through a generic error model;
 
+Depending on the error type, the UI does two things. 
+
+### 1. Handle too many delegates for the course availabilty
 ```json 
-
 {
   "errors":[
     {
-			"type":"SPACES_UNAVAILABLE",
-			"message":"",
-		}
+      "type":"SPACES_UNAVAILABLE",
+      "message":"availableSpaces:3"
+    }
   ]
 }
 ```
 
-```json 
+If the error type = `SPACES_UNAVAILABLE` then this means that during the booking process, the course availabilty has been reduced for any reason. 
 
+We should then allow the user the ability to remove delegates.
+
+The client can perform some basic validation, making sure that the delegate count matches the new availabilty count. We want to keep the error model as generic as possible and because of this, we can use the error.message string to pass back the number of available spaces left to allow the client to perform its validation.
+
+This process is repeated until a different error type or booking success.
+
+
+### 2. Handle generic errors
+```json 
 {
   "errors":[
     {
-			"type":"GENERAL",
-			"message":"Something went wrong with the service",
-		}
+      "type":"GENERAL",
+      "message":"Something went wrong when we tried to save your bookings"
+    }
   ]
 }
 ```
+Something happened that stopped the delegates being booked onto a course. This can be any reason other than availabilty (as above). The UI should show this and display the friendly message from the service.
+
+
+The FrontEnd will detrmine error logic from these Error types;
 
 ```javascript
 export enum CourseErrorType
