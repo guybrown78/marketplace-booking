@@ -33,6 +33,7 @@ interface TypeOption {
 
 export class SearchFiltersComponent implements OnInit {
 
+	inited:boolean = false;
 	error:string = null;
 	searchCompleteSubscription: Subscription;
 
@@ -94,16 +95,21 @@ export class SearchFiltersComponent implements OnInit {
 				setTimeout(() => {
 					this.searchFiltersForm.controls['delegate'].markAsTouched()
 					this.forceCloseTT = true;
+					this.inited = true;
 				}, 300)
 				
 			},(error: AppError) => {
 				// if error, make sure you set the delegate input to untouched to show the tooltip
 				this.searchFiltersForm.controls['delegate'].markAsUntouched()
-				
 				this.error = "Sorry, couldn't load the delegate";
+				this.inited = true;
 				console.log("error loading the delegate")
 			})
 
+		}else{
+			setTimeout(() => {
+				this.inited = true;
+			}, 300)
 		}
 	}
 	

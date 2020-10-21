@@ -35,7 +35,7 @@ import { fadeInOutAnimation, delegateInOutAnimation } from '../common/animations
 export class AddDelegatesComponent implements OnInit {
 
 	error:string = null;
-	isLoading:boolean = false;
+	isLoading:boolean = true;
 	course:CourseModel;
 	delegateForm!: FormGroup;
 	//

@@ -1,6 +1,7 @@
 <div class="search-filters form-hero-card">
 
 	<form 
+		*ngIf="inited"
 		nz-form 
 		[formGroup]="searchFiltersForm" 
 		(ngSubmit)="submitForm()" 

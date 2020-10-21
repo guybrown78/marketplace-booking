@@ -5,7 +5,7 @@
 	</tf-ng-page-title-breadcrumbs>
 
 	<div class="mp-page-card-bottom">
-		<div class="mp-search-wrapper">
+		<div class="mp-search-wrapper" *ngIf="inited">
 
 			<div class="filters-column">
 				<search-filters></search-filters>

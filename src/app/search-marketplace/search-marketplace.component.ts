@@ -12,7 +12,7 @@ import { AppError } from '../common/errors/app.error'
 export class SearchMarketplaceComponent implements OnInit {
 
 	error:string = null;
-
+	inited:boolean = false;
   constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -31,9 +31,13 @@ export class SearchMarketplaceComponent implements OnInit {
 		if(this.urlService.entryData.tennantId){
 			this.tennantService.getTennant(this.urlService.entryData.tennantId).subscribe((tennant:TennantModel) => {
 				this.tennantService.tennant = tennant;
+				this.inited = true;
 			}, (error: AppError) => {
 				this.error = "Sorry, something went wrong loading the tennant";
+				this.inited = true;
 			});
+		}else{
+			this.inited = true;
 		}
 	}
 	
