@@ -96,7 +96,7 @@ export class SearchFiltersComponent implements OnInit {
 					this.searchFiltersForm.controls['delegate'].markAsTouched()
 					this.forceCloseTT = true;
 					this.inited = true;
-				}, 150)
+				}, 300)
 				
 			},(error: AppError) => {
 				// if error, make sure you set the delegate input to untouched to show the tooltip
@@ -109,7 +109,7 @@ export class SearchFiltersComponent implements OnInit {
 		}else{
 			setTimeout(() => {
 				this.inited = true;
-			}, 150)
+			}, 300)
 		}
 	}
 	
