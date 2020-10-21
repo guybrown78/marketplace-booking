@@ -32,6 +32,7 @@ export class SaveCourseService extends BaseService {
 			// compile model
 			const savedCourse:SaveCourseModel = {
 				scheduledCourseId: course.scheduledCourseId,
+				standardId: course.standardId,
 				course,
 				delegates,
 				prices:{

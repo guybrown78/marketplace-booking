@@ -1,7 +1,7 @@
 <nz-collapse [nzBordered]="false" nzExpandIconPosition="right">
 	<nz-collapse-panel
 		#p
-		nzHeader="Additional Notes"
+		nzHeader="Additional booking information"
 		[nzActive]="false"
 		[ngStyle]="{
 			background: '#ECF2F3',
@@ -20,26 +20,30 @@
 
 		<tf-ng-form-card>
 
-			<form nz-form [formGroup]="validateForm" nzLayout="vertical" (ngSubmit)="submitForm()">
-		
-				<nz-form-item>
-					<nz-form-label nzFor="poNumber">PO Number</nz-form-label>
-					<input nz-input formControlName="poNumber" id="poNumber" />
-				</nz-form-item>
+			<form nz-form [formGroup]="additionalNotesForm" nzLayout="vertical">
+				
+				<div nz-row >
+					<nz-form-item nz-col nzSpan="11">
+						<nz-form-label nzFor="poNumber">PO Number</nz-form-label>
+						<input nz-input formControlName="poNumber" id="poNumber" />
+					</nz-form-item>
+
+					<div nz-col nzSpan="11" nzOffset="2">
+						<nz-form-item >
+							<nz-form-label nzFor="level">Level</nz-form-label>
+							<input nz-input formControlName="level" id="level" />
+						</nz-form-item>
+					</div>
+				</div>
 
 				<nz-form-item>
-					<nz-form-label nzFor="level">Level</nz-form-label>
-					<input nz-input formControlName="level" id="level" />
-				</nz-form-item>
-
-				<nz-form-item>
-					<nz-form-label nzFor="tmsCost">If a TMS Cost, state why</nz-form-label>
-					<input nz-input formControlName="tmsCost" id="tmsCost" />
+					<nz-form-label nzFor="tmsCost">TMS Cost</nz-form-label>
+					<textarea nz-input formControlName="tmsCost" id="tmsCost" placeholder="If a TMS Cost, state why"></textarea>
 				</nz-form-item>
 
 				<nz-form-item>
 					<nz-form-label nzFor="trainingReason">Training Reason</nz-form-label>
-					<input nz-input formControlName="trainingReason" id="trainingReason" />
+					<textarea nz-input formControlName="trainingReason" id="trainingReason" placeholder="Optional notes for training reasons"></textarea>
 				</nz-form-item>
 
 

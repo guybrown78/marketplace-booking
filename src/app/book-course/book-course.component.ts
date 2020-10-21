@@ -8,7 +8,7 @@ import { UrlDataService } from '../services/url-data.service';
 //
 import { GetCoursePricePipe } from '../common/pipes/get-course-price.pipe'
 import { GetDisplayPricePipe } from '../common/pipes/get-display-price.pipe'
-import { SaveCourseModel, SavedCoursesModel, CoursePriceCurrency } from '../common/models/courses.model';
+import { SaveCourseModel, SavedCoursesModel, CoursePriceCurrency, AdditionalNotesModel } from '../common/models/courses.model';
 import { _mpConfigTaxValue, _mpConfigTaxLabel } from '../../config'
 
 @Component({
@@ -66,6 +66,11 @@ export class BookCourseComponent implements OnInit {
 	onConfirmBtnClicked(){
 		console.log("CONFIRM BOOKING")
 	}
+
+	additionalNotesChange(additionalNotesValues:AdditionalNotesModel){
+		//console.log(additionalNotesValues)
+	}
+
 	calculateTotals(){
 		if(!this.courses){
 			return null;

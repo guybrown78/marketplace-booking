@@ -24,6 +24,7 @@
 				</span>
 
 			</div>
+
 			<div class="courses-row" *ngIf="!courses">
 				<span class="text-center navy no-data">You haven't selected and courses and delegates. Use our <a class="underlined" [routerLink]="['/search']">Search</a> to start.</span>
 			</div>
@@ -77,7 +78,7 @@
 				</div>
 				
 
-				<additional-notes></additional-notes>
+				<additional-notes (additionalNotes)="additionalNotesChange($event)"></additional-notes>
 
 				<div class="confirm-wrapper" *ngIf="courses">
 					<button 

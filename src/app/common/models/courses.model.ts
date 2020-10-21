@@ -60,6 +60,7 @@ export class SavedCoursesModel {
 }
 export class SaveCourseModel {
 	scheduledCourseId:string
+	standardId:string
 	course:CourseModel
 	delegates:DelegateModel[]
   prices:CoursePricesModel

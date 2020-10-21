@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { AdditionalNotesModel } from '../../common/models/courses.model'
 @Component({
   selector: 'additional-notes',
   templateUrl: './additional-notes.component.html',
@@ -8,21 +8,26 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AdditionalNotesComponent implements OnInit {
 
-  validateForm: FormGroup;
+  additionalNotesForm: FormGroup;
 
-  submitForm(): void {
-    //
-  }
+  @Output("additionalNotes") additionalNotes:EventEmitter<AdditionalNotesModel> = new EventEmitter<AdditionalNotesModel>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
+    this.additionalNotesForm = this.fb.group({
       poNumber: [null],
       level: [null],
       tmsCost: [null],
       trainingReason: [null],
-    });
+		});
+		this.onChanges();
   }
 
+	onChanges(): void {
+		this.additionalNotesForm.valueChanges.subscribe(val => {
+			const addNotes:AdditionalNotesModel = val as AdditionalNotesModel;
+			this.additionalNotes.emit(addNotes);	
+		});
+	}
 }

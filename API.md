@@ -308,6 +308,7 @@ tenant.ontransform.com/api/bookingform/book
 ```json 
 {
   "scheduledCourseId":"001",
+  "standardId":"001",
   "delegates":[
     {
       "id":"001"
@@ -327,7 +328,6 @@ tenant.ontransform.com/api/bookingform/book
     "tmsCost":"",
     "trainingReason":""
   }
-}
 ```
 
 **RESPONSE** The return data will be a list of the neccessary delegate models;
@@ -339,6 +339,7 @@ if the booking process was a success, then send back the data in results...
   "results":[
     {
       "scheduledCourseId":"001",
+      "standardId":"001",
       "delegates":[
         {
           "id":"001"
