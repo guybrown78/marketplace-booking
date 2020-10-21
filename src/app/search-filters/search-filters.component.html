@@ -18,14 +18,17 @@
 				</span> 
 			</nz-form-label>
 			
-			<!-- [nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched && !forceCloseTT" -->
+			<!-- 
+				[nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched && !forceCloseTT" 
+				[nzTooltipTrigger]="null"
+			-->
 			<nz-form-control 
 				*ngIf="inited"
 				nzErrorTip="The input is not valid E-mail!" 
+				nz-tooltip
 				[nzTooltipTitle]="delegateTooltipTemplate" 
 				nzTooltipPlacement="right" 
-				nz-tooltip
-				[nzTooltipTrigger]="null"
+				[nzTooltipTrigger]="nzTooltipTriggerEvent"
 				[nzTooltipVisible]="!forceCloseTT"
 			>
 				<nz-input-group [nzPrefix]="prefixUser">

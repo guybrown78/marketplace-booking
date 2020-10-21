@@ -26,6 +26,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 //
 import { HeaderComponent } from './header/header.component';
@@ -116,6 +117,7 @@ registerLocaleData(en);
 		NzTableModule,
 		NzTabsModule,
 		NzToolTipModule,
+		NzPopconfirmModule,
 		NzCollapseModule,
 		ScullyLibModule,
   ],

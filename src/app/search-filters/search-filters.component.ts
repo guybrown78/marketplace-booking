@@ -53,10 +53,12 @@ export class SearchFiltersComponent implements OnInit {
 	disableFilters:boolean = true;
 	//
 	forceCloseTT:boolean = false;
+	nzTooltipTriggerEvent:string = 'hover';
+	//
 	initialSearchComplete:boolean = false;
 	altFormUrl:string = _mpConfigAltFormURL;
 	//
-	nzTooltipTriggerEvent:string = null;
+	
 	//
   constructor(
 		private fb: FormBuilder,
@@ -94,7 +96,7 @@ export class SearchFiltersComponent implements OnInit {
 				this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
 				setTimeout(() => {
 					this.searchFiltersForm.controls['delegate'].markAsTouched()
-					this.forceCloseTT = true;
+					this.onForceCloseTT();
 					this.inited = true;
 				}, 300)
 				
@@ -124,7 +126,7 @@ export class SearchFiltersComponent implements OnInit {
 
 	submitForm(): void {
 		if(this.courseService.course){
-			this.forceCloseTT = true;
+			this.onForceCloseTT();
 			this.resetFilters();
 			// console.log(this.searchFiltersForm.value);
 			this.courseService.searchFiltersFormValues = this.searchFiltersForm.value;
@@ -194,5 +196,6 @@ export class SearchFiltersComponent implements OnInit {
 
 	onForceCloseTT(){
 		this.forceCloseTT = true;
+		this.nzTooltipTriggerEvent = null;
 	}
 }
