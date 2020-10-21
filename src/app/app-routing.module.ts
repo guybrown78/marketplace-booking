@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 //
 import { SearchMarketplaceComponent } from './search-marketplace/search-marketplace.component'
 import { SearchResultsComponent } from './search-results/search-results.component'
+import { AddDelegatesComponent } from './add-delegates/add-delegates.component'
 import { BookCourseComponent } from './book-course/book-course.component';
 const routes: Routes = [
 	{ 
@@ -13,6 +14,11 @@ const routes: Routes = [
 	{ 
 		path: 'search', 
 		component: SearchMarketplaceComponent, 
+		data: {} 
+	},
+	{ 
+		path: 'add-delegates/:scheduledCourseId', 
+		component: AddDelegatesComponent, 
 		data: {} 
 	},
 	// { 

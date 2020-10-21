@@ -199,11 +199,7 @@ This provides the initial search and then allows all the filter parameters to cr
 
 
 ```
-tenant.ontransform.com/api/bookingform/mp/courses/available/:standardId
-
-// or
-
-tenant.ontransform.com/api/bookingform/mp/courses/schedules/:standardId
+tenant.ontransform.com/api/bookingform/mp/courses/available?standardId=n
 ```
 response
 
@@ -276,6 +272,9 @@ export enum CoursePriceCurrency
 
 [Example Course/Schedules JSON](https://my-json-server.typicode.com/guybrown78/api-course/db)
 
+
+
+
 --------------------------------------------------
 from this data. the UI allows to filter from n courses.
 
@@ -285,6 +284,14 @@ from this data. the UI allows to filter from n courses.
 4. supliers, list all courses grouped by their suppliers unique id
 5. type, list all courses grouped by their type unique id
 
+# SINGLE SCHEDULED COURSE
+
+Using the above enpoint, instead of getting the all the scheduled courses from a standard, we can request just a single scheduled course from it's scheduledCourseId...
+
+```
+tenant.ontransform.com/api/bookingform/mp/courses/available?scheduledCourseId=n
+```
+This will return the same model as above, however it will only ever have one scheduleCourse model in the array
 
 # BOOKING CONFIRMATION
 

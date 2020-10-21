@@ -1,39 +1,102 @@
-<tf-ng-page-title-breadcrumbs>
-	<nz-breadcrumb nzSeparator=">">
-		<nz-breadcrumb-item>
-			<a [routerLink]="['/search']">Search</a>
-		</nz-breadcrumb-item>
-		<nz-breadcrumb-item>
-			Results
-		</nz-breadcrumb-item>
-	</nz-breadcrumb>
-</tf-ng-page-title-breadcrumbs>
 
+<section class="mp-page-card">
+	<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+		<nz-breadcrumb nzSeparator=">" >
+			<nz-breadcrumb-item>
+				<a [routerLink]="['/search']">Search</a>
+			</nz-breadcrumb-item>
+			<nz-breadcrumb-item>
+				Book Courses
+			</nz-breadcrumb-item>
+		</nz-breadcrumb>
+	
+	</tf-ng-page-title-breadcrumbs>
 
-<tf-ng-card>
-	<h2 nz-typography>Search results</h2>
+	<div class="mp-page-card-bottom">
+		<div class="mp-loading-wrapper" *ngIf="isLoading">
+			<!-- loading ... -->
+		</div>
+		<div class="mp-confirm-wrapper" *ngIf="!isLoading">
+			<div class="title-row">
+				<button nz-button class="grey" (click)="onBackBtnClicked()">Back</button>
+				<span nzTypography class="instructions blue text-center">
+					Your Courses
+				</span>
 
-	<tf-ng-card-content>
-		<a nz-dropdown [nzDropdownMenu]="menu">
-      Hover me
-      <i nz-icon nzType="down"></i>
-    </a>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu nzSelectable>
-        <li nz-menu-item>1st menu item</li>
-        <li nz-menu-item>2nd menu item</li>
-        <li nz-menu-item>3rd menu item</li>
-      </ul>
-    </nz-dropdown-menu>
-	</tf-ng-card-content>
+			</div>
+			<div class="courses-row" *ngIf="!courses">
+				<span class="text-center navy no-data">You haven't selected and courses and delegates. Use our <a class="underlined" [routerLink]="['/search']">Search</a> to start.</span>
+			</div>
 
-</tf-ng-card>
+	
+			
+			<div class="courses-row" *ngIf="courses">
+				
+				<div class="header-titles">
+					<header-title title="supplier" class="supplier"></header-title>
+					<header-title title="delegate" class="delegate"></header-title>
+					<header-title title="course" class="course"></header-title>
+					<header-title title="Start Date" class="date"></header-title>
+					<header-title title="price" class="price"></header-title>
+				</div>
+				<div *ngFor="let savedCourse of courses.results">
+					<delegate-course-item 
+						*ngFor="let delegate of savedCourse.delegates" 
+						[course]="savedCourse.course"
+						[delegate]="delegate"
+					></delegate-course-item>
+				</div>
 
-<tf-ng-card colour="white">
+				<div class="totals-wrapper" *ngIf="courses">
+					<button 
+						nz-button class="grey" 
+						(click)="onAddMoreCoursesBtnClicked()"
+					>Add more courses</button>
+					<div class="totals">
+						<div class="container top">
+							<div class="total-row">
+								<span>Sub Total:</span>
+								<span>{{ subTotal | getDisplayPrice: currency }}</span>
+							</div>
+							<div class="total-row">
+								<span>Discount:</span>
+								<span>{{ discount | getDisplayPrice: currency }}</span>
+							</div>
+							<div class="total-row">
+								<span>VAT:</span>
+								<span>{{ vat | getDisplayPrice: currency }}</span>
+							</div>
+						</div>
+						<div class="container bottom">
+							<div class="total-row">
+								<span><strong>Total:</strong></span>
+								<span><strong>{{ total | getDisplayPrice: currency }}</strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				<additional-notes></additional-notes>
+
+				<div class="confirm-wrapper" *ngIf="courses">
+					<button 
+						nz-button 
+						class="aqua confirm-button" 
+						(click)="onConfirmBtnClicked()"
+					>Confirm Booking</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</section>
+
+<!-- <tf-ng-card colour="white">
 	<h2 nz-typography>Return Data</h2>
 	<tf-ng-card-content>
 		<code>
 			<pre>{{urlService.returnData | json}}</pre>
 		</code>
 	</tf-ng-card-content>
-</tf-ng-card>
+</tf-ng-card> -->

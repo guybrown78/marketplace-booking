@@ -5,8 +5,10 @@ import { Subject, of } from 'rxjs';
 import { BaseService } from './base.service';
 import { CourseTypeModel } from '../common/models/tennant.model';
 import { CoursesModel, CourseModel, CourseSupplierModel, CourseLocationModel, ScheduledCourseSupplierModel } from '../common/models/courses.model';
+import { DelegateModel } from '../common/models/delegate.model';
 //
 import * as moment from 'moment';
+
 
 interface SearchResultsInterface {
 	hasResults:boolean;
@@ -71,6 +73,15 @@ export class CourseService extends BaseService {
 			.pipe(catchError(this.handleError));
 	}
 
+	// Get All Single Scheduled Course
+	getSchedule(scheduleCourseId:string) {
+		// GET ...api/api-course/rusults/
+		return this.http
+			.get(this.getDataURL(`api-course/results/${scheduleCourseId}`), { ...this.requestOptions() })
+			.pipe(catchError(this.handleError));
+	}
+
+		
 	parseSearchResults(results:CourseModel[]){
 		let filteredResults:CourseModel[] = [ ...results ];
 		// location
@@ -155,6 +166,9 @@ export class CourseService extends BaseService {
 		this.searchConfirmedSource.next();
 	}
 	
+
+
+	
 	// GETTERS AND SETTERS
 	get course(): CourseModel {
 		return this._course;
@@ -190,5 +204,7 @@ export class CourseService extends BaseService {
 	set searchFiltersFormValues(values:any){
 		this._searchFiltersFormValues = values;
 	}
+
+
 
 }

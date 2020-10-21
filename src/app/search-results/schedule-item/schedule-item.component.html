@@ -1,11 +1,11 @@
-<div class="course-schedule-wrapper">
-	<supplier class="supplier" [courseSupplier]="course.supplier"></supplier>
-	
-	<!-- <column-title
-		class="type"
-		[mainTitle]="course.type.name"
-		[subTitle]="course.duration | getCourseDuration"
-	></column-title> -->
+<div 
+	class="course-schedule-wrapper" 
+	[ngClass]="[ !showBookButton ? 'no-book-button' : '' ]"
+>
+	<supplier 
+		class="supplier" 
+		[courseSupplier]="course.supplier"
+	></supplier>
 
 	<column-title
 		class="location"
@@ -25,8 +25,8 @@
 		[subTitle]="course.availability.available | getNumberLabel: 'space'"	
 	></column-title>
 
-	<div class="book-btn">
-		<button nz-button nzSize="large" class="blue">Book</button>
+	<div *ngIf="showBookButton" class="book-btn">
+		<button nz-button nzSize="large" class="blue" (click)="onCourseBook()">Book</button>
 	</div>
 	
 </div>

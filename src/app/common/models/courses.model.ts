@@ -1,4 +1,5 @@
 import { CourseTypeModel } from './tennant.model';
+import { DelegateModel } from './delegate.model'
 export class CoursesModel {
 	results:CourseModel[]
 }
@@ -51,4 +52,23 @@ export class ScheduledCourseSupplierModel {
 	supplier:CourseSupplierModel
 	locations:CourseLocationModel[]
 	courses:CourseModel[]
+}
+
+// Save Courses
+export class SavedCoursesModel {
+	results:SaveCourseModel[]
+}
+export class SaveCourseModel {
+	scheduledCourseId:string
+	course:CourseModel
+	delegates:DelegateModel[]
+  prices:CoursePricesModel
+	additionalNotes:AdditionalNotesModel
+}
+
+export class AdditionalNotesModel {
+	poNumber:string
+	level:string
+	tmsCost:string
+	trainingReason:string
 }

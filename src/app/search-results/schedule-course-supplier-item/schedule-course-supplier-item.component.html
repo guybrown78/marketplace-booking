@@ -36,16 +36,36 @@
 
 				<span role="button" aria-pressed="false" class="blue date-select" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
 					<i class="prefix-icon" nz-icon nzType="calendar" nzTheme="outline"></i>
-					Select a date to book
+					<span class="title">Select a date to book</span>
 					<i class="suffix-icon" nz-icon nzType="down"></i>
 				</span>
 				<nz-dropdown-menu #menu="nzDropdownMenu">
-					<ul nz-menu nzSelectable>
+					<ul nz-menu nzSelectable class="supplier-courses-list">
 						<li *ngFor="let course of courseSupplier.courses" nz-menu-item>
-							<span>
+							<div class="supplier-course-details">
+								<column-title
+									class="date"
+									[mainTitle]=" course.startDate | getDisplayDate: true "
+									[subTitle]="course.availability.available | getNumberLabel: 'space'"	
+								></column-title>
+
+								<column-title
+									class="price"
+									[mainTitle]="course.prices | getCoursePrice"
+									[subTitle]="course.prices | getCourseTax"
+								></column-title>
+
+								<column-title
+									class="location"
+									[mainTitle]="course.location.name"
+									[subTitle]="course.duration | getCourseDuration"
+								></column-title>
+
+							</div>
+							<!-- <span>
 								<strong>{{ course.startDate }}</strong> 
 								({{ course.availability.available }} spaces)
-							</span>
+							</span> -->
 						</li>
 					</ul>
 				</nz-dropdown-menu>

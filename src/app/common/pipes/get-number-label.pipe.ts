@@ -11,7 +11,7 @@ export class GetNumberLabelPipe implements PipeTransform {
   }
 
 	getNumberLabel(count:number, label:string, pluralLabel:string):String{
-		const lbl:string = count > 1 ?  pluralLabel ? pluralLabel : `${label}s` : label;
+		const lbl:string = count != 1 ?  pluralLabel ? pluralLabel : `${label}s` : label;
 		return `${count} ${lbl}`;
 	}
 }

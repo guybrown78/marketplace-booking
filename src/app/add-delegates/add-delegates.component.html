@@ -1,0 +1,134 @@
+
+<section class="mp-page-card">
+	<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+		<nz-breadcrumb nzSeparator=">" *ngIf="!isLoading && course" >
+			<nz-breadcrumb-item>
+				<a [routerLink]="['/search']">Search</a>
+			</nz-breadcrumb-item>
+			<nz-breadcrumb-item>
+				{{ course.name }}
+			</nz-breadcrumb-item>
+		</nz-breadcrumb>
+	
+	</tf-ng-page-title-breadcrumbs>
+
+	<div class="mp-page-card-bottom">
+		<div class="mp-loading-wrapper" *ngIf="isLoading && !course">
+			<!-- loading ... -->
+		</div>
+		<div class="mp-add-delegates-wrapper" *ngIf="!isLoading && course">
+			<div class="title-row">
+				<button nz-button class="grey" (click)="onBackBtnClicked()">Back</button>
+				<span nzTypography class="add-instructions blue text-center">
+					Do you want to add more people to the booking?
+				</span>
+				<button nz-button class="grey" (click)="onSkipBtnClicked()">Skip</button>
+			</div>
+			<div class="selected-course-row">
+				<div class="header-titles">
+					<header-title title="supplier" class="supplier"></header-title>
+					<header-title title="course" class="course"></header-title>
+					<header-title title="Start Date" class="date"></header-title>
+					<header-title title="price" class="price"></header-title>
+				</div>
+				<selected-course-item [course]="course"></selected-course-item>
+
+				<div class="add-delegates-wrapper">
+
+					<div class="add-delegates-status">
+						<span nzTypography>There {{ course.availability.available | getPluralWord: 'is':'are' }} <span class="bold" [ngClass]="availableSpaces > 0 ? 'blue' : 'red'"><strong>{{ course.availability.available - selectedDelegates.length | getNumberLabel: 'space' }}</strong></span> left on this course</span>
+					</div>
+
+					<div class="delegate-search">
+						<form 
+							nz-form 
+							[formGroup]="delegateForm" 
+							nzLayout="vertical"
+						>
+							
+							<nz-form-item>
+					
+								<nz-form-control 
+									nzErrorTip="The input is not valid E-mail!" 
+								>
+									<nz-input-group [nzPrefix]="prefixUser">
+										<input 
+											[placeholder]="placeholder" 
+											nz-input 
+											formControlName="delegate" 
+											id="delegate" 
+											(input)="onDelegateInput($event)" 
+											[nzAutocomplete]="autoDelegate" 
+										/>	
+										<nz-autocomplete 
+											nzBackfill 
+											#autoDelegate
+										>
+											<nz-auto-option 
+												*ngIf="delegatesLoading"
+												nzDisabled 
+												nzCustomContent
+											>
+												<i nz-icon nzType="loading" class="loading-icon"></i> Loading Delegates...
+											</nz-auto-option>
+											
+											<ng-container *ngFor="let option of delegateOptions">
+												<nz-auto-option 
+													*ngIf="!delegatesLoading"
+													[nzValue]="(option | getUsersFullName)"
+													[nzDisabled]="delegateExistsInSelectedList(option)"
+													(click)="onDelegateAutoSelected(option)"
+												>{{ option | getUsersFullName }}</nz-auto-option>
+											</ng-container>
+										
+										</nz-autocomplete>
+					
+				
+									</nz-input-group> 
+								</nz-form-control>
+							</nz-form-item>
+
+							<span class="text-center grey italic no-delegates" *ngIf="!selectedDelegates.length">You haven't added any delegates to this course</span>
+							<ul class="delegates-list" *ngIf="selectedDelegates.length">
+								<li *ngFor="let delegate of selectedDelegates" [@delegateInOut]>
+									<span>{{ delegate | getUsersFullName }}</span>
+									<span>{{ delegate | getUsersTennantJobRole: tennantService.tennant }}</span>
+									<button nz-button nzSize="small" nzShape="circle" class="grey" (click)="onRemoveDelegate(delegate)">
+										<i nz-icon nzType="close"></i>
+									</button>
+								</li>
+							</ul>
+
+						</form> 
+
+						<div class="delegates-footer-buttons ant-form">
+							<button 
+								nz-button class="grey" 
+								(click)="onSkipBtnClicked()"
+							>Skip</button>
+							<button 
+								nz-button 
+								[disabled]="selectedDelegates.length === 0"
+								class="aqua" 
+								(click)="onContinueBtnClicked()"
+							>Continue</button>
+						</div>
+
+					</div>
+
+					
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+</section>
+
+
+
+
+<ng-template #prefixUser>
+	<i nz-icon nzType="user"></i>
+</ng-template>

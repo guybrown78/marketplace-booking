@@ -86,6 +86,32 @@
 	margin-right: 1.5rem;
 	font-size: 1.3rem;
 }
+.date-select .title{
+	min-width: 300px;
+}
 .date-select .suffix-icon{
 	margin-left: 1.5rem;
+}
+ul.supplier-courses-list{
+
+}
+ul.supplier-courses-list li{
+	border-bottom: solid 1px #D0DFE3;
+	padding: 0;
+	margin: 0;
+}
+ul.supplier-courses-list li:last-child{
+	border-bottom: none;
+}
+.supplier-course-details{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	
+}
+.supplier-course-details .date,
+.supplier-course-details .price,
+.supplier-course-details .location{
+	width:33%;
 }

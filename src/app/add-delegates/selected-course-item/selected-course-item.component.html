@@ -1,0 +1,29 @@
+<div 
+	class="course-schedule-wrapper" 
+>
+	<supplier 
+		class="supplier" 
+		[courseSupplier]="course.supplier"
+	></supplier>
+
+	<column-title
+		class="course"
+		[mainTitle]="course.name"
+		[subTitle]="course.duration | getCourseDuration"
+	></column-title>
+
+	<column-title
+		class="date"
+		[mainTitle]=" course.startDate | getDisplayDate: true "
+		[subTitle]="course.location.name"	
+	></column-title>
+
+	<column-title
+		class="price"
+		[mainTitle]="course.prices | getCoursePrice"
+		[subTitle]="course.prices | getCourseTax"
+	></column-title>
+
+	
+	
+</div>

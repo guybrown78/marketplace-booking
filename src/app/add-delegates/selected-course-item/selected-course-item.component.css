@@ -1,0 +1,21 @@
+.course-schedule-wrapper{
+	background-color: #FFFFFF;
+	padding: 0.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	border-radius: 5px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.course-schedule-wrapper .supplier{
+	width: 35%;
+}
+
+.course-schedule-wrapper .course,
+.course-schedule-wrapper .date{
+	width:25%;
+}
+.course-schedule-wrapper .price{
+	width:10%;
+}
