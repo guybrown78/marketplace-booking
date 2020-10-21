@@ -76,6 +76,7 @@ export class SearchFiltersComponent implements OnInit {
 	}
 
   ngOnInit(): void {
+		console.log("ngOnInit()!!!!!!!");
 		this.searchFiltersForm = this.fb.group({
 			delegate: [null],
 			delegateId: [null],
@@ -197,5 +198,14 @@ export class SearchFiltersComponent implements OnInit {
 	onForceCloseTT(){
 		this.forceCloseTT = true;
 		this.nzTooltipTriggerEvent = null;
+	}
+
+	ngOnDestroy(){
+		console.log("destroy!!!!!!!");
+		const el = document.querySelector('.delegate-tooltip');
+		if(el){
+			el.parentNode.removeChild(el);
+		}
+		
 	}
 }
