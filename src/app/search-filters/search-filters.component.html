@@ -17,13 +17,15 @@
 				</span> 
 			</nz-form-label>
 
+			<!-- [nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched && !forceCloseTT" -->
+			
 			<nz-form-control 
 				nzErrorTip="The input is not valid E-mail!" 
 				[nzTooltipTitle]="delegateTooltipTemplate" 
 				nzTooltipPlacement="right" 
 				nz-tooltip
 				[nzTooltipTrigger]="null"
-				[nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched && !forceCloseTT"
+				[nzTooltipVisible]="!forceCloseTT"
 			>
 				<nz-input-group [nzPrefix]="prefixUser">
 					<input 
