@@ -54,6 +54,9 @@ export class SearchFiltersComponent implements OnInit {
 	forceCloseTT:boolean = false;
 	initialSearchComplete:boolean = false;
 	altFormUrl:string = _mpConfigAltFormURL;
+	//
+	nzTooltipTriggerEvent:string = null;
+	//
   constructor(
 		private fb: FormBuilder,
 		private urlService: UrlDataService,
