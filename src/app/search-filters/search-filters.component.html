@@ -20,6 +20,7 @@
 			
 			<!-- [nzTooltipVisible]="!searchFiltersForm.get('delegate')?.touched && !forceCloseTT" -->
 			<nz-form-control 
+				*ngIf="inited"
 				nzErrorTip="The input is not valid E-mail!" 
 				[nzTooltipTitle]="delegateTooltipTemplate" 
 				nzTooltipPlacement="right" 
@@ -226,5 +227,4 @@
 			<i nz-icon nzType="close"></i>
 		</button>
 	</div>
-	
 </ng-template>
