@@ -212,9 +212,15 @@
 <ng-template #suffixDate></ng-template>
 
 <ng-template #delegateTooltipTemplate>
-	<div class="tooltip-container">
+	<div class="tooltip-container" *ngIf="!forceCloseTT">
 		<span>If you want to add multiple delegates, you can leave this&nbsp;blank</span>
-		<button nz-button nzSize="small" nzShape="circle" class="navy" (click)="onForceCloseTT()">
+		<button 
+			nz-button 
+			nzSize="small" 
+			nzShape="circle" 
+			class="navy" 
+			(click)="onForceCloseTT()"
+		>
 			<i nz-icon nzType="close"></i>
 		</button>
 	</div>

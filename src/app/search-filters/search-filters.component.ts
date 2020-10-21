@@ -88,8 +88,11 @@ export class SearchFiltersComponent implements OnInit {
 				this.onDelegateAutoSelected(delegate)
 				// update form value with delegates name
 				this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
-				this.searchFiltersForm.controls['delegate'].markAsTouched()
-				this.forceCloseTT = true;
+				setTimeout(() => {
+					this.searchFiltersForm.controls['delegate'].markAsTouched()
+					this.forceCloseTT = true;
+				}, 300)
+				
 			},(error: AppError) => {
 				// if error, make sure you set the delegate input to untouched to show the tooltip
 				this.searchFiltersForm.controls['delegate'].markAsUntouched()
