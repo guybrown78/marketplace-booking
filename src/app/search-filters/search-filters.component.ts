@@ -71,7 +71,8 @@ export class SearchFiltersComponent implements OnInit {
 
   ngOnInit(): void {
 		this.searchFiltersForm = this.fb.group({
-      delegate: [null],
+			delegate: [null],
+			delegateId: [null],
       course: [null, [Validators.required]],
       type: [null],
       location: [null],
@@ -137,6 +138,7 @@ export class SearchFiltersComponent implements OnInit {
 	}
 	onDelegateAutoSelected(delegate:DelegateModel){
 		this.selectedDelegate = delegate;
+		this.searchFiltersForm.controls['delegateId'].setValue(delegate.id);
 	}
 	//
 	onCourseInput(event: Event): void {

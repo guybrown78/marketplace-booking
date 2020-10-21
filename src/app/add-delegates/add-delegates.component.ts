@@ -42,6 +42,7 @@ export class AddDelegatesComponent implements OnInit {
 	delegateOptions: DelegateModel[] = [];
 	delegatesLoading:boolean = false;
 	selectedDelegates:DelegateModel[] = [];
+	preloadDelegates:any[] = [];
 	//
 	availableSpaces:number = 0;
 	placeholder:string = "";
@@ -82,17 +83,39 @@ export class AddDelegatesComponent implements OnInit {
 			//
 		}else{
 			console.log("go get it")
+			if(this.courseService.searchFiltersFormValues && this.courseService.searchFiltersFormValues.delegateId){
+				console.log("has a delegate, load it");
+				this.preloadDelegates.push(this.courseService.searchFiltersFormValues.delegateId);
+			}
 			this.fetchCourse(scheduledCourseId);
+			console.log(this.courseService.searchFiltersFormValues);
+
+
+			//
 		}
   }
 
 	fetchCourse(scheduledCourseId:string){
 		this.courseService.getSchedule(scheduledCourseId)
 			.subscribe((scheduledCourse:CourseModel) => {
+				//
 				this.course = scheduledCourse;
-				this.availableSpaces = this.calculateAvailableSpaces()
+				//
+				if(this.preloadDelegates.length){
+					// load the delegate 
+					this.delegateService.getDelegatesFromId(this.preloadDelegates[0]).subscribe((delegate:DelegateModel) => {
+						this.selectedDelegates.push(delegate);
+						this.availableSpaces = this.calculateAvailableSpaces()
+						this.isLoading = false;
+					},(error: AppError) => {
+						// fail gracefully
+					})
+				}else{
+					this.availableSpaces = this.calculateAvailableSpaces()
+					this.isLoading = false;
+				}
+				//
 				
-				this.isLoading = false;
 			}, (error: AppError) => {
 				this.error = "Sorry, something went wrong trying to search for your course.";
 				this.isLoading = false;
