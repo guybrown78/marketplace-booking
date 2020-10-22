@@ -73,3 +73,9 @@ export class AdditionalNotesModel {
 	tmsCost:string
 	trainingReason:string
 }
+
+
+export class BookingItemItentifierModel {
+	scheduledCourseId:string
+	delegateId:string
+}

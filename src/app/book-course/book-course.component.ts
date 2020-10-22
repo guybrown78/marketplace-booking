@@ -8,9 +8,11 @@ import { UrlDataService } from '../services/url-data.service';
 //
 import { GetCoursePricePipe } from '../common/pipes/get-course-price.pipe'
 import { GetDisplayPricePipe } from '../common/pipes/get-display-price.pipe'
-import { SaveCourseModel, SavedCoursesModel, CoursePriceCurrency, AdditionalNotesModel } from '../common/models/courses.model';
+import { SaveCourseModel, SavedCoursesModel, CoursePriceCurrency, AdditionalNotesModel, BookingItemItentifierModel } from '../common/models/courses.model';
 import { _mpConfigTaxValue, _mpConfigTaxLabel } from '../../config'
+//
 
+import { fadeInOutAnimation, delegateInOutAnimation } from '../common/animations';
 @Component({
   selector: 'app-book-course',
   templateUrl: './book-course.component.html',
@@ -18,7 +20,8 @@ import { _mpConfigTaxValue, _mpConfigTaxLabel } from '../../config'
 	providers:[
 		GetCoursePricePipe,
 		GetDisplayPricePipe
-	]
+	],
+	animations: [ delegateInOutAnimation, fadeInOutAnimation ]
 })
 export class BookCourseComponent implements OnInit {
 
@@ -44,7 +47,6 @@ export class BookCourseComponent implements OnInit {
 		
 	) {
 		this.courses = saveCourseService.savedCourses;
-		console.log(this.courses)
 	}
 
 	ngOnInit(): void {
@@ -89,5 +91,17 @@ export class BookCourseComponent implements OnInit {
 		this.discount = 0;
 		this.total = subTotal + tax;
 		this.currency = CoursePriceCurrency.GBP;
+	}
+
+	removeBookingItem(bookingItem:BookingItemItentifierModel){
+		this.saveCourseService.removeBookingItem(bookingItem);
+		this.courses = this.saveCourseService.savedCourses;
+		let isDelegates:boolean = true;
+		this.courses.results.map(c => isDelegates = c.delegates.length > 0);
+		if(isDelegates){
+			this.calculateTotals();
+		}else{
+			this.courses = null;
+		}
 	}
 }

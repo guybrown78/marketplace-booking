@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="courses-row" *ngIf="!courses">
-				<span class="text-center navy no-data">You haven't selected and courses and delegates. Use our <a class="underlined" [routerLink]="['/search']">Search</a> to start.</span>
+				<span class="text-center navy no-data">You haven't selected any courses or delegates. Use our <a class="underlined" [routerLink]="['/search']">Search</a> to start.</span>
 			</div>
 
 	
@@ -34,17 +34,22 @@
 			<div class="courses-row" *ngIf="courses">
 				
 				<div class="header-titles">
-					<header-title title="supplier" class="supplier"></header-title>
-					<header-title title="delegate" class="delegate"></header-title>
-					<header-title title="course" class="course"></header-title>
-					<header-title title="Start Date" class="date"></header-title>
-					<header-title title="price" class="price"></header-title>
+					<div class="items">
+						<header-title title="supplier" class="supplier"></header-title>
+						<header-title title="delegate" class="delegate"></header-title>
+						<header-title title="course" class="course"></header-title>
+						<header-title title="Start Date" class="date"></header-title>
+						<header-title title="price" class="price"></header-title>
+					</div>
+					
 				</div>
 				<div *ngFor="let savedCourse of courses.results">
 					<delegate-course-item 
 						*ngFor="let delegate of savedCourse.delegates" 
 						[course]="savedCourse.course"
 						[delegate]="delegate"
+						(removeBookingItem)="removeBookingItem($event)"
+						[@fadeInOut]
 					></delegate-course-item>
 				</div>
 

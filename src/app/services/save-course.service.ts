@@ -4,7 +4,16 @@ import { catchError } from 'rxjs/operators';
 import { Subject, of } from 'rxjs';
 import { BaseService } from './base.service';
 
-import { CoursesModel, CourseModel, CourseSupplierModel, CourseLocationModel, ScheduledCourseSupplierModel, SavedCoursesModel, SaveCourseModel } from '../common/models/courses.model';
+import { 
+	CoursesModel, 
+	CourseModel, 
+	CourseSupplierModel, 
+	CourseLocationModel, 
+	ScheduledCourseSupplierModel, 
+	SavedCoursesModel, 
+	SaveCourseModel, 
+	BookingItemItentifierModel 
+} from '../common/models/courses.model';
 import { DelegateModel } from '../common/models/delegate.model';
 
 @Injectable({
@@ -56,14 +65,33 @@ export class SaveCourseService extends BaseService {
 		}
 	}
 
+	
 	getSavedCourse(scheduledCourseId:string):SaveCourseModel{
 		const sCourses:SaveCourseModel[] = this.savedCourses ? [ ...this.savedCourses.results ] : [];
 		const index:number = sCourses.findIndex(sc => sc.scheduledCourseId === scheduledCourseId)
-		console.log("_____ ", index);
 		if(index >= 0){
 			return this.savedCourses.results[index];
 		}
 		return null;
+	}
+
+	removeBookingItem(bookingItem:BookingItemItentifierModel){
+
+		// get course
+		const sCourses:SaveCourseModel[] = this.savedCourses ? [ ...this.savedCourses.results ] : [];
+		const index:number = sCourses.findIndex(sc => sc.scheduledCourseId === bookingItem.scheduledCourseId)
+		if(index >= 0){
+			const course:SaveCourseModel = this.savedCourses.results[index];
+			// get delegate
+			const delegateIndex:number = course.delegates.findIndex(cd => cd.id === bookingItem.delegateId);
+			if(delegateIndex >= 0){
+				// remove delegate
+				course.delegates.splice(delegateIndex, 1);
+				course.prices.total = course.course.prices.total * course.delegates.length;
+				//
+				this.savedCourses = { results:sCourses };
+			}
+		}
 	}
 	// GETTERS AND SETTERS
 	get savedCourses(): SavedCoursesModel {

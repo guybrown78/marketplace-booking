@@ -30,3 +30,14 @@ export const delegateInOutAnimation =
 			animate('0.25s ease-in', style({ opacity: 0, maxHeight: '0px' }))
 		])
 ]);
+
+export const bookingItemInOutAnimation =
+	trigger('itemInOut', [
+		transition(':enter', [
+			style({ opacity:0, height: '46px'}),
+			animate('0.25s ease-in', style({ opacity: 1, height: '46px' }))
+		]),
+		transition(':leave', [
+			animate('0.25s ease-in', style({ opacity: 0, height: '0px' }))
+		])
+]);

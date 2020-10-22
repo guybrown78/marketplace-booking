@@ -72,25 +72,19 @@ export class AddDelegatesComponent implements OnInit {
 		});
 		// work out where to get the data from...
 		const savedCourse:SaveCourseModel = this.saveCourseService.getSavedCourse(scheduledCourseId);
-		console.log("savedCourse",savedCourse)
+
 		if(savedCourse){
 			// coming back, stored...
-			console.log("it's saved!!!!")
 			this.course = savedCourse.course;
 			this.selectedDelegates = savedCourse.delegates;
 			this.availableSpaces = this.calculateAvailableSpaces()
 			this.isLoading = false;
 			//
 		}else{
-			console.log("go get it")
 			if(this.courseService.searchFiltersFormValues && this.courseService.searchFiltersFormValues.delegateId){
-				console.log("has a delegate, load it");
 				this.preloadDelegates.push(this.courseService.searchFiltersFormValues.delegateId);
 			}
 			this.fetchCourse(scheduledCourseId);
-			console.log(this.courseService.searchFiltersFormValues);
-
-
 			//
 		}
   }

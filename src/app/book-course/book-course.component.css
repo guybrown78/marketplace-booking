@@ -58,17 +58,23 @@ span.no-data{
 	flex-direction: row;
 	width: 100%;
 	margin-bottom: 0.25rem;
-	padding: 0.25rem;
 }
-.header-titles .supplier{
+.header-titles .items{
+	flex:1 1 0%;
+	display: flex;
+	flex-direction: row;
+	padding: 0.25rem;
+	margin-left:30px;
+}
+.header-titles .items .supplier{
 	width: 30%;
 }
-.header-titles .delegate,
-.header-titles .course,
-.header-titles .date{
+.header-titles .items .delegate,
+.header-titles .items .course,
+.header-titles .items .date{
 	width:20%;
 }
-.header-titles .price{
+.header-titles .items .price{
 	width:10%;
 	display: flex;
 	justify-content: flex-end;

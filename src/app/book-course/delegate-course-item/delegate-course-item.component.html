@@ -1,35 +1,43 @@
 <div 
+	*ngIf="show"
 	class="course-schedule-wrapper" 
+	[@itemInOut]
+	(@itemInOut.done)="onFadeOutComplete()"
 >
-	<supplier 
-		class="supplier" 
-		[courseSupplier]="course.supplier"
-	></supplier>
+	<div class="remove" (click)="onRemoveClicked()">
+		<i nz-icon nzType="close" nzTheme="outline"></i>
+	</div>
 
- <column-title
-		class="delegate"
-		[mainTitle]="delegate | getUsersFullName"
-		[subTitle]="delegate | getUsersTennantJobRole: tennantService.tennant"
-	></column-title> 
+	<div class="items">
+		<supplier 
+			class="supplier" 
+			[courseSupplier]="course.supplier"
+		></supplier>
 
-	<column-title
-		class="course"
-		[mainTitle]="course.name"
-		[subTitle]="course.duration | getCourseDuration"
-	></column-title>
+		<column-title
+			class="delegate"
+			[mainTitle]="delegate | getUsersFullName"
+			[subTitle]="delegate | getUsersTennantJobRole: tennantService.tennant"
+		></column-title> 
 
-	<column-title
-		class="date"
-		[mainTitle]=" course.startDate | getDisplayDate: true "
-		[subTitle]="course.location.name"	
-	></column-title>
+		<column-title
+			class="course"
+			[mainTitle]="course.name"
+			[subTitle]="course.duration | getCourseDuration"
+		></column-title>
 
-	<column-title
-		class="price"
-		[mainTitle]="course.prices | getCoursePrice"
-		[subTitle]="''"
-	></column-title>
+		<column-title
+			class="date"
+			[mainTitle]=" course.startDate | getDisplayDate: true "
+			[subTitle]="course.location.name"	
+		></column-title>
 
+		<column-title
+			class="price"
+			[mainTitle]="course.prices | getCoursePrice"
+			[subTitle]="''"
+		></column-title>
+	</div>
 	
-	
+
 </div>
