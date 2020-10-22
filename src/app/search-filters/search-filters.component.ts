@@ -79,38 +79,29 @@ export class SearchFiltersComponent implements OnInit {
 		console.log("ngOnInit()!!!!!!!");
 		this.clearUpToolTips();
 		//
+		console.log(this.courseService.searchFiltersFormValues)
+		const values = this.courseService.searchFiltersFormValues
 		this.searchFiltersForm = this.fb.group({
-			delegate: [null],
-			delegateId: [null],
-      course: [null, [Validators.required]],
-      type: [null],
-      location: [null],
-      startDate: [null],
+			delegate: [values ? values.delegate : null],
+			delegateId: [values ? values.delegateId : null],
+			course: [values ? values.course : null, [Validators.required]],
+			courseId: [values ? values.courseId : null],
+      type: [values ? values.type : null],
+      location: [values ? values.location : null],
+      startDate: [values ? values.startDate : null],
 		});
+		if(values){
+			if(values.delegateId){
+				this.fetchDefaultDelegate(values.delegateId);
+			}
+			if(values.courseId){
+				this.submitForm();
+			}
+		}
 		// check entry delegates
 		if(this.urlService.entryData.delegateIds.length){
-
-			// set the input to touched to stop the flicker of the tooltip if takes a while to load the delegate
-			this.searchFiltersForm.controls['delegate'].markAsTouched()
-			// load the delegate
-			this.delegateService.getDelegatesFromId(this.urlService.entryData.delegateIds[0]).subscribe((delegate:DelegateModel) => {
-				this.onDelegateAutoSelected(delegate)
-				// update form value with delegates name
-				this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
-				setTimeout(() => {
-					this.searchFiltersForm.controls['delegate'].markAsTouched()
-					this.onForceCloseTT();
-					this.inited = true;
-				}, 50)
-				
-			},(error: AppError) => {
-				// if error, make sure you set the delegate input to untouched to show the tooltip
-				this.searchFiltersForm.controls['delegate'].markAsUntouched()
-				this.error = "Sorry, couldn't load the delegate";
-				this.inited = true;
-				console.log("error loading the delegate")
-			})
-
+			// load with delegate from query string
+			this.fetchDefaultDelegate(this.urlService.entryData.delegateIds[0])
 		}else{
 			setTimeout(() => {
 				this.inited = true;
@@ -118,6 +109,28 @@ export class SearchFiltersComponent implements OnInit {
 		}
 	}
 	
+	fetchDefaultDelegate(delegateId:string){
+		// set the input to touched to stop the flicker of the tooltip if takes a while to load the delegate
+		this.searchFiltersForm.controls['delegate'].markAsTouched()
+		// load the delegate
+		this.delegateService.getDelegatesFromId(delegateId).subscribe((delegate:DelegateModel) => {
+			this.onDelegateAutoSelected(delegate)
+			// update form value with delegates name
+			this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
+			setTimeout(() => {
+				this.searchFiltersForm.controls['delegate'].markAsTouched()
+				this.onForceCloseTT();
+				this.inited = true;
+			}, 50)
+			
+		},(error: AppError) => {
+			// if error, make sure you set the delegate input to untouched to show the tooltip
+			this.searchFiltersForm.controls['delegate'].markAsUntouched()
+			this.error = "Sorry, couldn't load the delegate";
+			this.inited = true;
+			console.log("error loading the delegate")
+		})
+	}
 	fetchDelegateData(){
 		this.delegateService.getDelegates()
 			.subscribe((delegates:DelegatesModel) => {
@@ -176,6 +189,7 @@ export class SearchFiltersComponent implements OnInit {
 	}
 	onCoursesAutoSelected(course:CourseModel){
 		this.courseService.course = course;
+		this.searchFiltersForm.controls['courseId'].setValue(course.standardId);
 		this.searchFiltersForm.controls['type'].setValue(null);
 		this.searchFiltersForm.controls['location'].setValue(null);
 		this.searchFiltersForm.controls['startDate'].setValue(null);
