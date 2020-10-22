@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ScheduledCourseSupplierModel } from '../../common/models/courses.model';
 import { GetLocationsPipe } from '../../common/pipes/get-locations.pipe'
 import { GetNumberLabelPipe } from '../../common/pipes/get-number-label.pipe'
@@ -25,6 +26,7 @@ export class ScheduleCourseSupplierItemComponent  {
 	@Input("is-open") isOpen:boolean = false;
 
 	constructor(
+		private router: Router,
 		private getLocations:GetLocationsPipe,
 		private getNumberLabel:GetNumberLabelPipe,
 		private getDisplayDate:GetDisplayDatePipe,
@@ -35,5 +37,10 @@ export class ScheduleCourseSupplierItemComponent  {
 
 	onToggle(){
 		this.isOpen = !this.isOpen;
+	}
+
+	onCourseSelect(course){
+		console.log(course)
+		this.router.navigate([`/add-delegates/${course.scheduledCourseId}`]);
 	}
 }

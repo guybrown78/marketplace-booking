@@ -22,7 +22,11 @@
 				<span nzTypography class="add-instructions blue text-center">
 					Do you want to add more people to the booking?
 				</span>
-				<button nz-button class="grey" (click)="onSkipBtnClicked()">Skip</button>
+				<button 
+					nz-button class="grey" 
+					[disabled]="selectedDelegates.length === 0"
+					(click)="onSkipBtnClicked()"
+				>Skip</button>
 			</div>
 			<div class="selected-course-row">
 				<div class="header-titles">
@@ -104,6 +108,7 @@
 						<div class="delegates-footer-buttons ant-form">
 							<button 
 								nz-button class="grey" 
+								[disabled]="selectedDelegates.length === 0"
 								(click)="onSkipBtnClicked()"
 							>Skip</button>
 							<button 

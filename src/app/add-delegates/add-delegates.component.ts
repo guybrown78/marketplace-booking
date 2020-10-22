@@ -157,7 +157,8 @@ export class AddDelegatesComponent implements OnInit {
 		this.router.navigate([`/search`]);
 	}
 	onSkipBtnClicked(){
-		this.router.navigate([`/confirm`]);
+		// this.router.navigate([`/confirm`]);
+		this.onContinueBtnClicked()
 	}
 	onContinueBtnClicked(){
 		this.saveCourseService.saveCourse(this.course, this.selectedDelegates);

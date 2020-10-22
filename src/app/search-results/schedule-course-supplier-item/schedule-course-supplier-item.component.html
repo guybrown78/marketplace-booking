@@ -42,7 +42,7 @@
 				<nz-dropdown-menu #menu="nzDropdownMenu">
 					<ul nz-menu nzSelectable class="supplier-courses-list">
 						<li *ngFor="let course of courseSupplier.courses" nz-menu-item>
-							<div class="supplier-course-details">
+							<div (click)="onCourseSelect(course)" class="supplier-course-details">
 								<column-title
 									class="date"
 									[mainTitle]=" course.startDate | getDisplayDate: true "
