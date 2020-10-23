@@ -1,0 +1,64 @@
+.mp-success-wrapper{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+.mp-success-wrapper .title-row{
+	height:60px;
+	margin-top: 30px;
+	border-bottom: solid 1px #9BA7AA;
+	padding:0 1rem 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+.mp-success-wrapper .title-row span{
+	font-weight: 700;
+	font-size: 1.25rem;
+}
+.mp-success-wrapper .data{
+	flex:1 1 0%;
+	padding:1rem 2rem;
+}
+
+.mp-success-wrapper .data .success-messages{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.mp-success-wrapper .data .success-delegate{
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+	background-color: #d0dfe3;
+	width:100%;
+	max-width: 450px;
+	padding: 0 0.5rem;
+	margin: 0.25rem auto;
+}
+.mp-success-wrapper .data .success-delegate span.icon{
+	font-size: 1.4rem;
+	margin-right: 0.5rem;
+}
+.button-wrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0.5rem;
+}
+span.no-data{
+	margin: 50px auto;
+	padding: 0.25rem;
+	display: block;
+}
+@media (min-width: 640px){
+	.mp-success-wrapper .data{
+		padding:1rem 6rem;
+	}
+	.mp-success-wrapper .data .success-delegate{
+		width:85%;
+	}
+}

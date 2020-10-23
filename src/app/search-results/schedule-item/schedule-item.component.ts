@@ -35,8 +35,6 @@ export class ScheduleItemComponent implements OnInit {
 	}
 	
 	onCourseBook(){
-		// console.log("booom")
-		console.log(this.course.standardId, this.course.scheduledCourseId);
 		this.router.navigate([`/add-delegates/${this.course.scheduledCourseId}`]);
 	}
 

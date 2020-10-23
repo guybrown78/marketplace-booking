@@ -28,6 +28,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzResultModule } from 'ng-zorro-antd/result';
 //
 import { HeaderComponent } from './header/header.component';
 import { SearchMarketplaceComponent } from './search-marketplace/search-marketplace.component';
@@ -64,6 +65,7 @@ import { DelegateCourseItemComponent } from './book-course/delegate-course-item/
 
 import { GetDisplayPricePipe } from './common/pipes/get-display-price.pipe';
 import { AdditionalNotesComponent } from './book-course/additional-notes/additional-notes.component';
+import { SuccessComponent } from './success/success.component';
 
 
 registerLocaleData(en);
@@ -95,6 +97,7 @@ registerLocaleData(en);
     DelegateCourseItemComponent,
     GetDisplayPricePipe,
     AdditionalNotesComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,6 +122,7 @@ registerLocaleData(en);
 		NzToolTipModule,
 		NzPopconfirmModule,
 		NzCollapseModule,
+		NzResultModule,
 		ScullyLibModule,
   ],
   providers: [

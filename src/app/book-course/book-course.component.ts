@@ -34,7 +34,9 @@ export class BookCourseComponent implements OnInit {
 	vat:number;
 	total:number;
 	currency:CoursePriceCurrency;
-
+	//
+	isSubmitting:boolean = false;
+	//
   constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -62,11 +64,16 @@ export class BookCourseComponent implements OnInit {
 	}
 
 	onAddMoreCoursesBtnClicked(){
-		console.log("do nothing just yet")
+		console.log("do nothing just yet - multi courses is phase 2")
 	}
 
 	onConfirmBtnClicked(){
-		console.log("CONFIRM BOOKING")
+		this.isSubmitting = true;
+		setTimeout(() => {
+			this.isSubmitting = false;
+			this.saveCourseService.switchSavedToSuccess();
+			this.router.navigate([`/success`]);
+		}, 1750)
 	}
 
 	additionalNotesChange(additionalNotesValues:AdditionalNotesModel){

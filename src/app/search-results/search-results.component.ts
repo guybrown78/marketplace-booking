@@ -54,7 +54,6 @@ export class SearchResultsComponent implements OnInit {
 		this.courseService.getCourseSchedules(this.courseService.course.standardId)
 			.subscribe((scheduledCourses:CoursesModel) => {
 				this.courseService.parseSearchResults(scheduledCourses.results);
-				console.log(this.courseService.parsedResults);
 				this.isLoading = false;
 				this.courseService.confirmSearch();
 			}, (error: AppError) => {

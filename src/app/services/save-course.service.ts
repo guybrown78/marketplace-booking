@@ -22,6 +22,7 @@ import { DelegateModel } from '../common/models/delegate.model';
 export class SaveCourseService extends BaseService {
 
 	private _savedCourses:SavedCoursesModel = null;
+	private _successCourses:SavedCoursesModel = null;
 	private _lastScheduledCourseId:string;
 
   constructor(
@@ -62,6 +63,7 @@ export class SaveCourseService extends BaseService {
 			//
 		}else{
 			// Update existing
+			console.log("Booking already exists, update exisitng?");
 		}
 	}
 
@@ -76,7 +78,6 @@ export class SaveCourseService extends BaseService {
 	}
 
 	removeBookingItem(bookingItem:BookingItemItentifierModel){
-
 		// get course
 		const sCourses:SaveCourseModel[] = this.savedCourses ? [ ...this.savedCourses.results ] : [];
 		const index:number = sCourses.findIndex(sc => sc.scheduledCourseId === bookingItem.scheduledCourseId)
@@ -93,12 +94,25 @@ export class SaveCourseService extends BaseService {
 			}
 		}
 	}
+
+	switchSavedToSuccess(){
+		this.successCourses = { ...this.savedCourses};
+		this.savedCourses = null;
+	}
+
 	// GETTERS AND SETTERS
 	get savedCourses(): SavedCoursesModel {
 		return this._savedCourses;
 	}
 	set savedCourses(items:SavedCoursesModel) {
 		this._savedCourses = items;
+	}
+
+	get successCourses(): SavedCoursesModel {
+		return this._successCourses;
+	}
+	set successCourses(items:SavedCoursesModel) {
+		this._successCourses = items;
 	}
 
 	get lastScheduledCourseId(): string {

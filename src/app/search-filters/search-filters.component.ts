@@ -76,10 +76,8 @@ export class SearchFiltersComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-		console.log("ngOnInit()!!!!!!!");
 		this.clearUpToolTips();
 		//
-		console.log(this.courseService.searchFiltersFormValues)
 		const values = this.courseService.searchFiltersFormValues
 		this.searchFiltersForm = this.fb.group({
 			delegate: [values ? values.delegate : null],
@@ -144,7 +142,6 @@ export class SearchFiltersComponent implements OnInit {
 		if(this.courseService.course){
 			this.onForceCloseTT();
 			this.resetFilters();
-			// console.log(this.searchFiltersForm.value);
 			this.courseService.searchFiltersFormValues = this.searchFiltersForm.value;
 			this.courseService.announceSearch();
 		}
@@ -201,7 +198,6 @@ export class SearchFiltersComponent implements OnInit {
 		this.locationOptions = this.courseService.parsedResults.locations;
 		this.disableFilters = false;
 		this.searchFiltersForm.markAsPristine()
-		console.log(this.searchFiltersForm)
 	}
 	
 
@@ -223,7 +219,6 @@ export class SearchFiltersComponent implements OnInit {
 		}
 	}
 	ngOnDestroy(){
-		console.log("destroy!!!!!!!");
 		this.clearUpToolTips();
 	}
 }

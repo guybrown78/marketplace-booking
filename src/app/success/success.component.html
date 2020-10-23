@@ -1,0 +1,47 @@
+
+<section class="mp-page-card">
+	<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+		<span nz-typography>3T Marketplace</span>
+	</tf-ng-page-title-breadcrumbs>
+
+	<div class="mp-page-card-bottom">
+		<div class="mp-success-wrapper" *ngIf="!isLoading">
+
+			<div class="data" *ngIf="!courses">
+				<span class="text-center navy no-data">There are no courses or delegates to show. Use our <a class="underlined" [routerLink]="['/search']">Search</a> to start.</span>
+			</div>
+
+			<div class="title-row" *ngIf="courses">
+				<span nzTypography class="blue text-center">
+					Thank you for your booking
+				</span>
+			</div>
+
+
+			<div class="data" *ngIf="courses">
+
+				<tf-ng-card colour="white" *ngFor="let savedCourse of courses.results">
+					<div class="success-messages">
+						<span class="navy text-center">You have booked {{ savedCourse.delegates.length | getNumberLabel: 'delegate' }} on the following course</span>
+						<span class="blue text-center"><strong>{{ savedCourse.course.name }}</strong> with <strong>{{ savedCourse.course.supplier.name }}</strong> starting on <strong>{{ savedCourse.course.startDate | getDisplayDate: true }}</strong></span>
+
+						<div class="success-delegate" *ngFor="let delegate of savedCourse.delegates" >
+							<span class="icon green"><i nz-icon nzType="check-circle" nzTheme="fill"></i></span>
+							<span class="navy">{{ delegate | getUsersFullName }}</span>
+						</div>
+
+					</div>
+				</tf-ng-card>
+
+				<div class="button-wrapper">
+					<button nz-button class="grey" (click)="onReset()">
+						Make another booking?
+					</button>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+
+</section>

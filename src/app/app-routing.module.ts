@@ -5,6 +5,8 @@ import { SearchMarketplaceComponent } from './search-marketplace/search-marketpl
 import { SearchResultsComponent } from './search-results/search-results.component'
 import { AddDelegatesComponent } from './add-delegates/add-delegates.component'
 import { BookCourseComponent } from './book-course/book-course.component';
+import { SuccessComponent } from './success/success.component';
+
 const routes: Routes = [
 	{ 
 		path: '', 
@@ -31,6 +33,11 @@ const routes: Routes = [
 		component: BookCourseComponent, 
 		data: {} 
 	},
+	{
+		path:'success',
+		component:SuccessComponent,
+		data: {}
+	}
 ];
 
 @NgModule({
