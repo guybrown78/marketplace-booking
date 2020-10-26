@@ -12,7 +12,8 @@ import {
 	ScheduledCourseSupplierModel, 
 	SavedCoursesModel, 
 	SaveCourseModel, 
-	BookingItemItentifierModel 
+	BookingItemItentifierModel,
+	AdditionalNotesModel
 } from '../common/models/courses.model';
 import { DelegateModel } from '../common/models/delegate.model';
 
@@ -100,6 +101,28 @@ export class SaveCourseService extends BaseService {
 		this.savedCourses = null;
 	}
 
+	updateAdditionalNotes(scheduledCourseId:string, additionalNotesValues:AdditionalNotesModel){
+		const index:number = this.savedCourses.results.findIndex(sc => sc.scheduledCourseId === scheduledCourseId)
+		if(index >= 0){
+			this._savedCourses.results[index].additionalNotes = additionalNotesValues;
+		}
+	}
+	save(){
+		// FAKE POST!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// This is only in to get a http 200 success on the patch call as the demo endpoint won't allow CRUD calls to tenant.ontransform.com/api/bookingform/book
+		const payload:SaveCourseModel = { ...this.savedCourses.results[this.savedCourses.results.length - 1]}
+		return this.http
+			.post(
+				this.getDataURL(`api-book/db`), 
+				JSON.stringify({
+					scheduledCourseId:payload.scheduledCourseId,
+					standardId:payload.standardId,
+					delegates:payload.delegates,
+					prices:payload.prices,
+  				additionalNotes:payload.additionalNotes
+				})
+			).pipe(catchError(this.handleError));
+	}
 	// GETTERS AND SETTERS
 	get savedCourses(): SavedCoursesModel {
 		return this._savedCourses;

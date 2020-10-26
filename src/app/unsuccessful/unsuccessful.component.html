@@ -1,0 +1,46 @@
+
+<section class="mp-page-card">
+	<tf-ng-page-title-breadcrumbs (back-button-clicked)="onBackButtonClicked()">
+		<span nz-typography>3T Marketplace</span>
+	</tf-ng-page-title-breadcrumbs>
+
+	<div class="mp-page-card-bottom">
+		<div class="mp-success-wrapper">
+
+			<div class="title-row">
+				<span nzTypography class="red text-center">
+					Sorry, your booking was not successful this time
+				</span>
+			</div>
+
+
+			<div class="data" *ngIf="courses">
+
+				<tf-ng-card colour="white" *ngFor="let savedCourse of courses.results">
+					<div class="success-messages">
+						<span class="navy text-center">There was an error saving {{ savedCourse.delegates.length | getNumberLabel: 'delegate' }} on the following course</span>
+						<span class="blue text-center"><strong>{{ savedCourse.course.name }}</strong> with <strong>{{ savedCourse.course.supplier.name }}</strong> starting on <strong>{{ savedCourse.course.startDate | getDisplayDate: true }}</strong></span>
+
+						<div class="success-delegate" *ngFor="let delegate of savedCourse.delegates" >
+							<span class="icon red"><i nz-icon nzType="close-circle" nzTheme="fill"></i></span>
+							<span class="red">{{ delegate | getUsersFullName }}</span>
+						</div>
+
+					</div>
+				</tf-ng-card>
+
+			
+				
+			</div>
+
+			<div class="button-wrapper">
+				<button nz-button class="grey" (click)="onReset()">
+					Start a new search?
+				</button>
+			</div>
+
+
+		</div>
+	</div>
+
+</section>

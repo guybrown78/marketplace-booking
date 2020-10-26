@@ -66,6 +66,7 @@ import { DelegateCourseItemComponent } from './book-course/delegate-course-item/
 import { GetDisplayPricePipe } from './common/pipes/get-display-price.pipe';
 import { AdditionalNotesComponent } from './book-course/additional-notes/additional-notes.component';
 import { SuccessComponent } from './success/success.component';
+import { UnsuccessfulComponent } from './unsuccessful/unsuccessful.component';
 
 
 registerLocaleData(en);
@@ -98,6 +99,7 @@ registerLocaleData(en);
     GetDisplayPricePipe,
     AdditionalNotesComponent,
     SuccessComponent,
+    UnsuccessfulComponent,
   ],
   imports: [
     BrowserModule,

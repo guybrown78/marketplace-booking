@@ -6,6 +6,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { AddDelegatesComponent } from './add-delegates/add-delegates.component'
 import { BookCourseComponent } from './book-course/book-course.component';
 import { SuccessComponent } from './success/success.component';
+import { UnsuccessfulComponent } from './unsuccessful/unsuccessful.component';
 
 const routes: Routes = [
 	{ 
@@ -36,6 +37,11 @@ const routes: Routes = [
 	{
 		path:'success',
 		component:SuccessComponent,
+		data: {}
+	},
+	{
+		path:'unsuccessful',
+		component:UnsuccessfulComponent,
 		data: {}
 	}
 ];

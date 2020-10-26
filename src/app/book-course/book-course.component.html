@@ -91,7 +91,11 @@
 				</div>
 				
 
-				<additional-notes (additionalNotes)="additionalNotesChange($event)"></additional-notes>
+				<additional-notes 
+					*ngIf="courses"
+					[additionalNotesValues]="courses.results[0].additionalNotes"
+					(additionalNotes)="additionalNotesChange($event)"
+				></additional-notes>
 
 				<div class="confirm-wrapper" *ngIf="courses">
 					<button 

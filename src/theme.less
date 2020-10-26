@@ -52,6 +52,16 @@
 @aqua-800: #25B9A4;
 @aqua-900: #1B8778;
 
+@red-50: #F8EAED;
+@red-100: #EDC9D3;
+@red-200: #E3A9B9;
+@red-300: #D8899E;
+@red-400: #D57E96;
+@red-500: #C3486A;
+@red-600: #b92950;
+@red-700: #9D2244;
+@red-800: #8A1E3B;
+@red-900: #65162B;
 
 @blue-6 : @blue-600;
 
@@ -60,7 +70,7 @@
 @info-color : @blue-600;
 @success-color : #40c7a3;
 @processing-color : @blue-600;
-@error-color : #b92950;
+@error-color : @red-600;
 @highlight-color : #b92950;
 @warning-color : #b97129;
 @normal-color : #d9d9d9;
@@ -1345,6 +1355,20 @@ span.italic{
 	box-shadow: 0 0 0 3px rgba(@grey-300, 0.5);
 }
 
+// Red and Danger
+.ant-btn.ant-btn-dangerous, .ant-btn.red{
+	background-color: @error-color;
+	color: #FFFFFF;
+}
+.ant-btn.ant-btn-dangerous:hover, .ant-btn.red:hover{
+	background-color: @error-color;
+	color: @grey-200;
+}
+.ant-btn.ant-btn-dangerous:focus, .ant-btn.red:focus{
+	border-color:@error-color;
+	box-shadow: 0 0 0 3px rgba(@red-300, 0.5);
+}
+
 .ant-btn.blue[disabled], 
 .ant-btn.ant-btn-default[disabled], 
 .ant-btn[disabled], 
@@ -1391,6 +1415,19 @@ span.italic{
 	color: @grey-400;
 	background-color: @navy-200;
 	border-color: @navy-300;
+}
+
+.ant-btn.red[disabled], 
+.ant-btn.ant-btn-dangerous[disabled], 
+.ant-btn.red[disabled]:hover, 
+.ant-btn.ant-btn-dangerous[disabled]:hover,
+.ant-btn.red[disabled]:focus, 
+.ant-btn.ant-btn-dangerous[disabled]:focus,  
+.ant-btn.red[disabled]:active, 
+.ant-btn.ant-btn-dangerous[disabled]:active{
+	color: @red-400;
+	background-color: @red-200;
+	border-color: @red-300;
 }
 
 .ant-table-small {

@@ -11,6 +11,7 @@ import { GetDisplayPricePipe } from '../common/pipes/get-display-price.pipe'
 import { SaveCourseModel, SavedCoursesModel, CoursePriceCurrency, AdditionalNotesModel, BookingItemItentifierModel } from '../common/models/courses.model';
 import { _mpConfigTaxValue, _mpConfigTaxLabel } from '../../config'
 //
+import { AppError } from '../common/errors/app.error';
 
 import { fadeInOutAnimation, delegateInOutAnimation } from '../common/animations';
 @Component({
@@ -69,15 +70,36 @@ export class BookCourseComponent implements OnInit {
 
 	onConfirmBtnClicked(){
 		this.isSubmitting = true;
-		setTimeout(() => {
-			this.isSubmitting = false;
-			this.saveCourseService.switchSavedToSuccess();
-			this.router.navigate([`/success`]);
-		}, 1750)
+		// save()
+
+		this.saveCourseService
+			.save()
+			.subscribe(successCourse => {
+				// if(i === this.dataService.delegate.bookings.length - 1){
+				// 	// 1 set courses
+				// 	this.dataService.courses = this.courses;
+				// 	// 2 move on!
+				// 	// this.router.navigate([`registered`]);
+				// 	this.router.navigate([`vehicle-registration`]);
+				// }
+				setTimeout(() => {
+					this.isSubmitting = false;
+					this.saveCourseService.switchSavedToSuccess();
+					this.router.navigate([`/success`]);
+				}, 1750)
+			}, (error: AppError) => {
+				this.isSubmitting = false;
+				this.router.navigate([`/unsuccessful`]);
+			})
+
+
+		
 	}
 
 	additionalNotesChange(additionalNotesValues:AdditionalNotesModel){
 		//console.log(additionalNotesValues)
+		const scheduledCourseId:string = this.courses.results[0].scheduledCourseId
+		this.saveCourseService.updateAdditionalNotes(scheduledCourseId, additionalNotesValues)
 	}
 
 	calculateTotals(){

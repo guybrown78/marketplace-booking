@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdditionalNotesModel } from '../../common/models/courses.model'
 @Component({
@@ -10,16 +10,26 @@ export class AdditionalNotesComponent implements OnInit {
 
   additionalNotesForm: FormGroup;
 
+	_additionalNotesValues:AdditionalNotesModel;
+
+	@Input ("additionalNotesValues") set additionalNotesValues(values:AdditionalNotesModel){
+		this._additionalNotesValues = values;
+	}
+	get additionalNotesValues(): AdditionalNotesModel {
+    return this._additionalNotesValues;
+}
   @Output("additionalNotes") additionalNotes:EventEmitter<AdditionalNotesModel> = new EventEmitter<AdditionalNotesModel>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+		private fb: FormBuilder
+	) {}
 
   ngOnInit(): void {
     this.additionalNotesForm = this.fb.group({
-      poNumber: [null],
-      level: [null],
-      tmsCost: [null],
-      trainingReason: [null],
+      poNumber: [this.additionalNotesValues.poNumber],
+      level: [this.additionalNotesValues.level],
+      tmsCost: [this.additionalNotesValues.tmsCost],
+      trainingReason: [this.additionalNotesValues.trainingReason],
 		});
 		this.onChanges();
   }
