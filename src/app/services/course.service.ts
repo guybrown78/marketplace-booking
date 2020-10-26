@@ -60,7 +60,7 @@ export class CourseService extends BaseService {
 		}
 		// GET ...api/api-courses/db
 		return this.http
-			.get(this.getDataURL(`api-courses/db`), { ...this.requestOptions() })
+			.get(this.getDataURL(`mp/courses/names`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
 
