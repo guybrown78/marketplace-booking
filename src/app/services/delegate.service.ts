@@ -37,8 +37,10 @@ export class DelegateService extends BaseService{
 			return of(this._delegates);
 		}
 		// GET ...api/api-delegates/db
+
+
 		return this.http
-			.get(this.getDataURL(`api-delegates/db`), { ...this.requestOptions() })
+			.get(this.getDataURL(`delegates`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
 	//

@@ -12,17 +12,25 @@ import { BadInput } from '../common/errors/bad-input';
 })
 export class BaseService {
 
-	private _baseEndpoint: string = "https://my-json-server.typicode.com/guybrown78";
+	private _tennantName: string = "altrad";
+	private _baseEndpoint: string = ".uat.ontransform.com/tms/api/bookingform";
 	constructor(
 		public http: HttpClient
 	) { }
 	
 	public requestOptions(){
+		// const headerDict = {
+		// 	'Content-Type': 'application/json',
+		// 	'Accept': 'application/json',
+		// 	'Access-Control-Allow-Headers': 'Content-Type',
+		// 	'Access-Control-Allow-Origin':'*'
+		// };
 		const headerDict = {
 			'Content-Type': 'application/json',
 			'Accept': 'application/json',
+			'Cache-Control': 'no-store',
 			'Access-Control-Allow-Headers': 'Content-Type',
-			'Access-Control-Allow-Origin':'*'
+			// 'Access-Control-Allow-Origin':'*'
 		};
 		return{
 			headers: new HttpHeaders(headerDict), 
@@ -30,7 +38,7 @@ export class BaseService {
 	}
 
 	public getDataURL(url){
-		return `${this.baseEndpoint}/${url}`;
+		return `https://${this.tennantName}${this.baseEndpoint}/${url}`;
 	}
 
 
@@ -38,6 +46,12 @@ export class BaseService {
 
 	get baseEndpoint(): string {
 		return this._baseEndpoint;
+	}
+	get tennantName(): string {
+		return this._tennantName;
+	}
+	set tennantName(value:string){
+		this._tennantName = value;
 	}
 
 	public handleError(error: HttpErrorResponse) {
