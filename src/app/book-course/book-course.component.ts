@@ -87,6 +87,9 @@ export class BookCourseComponent implements OnInit {
 					if(successCourse.errors){
 						if(successCourse.errors[successCourse.errors.length - 1].type == ErrorTypeEnum.SPACES_UNAVAILABLE){
 							console.log(" error - spaces ")
+							// phase 2 - add this flow:
+							// https://xd.adobe.com/view/30678b83-84a4-4d3a-94bc-1a4c7b968e23-6534/screen/b6bc6e3f-842f-4735-b365-17ac9af9813e/
+							// logic already in to remove delegates, just need to add params to render differently
 							this.isSubmitting = false;
 							this.router.navigate([`/unsuccessful`]);
 						}else{
