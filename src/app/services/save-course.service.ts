@@ -109,11 +109,13 @@ export class SaveCourseService extends BaseService {
 	}
 	save(){
 		// FAKE POST!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		// This is only in to get a http 200 success on the patch call as the demo endpoint won't allow CRUD calls to tenant.ontransform.com/api/bookingform/book
+		// This is only in to get a http 200 success on the patch call as the demo endpoint won't allow CRUD calls to tenant.ontransform.com/api/bookingform/book. Should be POST
 		const payload:SaveCourseModel = { ...this.savedCourses.results[this.savedCourses.results.length - 1]}
+		console.log('%c SEE THIS  *** DONT LEAVE IN *** WRONG PATCH / POST ', 'background: #F00; color: #bada55; font-size:16px');
+		// CHANGE PATCH TO POST
 		return this.http
-			.post(
-				this.getDataURL(`api-book/db`), 
+			.patch(
+				this.getDataURL(`api-book/results/${payload.scheduledCourseId}`), 
 				JSON.stringify({
 					scheduledCourseId:payload.scheduledCourseId,
 					standardId:payload.standardId,

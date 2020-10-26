@@ -1,5 +1,7 @@
 import { CourseTypeModel } from './tennant.model';
 import { DelegateModel } from './delegate.model'
+import { ErrorModel } from './error.model';
+
 export class CoursesModel {
 	results:CourseModel[]
 }
@@ -67,6 +69,10 @@ export class SaveCourseModel {
 	additionalNotes:AdditionalNotesModel
 }
 
+export class SaveCourseResponseModel {
+	results:CourseModel[]
+	errors:ErrorModel[]
+}
 export class AdditionalNotesModel {
 	poNumber:string
 	level:string

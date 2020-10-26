@@ -8,7 +8,15 @@ import { UrlDataService } from '../services/url-data.service';
 //
 import { GetCoursePricePipe } from '../common/pipes/get-course-price.pipe'
 import { GetDisplayPricePipe } from '../common/pipes/get-display-price.pipe'
-import { SaveCourseModel, SavedCoursesModel, CoursePriceCurrency, AdditionalNotesModel, BookingItemItentifierModel } from '../common/models/courses.model';
+import { 
+	SavedCoursesModel, 
+	SaveCourseResponseModel, 
+	CoursePriceCurrency, 
+	AdditionalNotesModel, 
+	BookingItemItentifierModel 
+} from '../common/models/courses.model';
+import { ErrorTypeEnum } from '../common/models/error.model';
+
 import { _mpConfigTaxValue, _mpConfigTaxLabel } from '../../config'
 //
 import { AppError } from '../common/errors/app.error';
@@ -74,19 +82,29 @@ export class BookCourseComponent implements OnInit {
 
 		this.saveCourseService
 			.save()
-			.subscribe(successCourse => {
-				// if(i === this.dataService.delegate.bookings.length - 1){
-				// 	// 1 set courses
-				// 	this.dataService.courses = this.courses;
-				// 	// 2 move on!
-				// 	// this.router.navigate([`registered`]);
-				// 	this.router.navigate([`vehicle-registration`]);
-				// }
+			.subscribe((successCourse:SaveCourseResponseModel) => {
 				setTimeout(() => {
+					if(successCourse.errors){
+						if(successCourse.errors[successCourse.errors.length - 1].type == ErrorTypeEnum.SPACES_UNAVAILABLE){
+							console.log(" error - spaces ")
+							this.isSubmitting = false;
+							this.router.navigate([`/unsuccessful`]);
+						}else{
+							console.log(" error - general");
+							this.isSubmitting = false;
+							this.router.navigate([`/unsuccessful`]);
+						}
+						return null;
+					}
+					else if(successCourse.results){
+						this.isSubmitting = false;
+						this.saveCourseService.switchSavedToSuccess();
+						this.router.navigate([`/success`]);
+						return null;
+					}
+					console.log("no error or results found. Just tidy up!")
 					this.isSubmitting = false;
-					this.saveCourseService.switchSavedToSuccess();
-					this.router.navigate([`/success`]);
-				}, 1750)
+				}, 50)
 			}, (error: AppError) => {
 				this.isSubmitting = false;
 				this.router.navigate([`/unsuccessful`]);
