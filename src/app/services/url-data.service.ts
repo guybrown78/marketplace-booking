@@ -7,10 +7,11 @@ import { isObjectEmpty } from '../common/utils'
   providedIn: 'root'
 })
 export class UrlDataService {
-
+	private _tenantApiPrefix: string;
 	private _entryData:EntryQueryData = {
 		delegateIds:[],
-		tennantId: "",
+		tenantId: "",
+		tenant: null,
 	};
 	private _returnData: ResultsQueryData = {
 		type: "url",
@@ -19,29 +20,20 @@ export class UrlDataService {
 
 	constructor() { }
 	
-	// ?entrydata={"tennantId":"679e8ced-6c32-441d-9fdc-d806180e27f7"}
-	// ?entrydata=%7B"tennantId":"679e8ced-6c32-441d-9fdc-d806180e27f7"%7D
+	// ?entrydata={"tenantId":"679e8ced-6c32-441d-9fdc-d806180e27f7"}
+	// ?entrydata=%7B"tenantId":"679e8ced-6c32-441d-9fdc-d806180e27f7"%7D
 
-	// ?entrydata={"tennantId":"679e8ced-6c32-441d-9fdc-d806180e27f7","delegateIds":["63122"]}
-	// ?entrydata=%7B%22tennantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263122%22%5D%7D
+	// ?entrydata={"tenantId":"679e8ced-6c32-441d-9fdc-d806180e27f7","delegateIds":["63122"]}
+	// ?entrydata=%7B%22tenantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263122%22%5D%7D
 
 
 	setUrlQueryData(params:any){
-		console.log("params")
-		console.log(params)
 		if(!isObjectEmpty(params)){
-			console.log("params.entrydata")
-			console.log(params.entrydata)
-			console.log(!isObjectEmpty(params.entrydata));
 			if(params.entrydata && !isObjectEmpty(params.entrydata)){
-				console.log("HEEEEEEEER")
 				const ed = JSON.parse(params.entrydata);
-				console.log("---------")
-				console.log(ed)
-				console.log(ed.delegateIds);
-				console.log("---------")
 				this.entryData = {
-					tennantId:ed.tennantId || "",
+					tenantId:ed.tenantId || "",
+					tenant:ed.tenant || null,
 					delegateIds: ed.delegateIds ? ed.delegateIds.map(d => String(d)) : []
 				}
 			}
@@ -49,6 +41,18 @@ export class UrlDataService {
 				this.returnData = JSON.parse(params.returndata)
 			}
 		}
+	}
+
+	getTenantFromURL():string{
+		let url: string = window.location.origin;
+		console.log("getTenantFromURL")
+		console.log(url);
+		if(url.startsWith("http://localhost")){
+			return null
+		}
+		url = url.replace(/(^\w+:|^)\/\//, '');
+		console.log("removed protocalls", url);
+		return url.split(".")[0];
 	}
 
 	get entryData(): EntryQueryData {
@@ -70,4 +74,12 @@ export class UrlDataService {
 			this._returnData = { ...data };
 		}
 	}
+
+	get tenantApiPrefix(): string {
+		return this._tenantApiPrefix;
+	}
+	set tenantApiPrefix(value:string){
+		this._tenantApiPrefix = value;
+	}
+
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { BaseService } from './base.service';
-
+import { UrlDataService } from './url-data.service';
 import { GetUsersFullNamePipe } from '../common/pipes/get-users-full-name.pipe';
 
 import { DelegatesModel } from '../common/models/delegates.model';
@@ -19,9 +19,10 @@ export class DelegateService extends BaseService{
 	//
 	constructor(
 		http: HttpClient,
+		urlDataService:UrlDataService,
 		private getUsersFullName: GetUsersFullNamePipe,
 	) { 
-		super(http)
+		super(http, urlDataService)
 	}
 	
 	public getFilteredDelegated(str:string):DelegateModel[]{
@@ -38,7 +39,7 @@ export class DelegateService extends BaseService{
 		}
 		// GET ...api/api-delegates/db
 
-
+		// console.log("get delegates ... ", this.tenantApiPrefix);
 		return this.http
 			.get(this.getDataURL(`delegates`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));

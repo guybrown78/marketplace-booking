@@ -3,9 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Subject, of } from 'rxjs';
 import { BaseService } from './base.service';
-import { CourseTypeModel } from '../common/models/tennant.model';
-import { CoursesModel, CourseModel, CourseSupplierModel, CourseLocationModel, ScheduledCourseSupplierModel } from '../common/models/courses.model';
-import { DelegateModel } from '../common/models/delegate.model';
+import { UrlDataService } from './url-data.service';
+import { CourseTypeModel } from '../common/models/tenant.model';
+import { 
+	CourseModel, 
+	CourseSupplierModel, 
+	CourseLocationModel, 
+	ScheduledCourseSupplierModel 
+} from '../common/models/courses.model';
 //
 import * as moment from 'moment';
 
@@ -42,8 +47,9 @@ export class CourseService extends BaseService {
 	//
 	constructor(
 		http: HttpClient,
+		urlDataService:UrlDataService,
 	) { 
-		super(http)
+		super(http, urlDataService)
 	}
 
 	public getFilteredCourses(str:string):any[]{

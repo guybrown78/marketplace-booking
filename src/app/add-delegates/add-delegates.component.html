@@ -96,7 +96,7 @@
 							<ul class="delegates-list" *ngIf="selectedDelegates.length">
 								<li *ngFor="let delegate of selectedDelegates" [@delegateInOut]>
 									<span>{{ delegate | getUsersFullName }}</span>
-									<span>{{ delegate | getUsersTennantJobRole: tennantService.tennant }}</span>
+									<span>{{ delegate | getUsersTenantJobRole: tenantService.tenant }}</span>
 									<button nz-button nzSize="small" nzShape="circle" class="grey" (click)="onRemoveDelegate(delegate)">
 										<i nz-icon nzType="close"></i>
 									</button>

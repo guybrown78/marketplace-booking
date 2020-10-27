@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Subscription, Observable } from 'rxjs';
 // services
 import { UrlDataService } from '../services/url-data.service'
-import { TennantService } from '../services/tennant.service'
+import { TenantService } from '../services/tenant.service'
 import { DelegateService } from '../services/delegate.service'
 import { CourseService } from '../services/course.service'
 // common
@@ -11,9 +11,9 @@ import { AppError } from '../common/errors/app.error';
 import { DelegateModel } from '../common/models/delegate.model';
 import { DelegatesModel } from '../common/models/delegates.model';
 import { CourseModel, CoursesModel, CourseLocationModel } from '../common/models/courses.model';
-import { CourseTypeModel } from '../common/models/tennant.model'
+import { CourseTypeModel } from '../common/models/tenant.model'
 import { GetUsersFullNamePipe } from '../common/pipes/get-users-full-name.pipe';
-import { GetUsersTennantJobRolePipe } from '../common/pipes/get-users-tennant-job-role.pipe';
+import { GetUsersTenantJobRolePipe } from '../common/pipes/get-users-tenant-job-role.pipe';
 
 import { _mpConfigAltFormURL } from '../../config'
 interface TypeOption {
@@ -27,7 +27,7 @@ interface TypeOption {
   templateUrl: './search-filters.component.html',
 	styleUrls: ['./search-filters.component.css'],
 	providers:[
-		GetUsersTennantJobRolePipe
+		GetUsersTenantJobRolePipe
 	]
 })
 
@@ -63,11 +63,11 @@ export class SearchFiltersComponent implements OnInit {
   constructor(
 		private fb: FormBuilder,
 		private urlService: UrlDataService,
-		public tennantService: TennantService,
+		public tenantService: TenantService,
 		private delegateService: DelegateService,
 		public courseService: CourseService,
 		private getUsersFullName: GetUsersFullNamePipe,
-		private getUsersTennantJobRole: GetUsersTennantJobRolePipe
+		private getUsersTenantJobRole: GetUsersTenantJobRolePipe
 	) {
 		this.searchCompleteSubscription = courseService.searchConfirmed$.subscribe(
 			() => this.onCourseSeacrchComplete()

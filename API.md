@@ -1,4 +1,4 @@
-All the calls in these examples are tennanted. It will be worth having a quick think about the untennanted calls once these are agreed but as yet, there are no user stories for this.
+All the calls in these examples are tenanted. It will be worth having a quick think about the untenanted calls once these are agreed but as yet, there are no user stories for this.
 
 The API url examples are assumed as;
 
@@ -7,12 +7,12 @@ tenant.ontransform.com/api/bookingform/...
 ```
 # Tenant
 
-**GET** call to get the information about the tennant. This is called once and stored in the client. It will allow the client to construct delegates job roles sentances such as "Rigger at Wood"
+**GET** call to get the information about the tenant. This is called once and stored in the client. It will allow the client to construct delegates job roles sentances such as "Rigger at Wood"
 
 
-The entry URL will contain the tennant id, this is needed to make the initial tennant call
+The entry URL will contain the tenant id, this is needed to make the initial tenant call
 
-This api will have a slightly different URL as at this stage, we will only have a tennant ID and no tennant apiSuffix to construct the api. This will be a general rule within the application. If no tennant data is saved, the data entry points will start with the default 'transform'. (Could this be used as the entry point for non-tennanted states?).
+This api will have a slightly different URL as at this stage, we will only have a tenant ID and no tenant apiSuffix to construct the api. This will be a general rule within the application. If no tenant data is saved, the data entry points will start with the default 'transform'. (Could this be used as the entry point for non-tenanted states?).
 
 ```
 transform.ontransform.com/api/bookingform/tenant/:id
@@ -41,12 +41,12 @@ transform.ontransform.com/api/bookingform/tenant/:id
 ```
 apiSuffix is what the api entry URL will start with, For example {apiSuffix}.ontransform.com/api... will result in wood.ontransform.com/api...
 
->Liam to firm up what the ID' will be for tennant and delegates, wether if comes from Coure MP (type will be GUID) or mutitenant (int?)
+>Liam to firm up what the ID' will be for tenant and delegates, wether if comes from Coure MP (type will be GUID) or mutitenant (int?)
 
 # Delegate
 
 
-**GET** calls to recieve delegate models. Variations in these entry points means you can get all delegates from a tennant, a single delegate in a tennant from an id and a selected list of delegates from multiple ids
+**GET** calls to recieve delegate models. Variations in these entry points means you can get all delegates from a tenant, a single delegate in a tenant from an id and a selected list of delegates from multiple ids
 
 ```
 tenant.ontransform.com/api/bookingform/delegates
@@ -134,7 +134,7 @@ translates to
 ]
 ```
 
->if this is going to be too slow, then the client can get all delegates in a tennant in simple format, ie (name and id). Then search on that. However, when we go un-tennanted is this going to be huge? Other options are to type 3 chars in the client and thenmake the initial call. as the user types more chars adding to that initial 3, the client sorts
+>if this is going to be too slow, then the client can get all delegates in a tenant in simple format, ie (name and id). Then search on that. However, when we go un-tenanted is this going to be huge? Other options are to type 3 chars in the client and thenmake the initial call. as the user types more chars adding to that initial 3, the client sorts
 
 
 [Example Delegates JSON](https://my-json-server.typicode.com/guybrown78/api-delegates/db)
@@ -142,7 +142,7 @@ translates to
 # COURSE Names
 
 
-**GET** calls to recieve the available courses within a tennant. The model which is returned in this call is as minimalist as possible. This is defined with the last part of the of the endpoint `name/`. 
+**GET** calls to recieve the available courses within a tenant. The model which is returned in this call is as minimalist as possible. This is defined with the last part of the of the endpoint `name/`. 
 
 It is purely to populate the subsequent search for courses call. 
 The courses here are prefuxed after mp 'marketplace' as courses maybe a popular endpoint with a varient of its models.

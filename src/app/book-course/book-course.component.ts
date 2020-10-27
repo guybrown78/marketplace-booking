@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 // services
-import { TennantService } from '../services/tennant.service'
+import { TenantService } from '../services/tenant.service'
 import { CourseService } from '../services/course.service';
 import { SaveCourseService } from '../services/save-course.service';
 import { UrlDataService } from '../services/url-data.service';
@@ -50,7 +50,7 @@ export class BookCourseComponent implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute,
 		public urlService: UrlDataService,
-		public tennantService: TennantService,
+		public tenantService: TenantService,
 		public courseService: CourseService,
 		public saveCourseService: SaveCourseService,
 		private getCoursePrice:GetCoursePricePipe,

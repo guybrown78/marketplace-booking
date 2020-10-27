@@ -1,12 +1,12 @@
-export class TennantModel {
+export class TenantModel {
 	id:string
 	name:string
 	apiSuffix:string
 	availableCourseTypes:CourseTypeModel[]
 }
 
-export class TennantsModel {
-	results:TennantModel[]
+export class TenantsModel {
+	results:TenantModel[]
 }
 
 export class CourseTypeModel {

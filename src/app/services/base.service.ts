@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 //
 import { AppError } from '../common/errors/app.error';
 import { NotFoundError } from '../common/errors/not-found-error';
 import { BadInput } from '../common/errors/bad-input';
 //
+import { UrlDataService } from './url-data.service'
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService {
 
-	private _tennantName: string = "altrad";
+	
 	private _baseEndpoint: string = ".uat.ontransform.com/tms/api/bookingform";
 	constructor(
-		public http: HttpClient
+		public http: HttpClient,
+		public urlDataService:UrlDataService
 	) { }
 	
 	public requestOptions(){
@@ -38,7 +39,7 @@ export class BaseService {
 	}
 
 	public getDataURL(url){
-		return `https://${this.tennantName}${this.baseEndpoint}/${url}`;
+		return `https://${this.urlDataService.tenantApiPrefix}${this.baseEndpoint}/${url}`;
 	}
 
 
@@ -47,12 +48,7 @@ export class BaseService {
 	get baseEndpoint(): string {
 		return this._baseEndpoint;
 	}
-	get tennantName(): string {
-		return this._tennantName;
-	}
-	set tennantName(value:string){
-		this._tennantName = value;
-	}
+
 
 	public handleError(error: HttpErrorResponse) {
 		if(error.status === 404)

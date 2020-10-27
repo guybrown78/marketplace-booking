@@ -1,4 +1,4 @@
-import { CourseTypeModel } from './tennant.model';
+import { CourseTypeModel } from './tenant.model';
 import { DelegateModel } from './delegate.model'
 import { ErrorModel } from './error.model';
 

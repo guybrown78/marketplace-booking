@@ -13,23 +13,23 @@ The app accepts and stores JSON objects in the query. These are detailed in the 
 
 `?entrydata={}`
 
-### Pass in tennantId
-The tennantId can be passed into the app via the `tennantId` param
+### Pass in tenant
+The tenant can be passed into the app via the `tenant` param
 
-`?entrydata={"tennantId":"123"}`
+`?entrydata={"tenant":"altrad"}`
 
-This is the URL to use to pass in the tennant ID for:
+This is the URL to use to pass in the tenant  for:
 
 - Altrad
-[https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22%7D)
+[https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22altrad%22%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22woodgroup%22%7D)
 - Wood
-[https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22%7D)
+[https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22%7D)
 
 ### Pass in a single delegateId
 A single delegateId can be passed within the `delegatesIds` array. 
 
-- Arron Walker at Altrad [https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263121%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263121%22%5D%7D)
-- Dave Oliver at Wood [https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22,%22delegateIds%22:%5B%2263128%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tennantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22,%22delegateIds%22:%5B%2263128%22%5D%7D)
+- Arron Walker at Altrad [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263121%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263121%22%5D%7D)
+- Dave Oliver at Wood [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22,%22delegateIds%22:%5B%2263128%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22,%22delegateIds%22:%5B%2263128%22%5D%7D)
 
 
 ### Pass in multiple delegateIds
@@ -43,9 +43,9 @@ TODO
 
 The app uses these [API calls](https://github.com/guybrown78/marketplace-booking/blob/master/API.md) to retrieve and set data. During the dev process, the API will link to `fake data` which has been made up and served from these following endpoints;
 
-[Tennants Data](https://my-json-server.typicode.com/guybrown78/api-tennants/db)
+[Tenants Data](https://my-json-server.typicode.com/guybrown78/api-tenants/db)
 
-[Tennant Data (example: altrad)](https://my-json-server.typicode.com/guybrown78/api-tennants/results/679e8ced-6c32-441d-9fdc-d806180e27f7)
+[Tenant Data (example: altrad)](https://my-json-server.typicode.com/guybrown78/api-tenants/results/679e8ced-6c32-441d-9fdc-d806180e27f7)
 
 [All Delegates Data](https://my-json-server.typicode.com/guybrown78/api-delegates/db)
 

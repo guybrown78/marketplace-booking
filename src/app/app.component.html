@@ -1,8 +1,17 @@
 <div class="page-wrapper">
 	<app-header></app-header>
-	<!-- <app-navigation></app-navigation> -->
 
 	<main>
-		<router-outlet #outlet="outlet"></router-outlet>
+		<router-outlet *ngIf="inited" #outlet="outlet"></router-outlet>
+
+
+		<section *ngIf="!inited" class="mp-page-card">
+			<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+				<span nz-typography>Welcome to the 3T Marketplace</span>
+			</tf-ng-page-title-breadcrumbs>
+			<div class="mp-page-card-bottom"></div>
+		</section>
+
 	</main>
+
 </div>

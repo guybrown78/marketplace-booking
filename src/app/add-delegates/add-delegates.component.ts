@@ -4,7 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 
 import { Router, ActivatedRoute } from '@angular/router';
 // services
-import { TennantService } from '../services/tennant.service'
+import { TenantService } from '../services/tenant.service'
 import { DelegateService } from '../services/delegate.service'
 import { CourseService } from '../services/course.service';
 import { SaveCourseService } from '../services/save-course.service';
@@ -17,7 +17,7 @@ import { AppError } from '../common/errors/app.error';
 import { GetNumberLabelPipe } from '../common/pipes/get-number-label.pipe'
 import { GetPluralWordPipe } from '../common/pipes/get-plural-word.pipe'
 import { GetUsersFullNamePipe } from '../common/pipes/get-users-full-name.pipe';
-import { GetUsersTennantJobRolePipe } from '../common/pipes/get-users-tennant-job-role.pipe';
+import { GetUsersTenantJobRolePipe } from '../common/pipes/get-users-tenant-job-role.pipe';
 
 import { fadeInOutAnimation, delegateInOutAnimation } from '../common/animations';
 
@@ -28,7 +28,7 @@ import { fadeInOutAnimation, delegateInOutAnimation } from '../common/animations
 	providers:[
 		GetNumberLabelPipe,
 		GetPluralWordPipe,
-		GetUsersTennantJobRolePipe
+		GetUsersTenantJobRolePipe
 	],
 	animations: [ delegateInOutAnimation, fadeInOutAnimation ]
 })
@@ -51,14 +51,14 @@ export class AddDelegatesComponent implements OnInit {
 		private fb: FormBuilder,
 		private router: Router,
 		private route: ActivatedRoute,
-		public tennantService: TennantService,
+		public tenantService: TenantService,
 		public courseService: CourseService,
 		public saveCourseService: SaveCourseService,
 		private delegateService: DelegateService,
 		private getNumberLabel:GetNumberLabelPipe,
 		private getPluralWord:GetPluralWordPipe,
 		private getUsersFullName: GetUsersFullNamePipe,
-		private getUsersTennantJobRole: GetUsersTennantJobRolePipe
+		private getUsersTenantJobRole: GetUsersTenantJobRolePipe
 	) { }
 
   ngOnInit(): void {

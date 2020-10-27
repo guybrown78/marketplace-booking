@@ -36,7 +36,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 
 
 import { UrlDataService } from './services/url-data.service';
-import { TennantService } from './services/tennant.service';
+import { TenantService } from './services/tenant.service';
 import { CourseService } from './services/course.service';
 import { SaveCourseService } from './services/save-course.service';
 
@@ -45,7 +45,7 @@ import { SearchFiltersComponent } from './search-filters/search-filters.componen
 
 // PIPES
 import { GetUsersFullNamePipe } from './common/pipes/get-users-full-name.pipe';
-import { GetUsersTennantJobRolePipe } from './common/pipes/get-users-tennant-job-role.pipe';
+import { GetUsersTenantJobRolePipe } from './common/pipes/get-users-tenant-job-role.pipe';
 import { BookCourseComponent } from './book-course/book-course.component';
 import { ScheduleItemComponent } from './search-results/schedule-item/schedule-item.component';
 import { SupplierComponent } from './search-results/supplier/supplier.component';
@@ -67,6 +67,7 @@ import { GetDisplayPricePipe } from './common/pipes/get-display-price.pipe';
 import { AdditionalNotesComponent } from './book-course/additional-notes/additional-notes.component';
 import { SuccessComponent } from './success/success.component';
 import { UnsuccessfulComponent } from './unsuccessful/unsuccessful.component';
+import { BaseService } from './services/base.service';
 
 
 registerLocaleData(en);
@@ -79,7 +80,7 @@ registerLocaleData(en);
     SearchResultsComponent,
     SearchFiltersComponent,
     GetUsersFullNamePipe,
-    GetUsersTennantJobRolePipe,
+    GetUsersTenantJobRolePipe,
     BookCourseComponent,
     ScheduleItemComponent,
     SupplierComponent,
@@ -129,8 +130,9 @@ registerLocaleData(en);
   ],
   providers: [
 		{ provide: NZ_I18N, useValue: en_GB }, 
+		BaseService,
 		UrlDataService,
-		TennantService,
+		TenantService,
 		CourseService,
 		SaveCourseService,
 		GetUsersFullNamePipe,

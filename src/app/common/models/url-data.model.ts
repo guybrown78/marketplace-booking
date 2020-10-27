@@ -5,7 +5,8 @@ export class UrlQueryData {
 
 export class EntryQueryData {
 	delegateIds:string[]
-	tennantId: string
+	tenant: string
+	tenantId: string
 }
 export class ResultsQueryData {
 	type:string

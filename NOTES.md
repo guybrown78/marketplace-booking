@@ -3,7 +3,7 @@
 
 # Discounts. 
 
-The final `checkout` screen shows a discounts row in the Totals. My understanding is that discounts are set data side on a tennant/supplier/course basis. Therefore, the discounts should appear in the CoursePriceModel as this is course and supplier specific (scheduleId) and tennant specific (api url)
+The final `checkout` screen shows a discounts row in the Totals. My understanding is that discounts are set data side on a tenant/supplier/course basis. Therefore, the discounts should appear in the CoursePriceModel as this is course and supplier specific (scheduleId) and tenant specific (api url)
 
 Below shows an example of how we might implement this. 
 We add a `discount` param to the price model which is a percentage. In this example the discount is 5%.

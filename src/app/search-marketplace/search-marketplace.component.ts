@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UrlDataService } from '../services/url-data.service';
-import { TennantService } from '../services/tennant.service';
-import { TennantModel } from '../common/models/tennant.model'
+import { TenantService } from '../services/tenant.service';
+import { TenantModel, TenantsModel } from '../common/models/tenant.model'
 import { AppError } from '../common/errors/app.error'
+import { _mpConfigTenant } from '../../config'
 @Component({
   selector: 'app-search-marketplace',
   templateUrl: './search-marketplace.component.html',
@@ -12,35 +13,28 @@ import { AppError } from '../common/errors/app.error'
 export class SearchMarketplaceComponent implements OnInit {
 
 	error:string = null;
-	inited:boolean = false;
+	inited:boolean = true;
   constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private urlService: UrlDataService,
-		private tennantService: TennantService
+		private tenantService: TenantService
 	) { }
 
   ngOnInit(): void {
-		this.route.queryParams.subscribe(params => {
-			this.urlService.setUrlQueryData(params);
-		});
-		//
-		// console.log(this.urlService.entryData);
-		// console.log(this.urlService.returnData);
-		//
-		if(this.urlService.entryData.tennantId){
-			this.tennantService.getTennant(this.urlService.entryData.tennantId).subscribe((tennant:TennantModel) => {
-				this.tennantService.tennant = tennant;
-				this.inited = true;
-			}, (error: AppError) => {
-				this.error = "Sorry, something went wrong loading the tennant";
-				this.inited = true;
-			});
-		}else{
-			this.inited = true;
-		}
 	}
 	
-
+	// fetchTenant(tenantApiPrefix){
+	// 	// set the tenantApiPrefix in the baseService for the whole of the application
+	// 	this.tenantService.tenantApiPrefix = tenantApiPrefix;
+	// 	this.tenantService.getTenant(tenantApiPrefix)
+	// 	.subscribe((tenant:TenantModel) => {
+	// 		this.tenantService.tenant = tenant;
+	// 		this.inited = true;
+	// 	}, (error: AppError) => {
+	// 		this.error = "Sorry, something went wrong loading the tenant";
+	// 		this.inited = true;
+	// 	});
+	// }
 
 }
