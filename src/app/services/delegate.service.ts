@@ -31,6 +31,12 @@ export class DelegateService extends BaseService{
 		);
 	}
 
+	searchDelegates(searchValue:string) {
+		return this.http
+			.get(this.getDataURL(`delegates?search=name|${searchValue}`), { ...this.requestOptions() })
+			.pipe(catchError(this.handleError));
+	}
+
 	// Get All Delegates
 	getDelegates() {
 		// Are delegates loaded?
@@ -48,7 +54,7 @@ export class DelegateService extends BaseService{
 	getDelegatesFromId(id:string) {
 		// GET ...api/api-delegates/db
 		return this.http
-			.get(this.getDataURL(`api-delegates/results/${id}`), { ...this.requestOptions() })
+			.get(this.getDataURL(`delegates?id=${id}`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
 	// public getStaticJSON():any{

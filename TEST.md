@@ -28,7 +28,10 @@ This is the URL to use to pass in the tenant  for:
 [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22%7D)
 
 ### Pass in a single delegateId
-A single delegateId can be passed within the `delegatesIds` array. 
+A single delegateId can be passed within the `delegateIds` array. 
+
+?entrydata={"tenant":"altrad","delegateIds":["29243"]}
+
 
 - Arron Walker at Altrad [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263121%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22679e8ced-6c32-441d-9fdc-d806180e27f7%22,%22delegateIds%22:%5B%2263121%22%5D%7D)
 - Dave Oliver at Wood [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22,%22delegateIds%22:%5B%2263128%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenantId%22:%22d5d7e332-0aaf-4c78-86fb-e9b71ccab4f4%22,%22delegateIds%22:%5B%2263128%22%5D%7D)

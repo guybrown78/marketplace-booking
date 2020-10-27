@@ -151,17 +151,27 @@ export class SearchFiltersComponent implements OnInit {
 		const value = (event.target as HTMLInputElement).value;
 		this.delegatesLoading = true;
 		//
-		this.delegateService.getDelegates()
+		this.delegateService.searchDelegates(value.toLocaleLowerCase())
 			.subscribe((delegates:DelegatesModel) => {
-				if(!this.delegateService.allDelegatesLoaded){
-					this.delegateService.delegates = delegates.results;
-					this.delegateService.allDelegatesLoaded = true;
-				}
-					this.delegateOptions = this.delegateService.getFilteredDelegated(value.toLocaleLowerCase());
+					// this.delegateOptions = this.delegateService.getFilteredDelegated(value.toLocaleLowerCase());
+					this.delegateOptions = delegates.results;
 					this.delegatesLoading = false;
 			}, (error: AppError) => {
 				this.error = "Sorry, something went wrong loading the delegates";
+				//this.delegateOptions = []
+				//this.delegatesLoading = false;
 			});
+		// this.delegateService.getDelegates()
+		// 	.subscribe((delegates:DelegatesModel) => {
+		// 		if(!this.delegateService.allDelegatesLoaded){
+		// 			this.delegateService.delegates = delegates.results;
+		// 			this.delegateService.allDelegatesLoaded = true;
+		// 		}
+		// 			this.delegateOptions = this.delegateService.getFilteredDelegated(value.toLocaleLowerCase());
+		// 			this.delegatesLoading = false;
+		// 	}, (error: AppError) => {
+		// 		this.error = "Sorry, something went wrong loading the delegates";
+		// 	});
 	}
 	onDelegateAutoSelected(delegate:DelegateModel){
 		this.selectedDelegate = delegate;
