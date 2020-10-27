@@ -27,7 +27,15 @@ export class AppComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		this.route.queryParams.pipe(skip(1)).subscribe(params => {
+		// stops the need to pipe(skip(1)) if params are present
+		setTimeout(() => {
+			this.readParams();
+		}, 150)
+	}
+	
+	readParams(){
+		//pipe(skip(1)).
+		this.route.queryParams.subscribe(params => {
 			this.urlService.setUrlQueryData(params);
 			console.log(this.urlService.entryData)
 			//
@@ -59,7 +67,6 @@ export class AppComponent implements OnInit {
 			}
 		});
 	}
-	
 	setTenant(tenantApiPrefix){
 		// set the tenantApiPrefix in the baseService for the whole of the application
 		this.urlService.tenantApiPrefix = tenantApiPrefix

@@ -20,6 +20,8 @@ The tenant can be passed into the app via the `tenant` param
 
 This is the URL to use to pass in the tenant  for:
 
+?entrydata=%7B"tenant":"altrad"%7D
+
 - Altrad
 [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22altrad%22%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22woodgroup%22%7D)
 - Wood
