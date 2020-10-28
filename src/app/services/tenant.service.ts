@@ -22,22 +22,14 @@ export class TenantService extends BaseService {
 		super(http, urlDataService)
 	}
 
-	getTenantDataURL(url){
-		return `https://transform${this.baseEndpoint}/${url}`;
-	}
-
-
-
-	// Get Single tenant on id
+	// Get tenant details
 	getTenant() {
-		// GET ...api/api-tenants/db
 		return this.http
 			.get(this.getDataURL(`tenant`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
-	// Get Single tenant on id
+	// test tenant - used when scraping the tenant from the host url, it looks for the string between https:// and the first '.' - that string is used to compose the endpoint of this test service call
 	getTestTenant(tenant:string) {
-		// GET ...api/api-tenants/db
 		return this.http
 			.get(`https://${tenant}${this.baseEndpoint}/tenant`, { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));

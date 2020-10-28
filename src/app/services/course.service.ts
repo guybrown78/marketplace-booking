@@ -70,12 +70,16 @@ export class CourseService extends BaseService {
 			.pipe(catchError(this.handleError));
 	}
 
+	searchCourses(searchValue:string) {
+		return this.http
+			.get(this.getDataURL(`mp/courses/names?search=name|${searchValue}`), { ...this.requestOptions() })
+			.pipe(catchError(this.handleError));
+	}
+
 	// Get All Courses
 	getCourseSchedules(standardId:string) {
-		const epURL = standardId === "133" ? "api-course/db" : `api-course-${standardId}/db`
-		// GET ...api/api-course/db
 		return this.http
-			.get(this.getDataURL(epURL), { ...this.requestOptions() })
+			.get(this.getDataURL(`mp/courses/available?standardId=${standardId}`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
 
@@ -83,7 +87,7 @@ export class CourseService extends BaseService {
 	getSchedule(scheduleCourseId:string) {
 		// GET ...api/api-course/rusults/
 		return this.http
-			.get(this.getDataURL(`api-course/results/${scheduleCourseId}`), { ...this.requestOptions() })
+			.get(this.getDataURL(`mp/courses/available?scheduledCourseId=${scheduleCourseId}`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
 

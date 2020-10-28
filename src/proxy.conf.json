@@ -1,0 +1,7 @@
+{
+	"/tms/*": {
+			"target": "https://serica.uat.ontransform.com",
+			"secure": false,
+			"logLevel": "debug"
+	}
+}

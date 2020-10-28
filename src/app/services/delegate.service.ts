@@ -31,47 +31,28 @@ export class DelegateService extends BaseService{
 		);
 	}
 
-	searchDelegates(searchValue:string) {
-		return this.http
-			.get(this.getDataURL(`delegates?search=name|${searchValue}`), { ...this.requestOptions() })
-			.pipe(catchError(this.handleError));
-	}
-
 	// Get All Delegates
 	getDelegates() {
 		// Are delegates loaded?
 		if(this._delegates.length && this.allDelegatesLoaded){
 			return of(this._delegates);
 		}
-		// GET ...api/api-delegates/db
-
-		// console.log("get delegates ... ", this.tenantApiPrefix);
 		return this.http
 			.get(this.getDataURL(`delegates`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
 	//
+	searchDelegates(searchValue:string) {
+		return this.http
+			.get(this.getDataURL(`delegates?search=name|${searchValue}`), { ...this.requestOptions() })
+			.pipe(catchError(this.handleError));
+	}
+	//
 	getDelegatesFromId(id:string) {
-		// GET ...api/api-delegates/db
 		return this.http
 			.get(this.getDataURL(`delegates?id=${id}`), { ...this.requestOptions() })
 			.pipe(catchError(this.handleError));
 	}
-	// public getStaticJSON():any{
-	// 	let id = 63120;
-	// 	const roles = ["Rigger", "Welding Inspector", "Drilling Supervisor", "Platform Safety Officer", "Scaffolding engineer", "First Aider", "Pipe Specialist", "Engineer","Pipe Fitter"]
-	// 	const newModels = userData.map((u,i) => {
-	// 		id++
-	// 		const obj = {
-	// 			"id":String(id),
-	// 			"firstName":String(u.firstName),
-	// 			"lastName":String(u.lastName),
-	// 			"role":roles[Math.floor(Math.random() * 10)]
-	// 		}
-	// 		return obj;
-	// 	})
-	// 	return { "results":JSON.stringify(newModels) };
-	// }
 
 	// GETTERS AND SETTERS
 	get delegates(): DelegateModel[] {

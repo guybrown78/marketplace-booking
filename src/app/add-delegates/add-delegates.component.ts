@@ -97,7 +97,8 @@ export class AddDelegatesComponent implements OnInit {
 				//
 				if(this.preloadDelegates.length){
 					// load the delegate 
-					this.delegateService.getDelegatesFromId(this.preloadDelegates[0]).subscribe((delegate:DelegateModel) => {
+					this.delegateService.getDelegatesFromId(this.preloadDelegates[0]).subscribe((delegates:DelegatesModel) => {
+						const delegate:DelegateModel = delegates.results[0];
 						this.selectedDelegates.push(delegate);
 						this.availableSpaces = this.calculateAvailableSpaces()
 						this.isLoading = false;
@@ -119,17 +120,15 @@ export class AddDelegatesComponent implements OnInit {
 		const value = (event.target as HTMLInputElement).value;
 		this.delegatesLoading = true;
 		//
-		this.delegateService.getDelegates()
-			.subscribe((delegates:DelegatesModel) => {
-				if(!this.delegateService.allDelegatesLoaded){
-					this.delegateService.delegates = delegates.results;
-					this.delegateService.allDelegatesLoaded = true;
-				}
-					this.delegateOptions = this.delegateService.getFilteredDelegated(value.toLocaleLowerCase());
-					this.delegatesLoading = false;
-			}, (error: AppError) => {
-				this.error = "Sorry, something went wrong loading the delegates";
-			});
+		this.delegateService.searchDelegates(value.toLocaleLowerCase())
+		.subscribe((delegates:DelegatesModel) => {
+				this.delegateOptions = delegates.results;
+				this.delegatesLoading = false;
+		}, (error: AppError) => {
+			this.error = "Sorry, something went wrong loading the delegates";
+			//this.delegateOptions = []
+			//this.delegatesLoading = false;
+		});
 	}
 
 

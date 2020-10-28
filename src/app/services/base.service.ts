@@ -31,7 +31,7 @@ export class BaseService {
 			'Accept': 'application/json',
 			'Cache-Control': 'no-store',
 			'Access-Control-Allow-Headers': 'Content-Type',
-			// 'Access-Control-Allow-Origin':'*'
+			'Access-Control-Allow-Origin':'*'
 		};
 		return{
 			headers: new HttpHeaders(headerDict), 

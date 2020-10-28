@@ -110,8 +110,8 @@ export class SaveCourseService extends BaseService {
 		console.log('%c SEE THIS  *** DONT LEAVE IN *** WRONG PATCH / POST ', 'background: #F00; color: #bada55; font-size:16px');
 		// CHANGE PATCH TO POST
 		return this.http
-			.patch(
-				this.getDataURL(`api-book/results/${payload.scheduledCourseId}`), 
+			.post(
+				this.getDataURL(`book`), 
 				JSON.stringify({
 					scheduledCourseId:payload.scheduledCourseId,
 					standardId:payload.standardId,

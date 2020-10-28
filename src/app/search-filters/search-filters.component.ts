@@ -111,7 +111,8 @@ export class SearchFiltersComponent implements OnInit {
 		// set the input to touched to stop the flicker of the tooltip if takes a while to load the delegate
 		this.searchFiltersForm.controls['delegate'].markAsTouched()
 		// load the delegate
-		this.delegateService.getDelegatesFromId(delegateId).subscribe((delegate:DelegateModel) => {
+		this.delegateService.getDelegatesFromId(delegateId).subscribe((delegates:DelegatesModel) => {
+			const delegate:DelegateModel = delegates.results[0];
 			this.onDelegateAutoSelected(delegate)
 			// update form value with delegates name
 			this.searchFiltersForm.controls['delegate'].setValue(this.getUsersFullName.transform(delegate));
@@ -129,14 +130,14 @@ export class SearchFiltersComponent implements OnInit {
 			console.log("error loading the delegate")
 		})
 	}
-	fetchDelegateData(){
-		this.delegateService.getDelegates()
-			.subscribe((delegates:DelegatesModel) => {
-				this.delegateService.delegates = delegates.results
-			}, (error: AppError) => {
-				this.error = "Sorry, something went wrong loading the delegates";
-			});
-	}
+	// fetchDelegateData(){
+	// 	this.delegateService.getDelegates()
+	// 		.subscribe((delegates:DelegatesModel) => {
+	// 			this.delegateService.delegates = delegates.results
+	// 		}, (error: AppError) => {
+	// 			this.error = "Sorry, something went wrong loading the delegates";
+	// 		});
+	// }
 
 	submitForm(): void {
 		if(this.courseService.course){
@@ -182,17 +183,25 @@ export class SearchFiltersComponent implements OnInit {
 		const value = (event.target as HTMLInputElement).value;
 		this.coursesLoading = true;
 		//
-		this.courseService.getCourses()
+		this.courseService.searchCourses(value.toLocaleLowerCase())
 			.subscribe((courses:CoursesModel) => {
-				if(!this.courseService.allCoursesLoaded){
-					this.courseService.courses = courses.results;
-					this.courseService.allCoursesLoaded = true;
-				}
-				this.courseOptions = this.courseService.getFilteredCourses(value.toLocaleLowerCase());
+				// this.courseOptions = this.courseService.getFilteredCourses(value.toLocaleLowerCase());
+				this.courseOptions = courses.results;
 				this.coursesLoading = false;
 			}, (error: AppError) => {
 				this.error = "Sorry, something went wrong loading the courses";
 			});
+		// this.courseService.getCourses()
+		// 	.subscribe((courses:CoursesModel) => {
+		// 		if(!this.courseService.allCoursesLoaded){
+		// 			this.courseService.courses = courses.results;
+		// 			this.courseService.allCoursesLoaded = true;
+		// 		}
+		// 		this.courseOptions = this.courseService.getFilteredCourses(value.toLocaleLowerCase());
+		// 		this.coursesLoading = false;
+		// 	}, (error: AppError) => {
+		// 		this.error = "Sorry, something went wrong loading the courses";
+		// 	});
 	}
 	onCoursesAutoSelected(course:CourseModel){
 		this.courseService.course = course;
