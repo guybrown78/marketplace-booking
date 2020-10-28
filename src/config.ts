@@ -1,5 +1,6 @@
 export const _mpConfigTenant = "transform";
-export const _mpConfigBaseEndpoint = ".uat.ontransform.com/tms/api/bookingform";
+// export const _mpConfigBaseEndpoint = ".uat.ontransform.com/tms/api/bookingform";
+export const _mpConfigBaseEndpoint = ".uatenvreskin.aisgroup.co.uk/api/bookingform";
 // the API endpoints are composed from...
 //
 // "https://" + tenant + _mpConfigBaseEndpoint
