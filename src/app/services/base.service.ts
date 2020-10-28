@@ -7,30 +7,25 @@ import { NotFoundError } from '../common/errors/not-found-error';
 import { BadInput } from '../common/errors/bad-input';
 //
 import { UrlDataService } from './url-data.service'
+
+import { _mpConfigBaseEndpoint } from '../../config'
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService {
 
 	
-	private _baseEndpoint: string = ".uat.ontransform.com/tms/api/bookingform";
+	private _baseEndpoint: string = _mpConfigBaseEndpoint;
 	constructor(
 		public http: HttpClient,
 		public urlDataService:UrlDataService
 	) { }
 	
 	public requestOptions(){
-		// const headerDict = {
-		// 	'Content-Type': 'application/json',
-		// 	'Accept': 'application/json',
-		// 	'Access-Control-Allow-Headers': 'Content-Type',
-		// 	'Access-Control-Allow-Origin':'*'
-		// };
 		const headerDict = {
 			'Content-Type': 'application/json',
 			'Accept': 'application/json',
 			'Cache-Control': 'no-store',
-			'Access-Control-Allow-Headers': 'Content-Type',
 			'Access-Control-Allow-Origin':'*'
 		};
 		return{
@@ -38,6 +33,7 @@ export class BaseService {
 		}
 	}
 
+	// https:// serica .uat.ontransform.com/tms/api/bookingform/
 	public getDataURL(url){
 		return `https://${this.urlDataService.tenantApiPrefix}${this.baseEndpoint}/${url}`;
 	}
