@@ -50,33 +50,6 @@ A single delegateId can be passed within the `delegateIds` array.
 ?entrydata={"tenant":"altrad","delegateIds":["29243"]}
 
 
-- Arron Walker at Altrad [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22altrad%22,%22delegateIds%22:%5B%2263121%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22altrad%22,%22delegateIds%22:%5B%2263121%22%5D%7D)
-- Dave Oliver at Wood [https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22woodgroup%22,%22delegateIds%22:%5B%2263128%22%5D%7D](https://tf-marketplace.netlify.app/?entrydata=%7B%22tenant%22:%22woodgroup%22,%22delegateIds%22:%5B%2263128%22%5D%7D)
+- Arron Walker at Altrad [https://tf-mp.netlify.app/?entrydata=%7B%22tenant%22:%22altrad%22,%22delegateIds%22:%5B%2263121%22%5D%7D](https://tf-mp.netlify.app/?entrydata=%7B%22tenant%22:%22altrad%22,%22delegateIds%22:%5B%2263121%22%5D%7D)
+- Dave Oliver at Wood [https://tf-mp.netlify.app/?entrydata=%7B%22tenant%22:%22woodgroup%22,%22delegateIds%22:%5B%2263128%22%5D%7D](https://tf-mp.netlify.app/?entrydata=%7B%22tenant%22:%22woodgroup%22,%22delegateIds%22:%5B%2263128%22%5D%7D)
 
-
-### Pass in multiple delegateIds
-TODO
-
-## ReturnData
-### Pass in return URL once course is booked
-TODO
-
-# Static Data Calls
-
-The app uses these [API calls](https://github.com/guybrown78/marketplace-booking/blob/master/API.md) to retrieve and set data. During the dev process, the API will link to `fake data` which has been made up and served from these following endpoints;
-
-[Tenants Data](https://my-json-server.typicode.com/guybrown78/api-tenants/db)
-
-[Tenant Data (example: altrad)](https://my-json-server.typicode.com/guybrown78/api-tenants/results/679e8ced-6c32-441d-9fdc-d806180e27f7)
-
-[All Delegates Data](https://my-json-server.typicode.com/guybrown78/api-delegates/db)
-
-[Delegate Data (single delegate)](https://my-json-server.typicode.com/guybrown78/api-delegates/results/63121)
-
-[Courses Data](https://my-json-server.typicode.com/guybrown78/api-courses/db)
-
-[Course Schedules Data](https://my-json-server.typicode.com/guybrown78/api-course/db)
-> The course data is the searched schedules for the selected course `OPITO Basic H2S Training` which is `id:133`
-
-[Course Schedules Data (empty)](https://my-json-server.typicode.com/guybrown78/api-course-137/db)
-> The empty course data is the searched schedules for the selected course `OPITO Combined BOSIET` which is `id:137`
