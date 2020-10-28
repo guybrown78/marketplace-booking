@@ -27,47 +27,53 @@
 				nzErrorTip="The input is not valid E-mail!" 
 			>
 				<div
+					*ngIf="!forceCloseTT"
+					class="tooltip-generator"
 					nz-tooltip
 					[nzTooltipTitle]="delegateTooltipTemplate" 
 					nzTooltipPlacement="right" 
 					[nzTooltipTrigger]="nzTooltipTriggerEvent"
 					[nzTooltipVisible]="!forceCloseTT"
 					nzTooltipOverlayClassName="delegate-tooltip"
-				>
-					<nz-input-group [nzPrefix]="prefixUser">
-						<input 
-							placeholder="Start typing delegates name" 
-							nz-input 
-							formControlName="delegate" 
-							id="delegate" 
-							(input)="onDelegateInput($event)" 
-							[nzAutocomplete]="autoDelegate" 
-						/>
-						<nz-autocomplete 
-							nzBackfill 
-							#autoDelegate
+				></div>
+				<div
+					*ngIf="forceCloseTT"
+					class="tooltip-generator"
+				></div>
+				<nz-input-group [nzPrefix]="prefixUser">
+					<input 
+						placeholder="Start typing delegates name" 
+						nz-input 
+						formControlName="delegate" 
+						id="delegate" 
+						(input)="onDelegateInput($event)" 
+						[nzAutocomplete]="autoDelegate" 
+					/>
+					<nz-autocomplete 
+						nzBackfill 
+						#autoDelegate
+					>
+						<nz-auto-option 
+							*ngIf="delegatesLoading"
+							nzDisabled 
+							nzCustomContent
 						>
-							<nz-auto-option 
-								*ngIf="delegatesLoading"
-								nzDisabled 
-								nzCustomContent
-							>
-								<i nz-icon nzType="loading" class="loading-icon"></i> Loading Delegates...
-							</nz-auto-option>
-							
-							<ng-container *ngFor="let option of delegateOptions">
-								<nz-auto-option 
-									*ngIf="!delegatesLoading"
-									[nzValue]="(option | getUsersFullName)"
-									(click)="onDelegateAutoSelected(option)"
-								>{{ option | getUsersFullName }}</nz-auto-option>
-							</ng-container>
+							<i nz-icon nzType="loading" class="loading-icon"></i> Loading Delegates...
+						</nz-auto-option>
 						
-						</nz-autocomplete>
+						<ng-container *ngFor="let option of delegateOptions">
+							<nz-auto-option 
+								*ngIf="!delegatesLoading"
+								[nzValue]="(option | getUsersFullName)"
+								(click)="onDelegateAutoSelected(option)"
+							>{{ option | getUsersFullName }}</nz-auto-option>
+						</ng-container>
+					
+					</nz-autocomplete>
 
 
-					</nz-input-group>
-				</div>
+				</nz-input-group>
+				
 				
 			</nz-form-control>
 		</nz-form-item>
@@ -223,7 +229,7 @@
 <ng-template #suffixDate></ng-template>
 
 <ng-template #delegateTooltipTemplate>
-	<div class="tooltip-container" *ngIf="!forceCloseTT">
+	<div class="tooltip-container" >
 		<span>If you want to add multiple delegates, you can leave this&nbsp;blank</span>
 		<button 
 			nz-button 

@@ -57,6 +57,14 @@ span.label-prefix{
 	width:100%;
 }
 
+.tooltip-generator{
+	width: 100%;
+	height: 1px;
+	display: flex;
+	top: 16px;
+	position: relative;
+}
+
 @media (min-width: 640px){
 	.search-filters, .search-alternative-form{
 		max-width: 320px;

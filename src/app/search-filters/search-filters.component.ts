@@ -223,9 +223,10 @@ export class SearchFiltersComponent implements OnInit {
 	}
 
 	clearUpToolTips(){
-		const el = document.querySelector('.delegate-tooltip');
+		let el = document.querySelector('.delegate-tooltip');
 		if(el){
 			el.parentNode.removeChild(el);
+			el = null;
 		}
 	}
 	ngOnDestroy(){
