@@ -125,8 +125,10 @@ export class CourseService extends BaseService {
 				/* doesn't contain the element so add it */
 				obj.suppliers.push(c.supplier);
 			}
-			if (!obj.courseTypes.some(ct => ct.id === c.type.id)) {
-				obj.courseTypes.push(c.type);
+			if(c.type){
+				if (!obj.courseTypes.some(ct => ct.id === c.type.id)) {
+					obj.courseTypes.push(c.type);
+				}
 			}
 			if (!obj.locations.some(l => l.name.toLocaleLowerCase() === c.location.name.toLocaleLowerCase())) {
 				obj.locations.push(c.location);
